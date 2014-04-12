@@ -1,0 +1,3 @@
+usbavrpgm.name=Pololu USB AVR Programmer
+usbavrpgm.communication=serial
+usbavrpgm.protocol=avrispv2

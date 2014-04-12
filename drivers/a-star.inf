@@ -1,0 +1,57 @@
+; Copyright 2014 Pololu Corporation
+
+[Strings]
+DriverPackageDisplayName="Pololu A-Star Drivers"
+ManufacturerName="Pololu Corporation"
+ServiceName="USB RS-232 Emulation Driver"
+astar.Bootloader.Name="Pololu A-Star 32U4 Bootloader"
+astar.Sketch.Name="Pololu A-Star 32U4"
+
+[DefaultInstall]
+CopyINF=a-star.inf
+
+[Version]
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+Signature="$Windows NT$"
+Provider=%ManufacturerName%
+CatalogFile=pololu.cat
+DriverVer=04/01/2014,1.3.0.0
+DriverPackageDisplayName=%DriverPackageDisplayName%
+
+[Manufacturer]
+%ManufacturerName%=DeviceList, NTamd64
+
+[DestinationDirs]
+FakeModemCopyFileSection=12
+DefaultDestDir=12
+
+[DeviceList]
+%astar.Bootloader.Name%=DriverInstall, USB\VID_1FFB&PID_0101
+%astar.Sketch.Name%=DriverInstall, USB\VID_1FFB&PID_2300&MI_00
+
+[DeviceList.NTamd64]
+%astar.Bootloader.Name%=DriverInstall, USB\VID_1FFB&PID_0101
+%astar.Sketch.Name%=DriverInstall, USB\VID_1FFB&PID_2300&MI_00
+
+[DriverInstall]
+include=mdmcpq.inf,usb.inf
+CopyFiles = FakeModemCopyFileSection
+AddReg=DriverAddReg
+
+[DriverAddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,usbser.sys
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[DriverInstall.Services]
+include=mdmcpq.inf
+AddService=usbser, 0x00000002, DriverService
+
+[DriverService]
+DisplayName=%ServiceName%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\usbser.sys
+LoadOrderGroup=Base

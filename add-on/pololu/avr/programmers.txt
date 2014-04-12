@@ -1,0 +1,6 @@
+usbavrpgm.name=Pololu USB AVR Programmer
+usbavrpgm.communication=serial
+usbavrpgm.protocol=avrispv2
+usbavrpgm.program.protocol=avrispv2
+usbavrpgm.program.tool=arduino:avrdude
+usbavrpgm.program.extra_params=-P{serial.port}

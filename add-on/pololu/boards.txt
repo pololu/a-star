@@ -1,0 +1,32 @@
+a-star32U4.name=Pololu A-Star 32U4
+a-star32U4.upload.protocol=avr109
+a-star32U4.upload.maximum_size=28672
+a-star32U4.upload.speed=57600
+a-star32U4.upload.disable_flushing=true
+a-star32U4.bootloader.low_fuses=0xff
+a-star32U4.bootloader.high_fuses=0xd0
+a-star32U4.bootloader.extended_fuses=0xc8
+a-star32U4.bootloader.path=caterina
+a-star32U4.bootloader.file=Caterina-A-Star.hex
+a-star32U4.bootloader.unlock_bits=0x3F
+a-star32U4.bootloader.lock_bits=0x2F
+a-star32U4.build.mcu=atmega32u4
+a-star32U4.build.f_cpu=16000000L
+a-star32U4.build.vid=0x1ffb
+a-star32U4.build.pid=0x2300
+a-star32U4.build.core=arduino:arduino
+a-star32U4.build.variant=arduino:leonardo
+
+##############################################################
+
+#a-star32U4bp.name=Pololu A-Star 32U4 (bootloader port)
+#a-star32U4bp.upload.protocol=avr109
+#a-star32U4bp.upload.maximum_size=28672
+#a-star32U4bp.upload.speed=57600
+#a-star32U4bp.upload.disable_flushing=true
+#a-star32U4bp.build.mcu=atmega32u4
+#a-star32U4bp.build.f_cpu=16000000L
+#a-star32U4bp.build.vid=0x1ffb
+#a-star32U4bp.build.pid=0x2300
+#a-star32U4bp.build.core=arduino:arduino
+#a-star32U4bp.build.variant=arduino:leonardo
