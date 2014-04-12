@@ -1,0 +1,114 @@
+build date:      2014-04-08
+
+toolchain:       WinAVR-20100110 (GCC 4.3.3)
+toolchain URL:   http://sourceforge.net/projects/winavr/files/WinAVR/20100110/WinAVR-20100110-install.exe
+toolchain SHA1:  a3f4542a5027ca2e7ac6533ed32d0123e699b057
+
+lufa:            111009
+lufa URL:        https://lufa-lib.googlecode.com/files/LUFA-111009.zip
+lufa SHA1:       fe6abf1cef6fb924d58f9158c5297e305b169a8f
+
+make:            3.82-pololu2
+make URL:        https://github.com/pololu/make/releases/download/3.82-pololu2/make.exe
+make SHA1:       dac356daad87ea99e62dbf91f8f5cdb70200bafd
+
+build command:   make LUFA_PATH=LUFA-111009 VID=0x1FFB PID=0x0101
+
+merge blink sketch: Arduino 1.5.6-r2
+- enable verbose output during compilation to see build output directory
+- use Verify button to compile Blink example
+- copy Blink.cpp.hex from build output directory
+- remove EOF marker (:00000001FF) from Blink.cpp.hex
+- append Caterina-A-Star.hex
+- overwrite Caterina-A-Star.hex with result
+
+program command: avrdude -p m32u4 -P COM13 -c stk500 -U flash:w:Caterina-A-Star.hex \
+                  -U lock:w:0x2f:m -U efuse:w:0xc8:m -U hfuse:w:0xd0:m -U lfuse:w:0xff:m
+output:
+
+-------- begin --------
+avr-gcc (WinAVR 20100110) 4.3.3
+Copyright (C) 2008 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+Compiling C: Caterina.c
+avr-gcc -c -mmcu=atmega32u4 -I. -gdwarf-2 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_USER -DARCH=ARCH_AVR8 -DBOOT_START_ADDR=0x7000UL -DDEVICE_VID=0x1FFBUL -DDEVICE_PID=0x0101UL -D USB_DEVICE_ONLY -D DEVICE_STATE_AS_GPIOR=0 -D ORDERED_EP_CONFIG -D FIXED_CONTROL_ENDPOINT_SIZE=8 -D FIXED_NUM_CONFIGURATIONS=1 -D USE_RAM_DESCRIPTORS -D USE_STATIC_OPTIONS="(USB_DEVICE_OPT_FULLSPEED | USB_OPT_REG_ENABLED | USB_OPT_AUTO_PLL)" -D NO_INTERNAL_SERIAL -D NO_DEVICE_SELF_POWER -D NO_DEVICE_REMOTE_WAKEUP -D NO_SOF_EVENTS -D NO_LOCK_BYTE_WRITE_SUPPORT -Os -funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-small-functions -fpack-struct -fshort-enums -fno-strict-aliasing -Wall -Wstrict-prototypes -Wa,-adhlns=./Caterina.lst -ILUFA-111009/ -std=c99 -MMD -MP -MF .dep/Caterina.o.d Caterina.c -o Caterina.o
+
+Compiling C: Descriptors.c
+avr-gcc -c -mmcu=atmega32u4 -I. -gdwarf-2 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_USER -DARCH=ARCH_AVR8 -DBOOT_START_ADDR=0x7000UL -DDEVICE_VID=0x1FFBUL -DDEVICE_PID=0x0101UL -D USB_DEVICE_ONLY -D DEVICE_STATE_AS_GPIOR=0 -D ORDERED_EP_CONFIG -D FIXED_CONTROL_ENDPOINT_SIZE=8 -D FIXED_NUM_CONFIGURATIONS=1 -D USE_RAM_DESCRIPTORS -D USE_STATIC_OPTIONS="(USB_DEVICE_OPT_FULLSPEED | USB_OPT_REG_ENABLED | USB_OPT_AUTO_PLL)" -D NO_INTERNAL_SERIAL -D NO_DEVICE_SELF_POWER -D NO_DEVICE_REMOTE_WAKEUP -D NO_SOF_EVENTS -D NO_LOCK_BYTE_WRITE_SUPPORT -Os -funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-small-functions -fpack-struct -fshort-enums -fno-strict-aliasing -Wall -Wstrict-prototypes -Wa,-adhlns=./Descriptors.lst -ILUFA-111009/ -std=c99 -MMD -MP -MF .dep/Descriptors.o.d Descriptors.c -o Descriptors.o
+
+Compiling C: LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Device_AVR8.c
+avr-gcc -c -mmcu=atmega32u4 -I. -gdwarf-2 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_USER -DARCH=ARCH_AVR8 -DBOOT_START_ADDR=0x7000UL -DDEVICE_VID=0x1FFBUL -DDEVICE_PID=0x0101UL -D USB_DEVICE_ONLY -D DEVICE_STATE_AS_GPIOR=0 -D ORDERED_EP_CONFIG -D FIXED_CONTROL_ENDPOINT_SIZE=8 -D FIXED_NUM_CONFIGURATIONS=1 -D USE_RAM_DESCRIPTORS -D USE_STATIC_OPTIONS="(USB_DEVICE_OPT_FULLSPEED | USB_OPT_REG_ENABLED | USB_OPT_AUTO_PLL)" -D NO_INTERNAL_SERIAL -D NO_DEVICE_SELF_POWER -D NO_DEVICE_REMOTE_WAKEUP -D NO_SOF_EVENTS -D NO_LOCK_BYTE_WRITE_SUPPORT -Os -funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-small-functions -fpack-struct -fshort-enums -fno-strict-aliasing -Wall -Wstrict-prototypes -Wa,-adhlns=./LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Device_AVR8.lst -ILUFA-111009/ -std=c99 -MMD -MP -MF .dep/Device_AVR8.o.d LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Device_AVR8.c -o LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Device_AVR8.o
+
+Compiling C: LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Endpoint_AVR8.c
+avr-gcc -c -mmcu=atmega32u4 -I. -gdwarf-2 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_USER -DARCH=ARCH_AVR8 -DBOOT_START_ADDR=0x7000UL -DDEVICE_VID=0x1FFBUL -DDEVICE_PID=0x0101UL -D USB_DEVICE_ONLY -D DEVICE_STATE_AS_GPIOR=0 -D ORDERED_EP_CONFIG -D FIXED_CONTROL_ENDPOINT_SIZE=8 -D FIXED_NUM_CONFIGURATIONS=1 -D USE_RAM_DESCRIPTORS -D USE_STATIC_OPTIONS="(USB_DEVICE_OPT_FULLSPEED | USB_OPT_REG_ENABLED | USB_OPT_AUTO_PLL)" -D NO_INTERNAL_SERIAL -D NO_DEVICE_SELF_POWER -D NO_DEVICE_REMOTE_WAKEUP -D NO_SOF_EVENTS -D NO_LOCK_BYTE_WRITE_SUPPORT -Os -funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-small-functions -fpack-struct -fshort-enums -fno-strict-aliasing -Wall -Wstrict-prototypes -Wa,-adhlns=./LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Endpoint_AVR8.lst -ILUFA-111009/ -std=c99 -MMD -MP -MF .dep/Endpoint_AVR8.o.d LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Endpoint_AVR8.c -o LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Endpoint_AVR8.o
+
+Compiling C: LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Host_AVR8.c
+avr-gcc -c -mmcu=atmega32u4 -I. -gdwarf-2 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_USER -DARCH=ARCH_AVR8 -DBOOT_START_ADDR=0x7000UL -DDEVICE_VID=0x1FFBUL -DDEVICE_PID=0x0101UL -D USB_DEVICE_ONLY -D DEVICE_STATE_AS_GPIOR=0 -D ORDERED_EP_CONFIG -D FIXED_CONTROL_ENDPOINT_SIZE=8 -D FIXED_NUM_CONFIGURATIONS=1 -D USE_RAM_DESCRIPTORS -D USE_STATIC_OPTIONS="(USB_DEVICE_OPT_FULLSPEED | USB_OPT_REG_ENABLED | USB_OPT_AUTO_PLL)" -D NO_INTERNAL_SERIAL -D NO_DEVICE_SELF_POWER -D NO_DEVICE_REMOTE_WAKEUP -D NO_SOF_EVENTS -D NO_LOCK_BYTE_WRITE_SUPPORT -Os -funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-small-functions -fpack-struct -fshort-enums -fno-strict-aliasing -Wall -Wstrict-prototypes -Wa,-adhlns=./LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Host_AVR8.lst -ILUFA-111009/ -std=c99 -MMD -MP -MF .dep/Host_AVR8.o.d LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Host_AVR8.c -o LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Host_AVR8.o
+
+Compiling C: LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Pipe_AVR8.c
+avr-gcc -c -mmcu=atmega32u4 -I. -gdwarf-2 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_USER -DARCH=ARCH_AVR8 -DBOOT_START_ADDR=0x7000UL -DDEVICE_VID=0x1FFBUL -DDEVICE_PID=0x0101UL -D USB_DEVICE_ONLY -D DEVICE_STATE_AS_GPIOR=0 -D ORDERED_EP_CONFIG -D FIXED_CONTROL_ENDPOINT_SIZE=8 -D FIXED_NUM_CONFIGURATIONS=1 -D USE_RAM_DESCRIPTORS -D USE_STATIC_OPTIONS="(USB_DEVICE_OPT_FULLSPEED | USB_OPT_REG_ENABLED | USB_OPT_AUTO_PLL)" -D NO_INTERNAL_SERIAL -D NO_DEVICE_SELF_POWER -D NO_DEVICE_REMOTE_WAKEUP -D NO_SOF_EVENTS -D NO_LOCK_BYTE_WRITE_SUPPORT -Os -funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-small-functions -fpack-struct -fshort-enums -fno-strict-aliasing -Wall -Wstrict-prototypes -Wa,-adhlns=./LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Pipe_AVR8.lst -ILUFA-111009/ -std=c99 -MMD -MP -MF .dep/Pipe_AVR8.o.d LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Pipe_AVR8.c -o LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Pipe_AVR8.o
+
+Compiling C: LUFA-111009/LUFA/Drivers/USB/Core/AVR8/USBController_AVR8.c
+avr-gcc -c -mmcu=atmega32u4 -I. -gdwarf-2 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_USER -DARCH=ARCH_AVR8 -DBOOT_START_ADDR=0x7000UL -DDEVICE_VID=0x1FFBUL -DDEVICE_PID=0x0101UL -D USB_DEVICE_ONLY -D DEVICE_STATE_AS_GPIOR=0 -D ORDERED_EP_CONFIG -D FIXED_CONTROL_ENDPOINT_SIZE=8 -D FIXED_NUM_CONFIGURATIONS=1 -D USE_RAM_DESCRIPTORS -D USE_STATIC_OPTIONS="(USB_DEVICE_OPT_FULLSPEED | USB_OPT_REG_ENABLED | USB_OPT_AUTO_PLL)" -D NO_INTERNAL_SERIAL -D NO_DEVICE_SELF_POWER -D NO_DEVICE_REMOTE_WAKEUP -D NO_SOF_EVENTS -D NO_LOCK_BYTE_WRITE_SUPPORT -Os -funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-small-functions -fpack-struct -fshort-enums -fno-strict-aliasing -Wall -Wstrict-prototypes -Wa,-adhlns=./LUFA-111009/LUFA/Drivers/USB/Core/AVR8/USBController_AVR8.lst -ILUFA-111009/ -std=c99 -MMD -MP -MF .dep/USBController_AVR8.o.d LUFA-111009/LUFA/Drivers/USB/Core/AVR8/USBController_AVR8.c -o LUFA-111009/LUFA/Drivers/USB/Core/AVR8/USBController_AVR8.o
+
+Compiling C: LUFA-111009/LUFA/Drivers/USB/Core/AVR8/USBInterrupt_AVR8.c
+avr-gcc -c -mmcu=atmega32u4 -I. -gdwarf-2 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_USER -DARCH=ARCH_AVR8 -DBOOT_START_ADDR=0x7000UL -DDEVICE_VID=0x1FFBUL -DDEVICE_PID=0x0101UL -D USB_DEVICE_ONLY -D DEVICE_STATE_AS_GPIOR=0 -D ORDERED_EP_CONFIG -D FIXED_CONTROL_ENDPOINT_SIZE=8 -D FIXED_NUM_CONFIGURATIONS=1 -D USE_RAM_DESCRIPTORS -D USE_STATIC_OPTIONS="(USB_DEVICE_OPT_FULLSPEED | USB_OPT_REG_ENABLED | USB_OPT_AUTO_PLL)" -D NO_INTERNAL_SERIAL -D NO_DEVICE_SELF_POWER -D NO_DEVICE_REMOTE_WAKEUP -D NO_SOF_EVENTS -D NO_LOCK_BYTE_WRITE_SUPPORT -Os -funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-small-functions -fpack-struct -fshort-enums -fno-strict-aliasing -Wall -Wstrict-prototypes -Wa,-adhlns=./LUFA-111009/LUFA/Drivers/USB/Core/AVR8/USBInterrupt_AVR8.lst -ILUFA-111009/ -std=c99 -MMD -MP -MF .dep/USBInterrupt_AVR8.o.d LUFA-111009/LUFA/Drivers/USB/Core/AVR8/USBInterrupt_AVR8.c -o LUFA-111009/LUFA/Drivers/USB/Core/AVR8/USBInterrupt_AVR8.o
+
+Compiling C: LUFA-111009/LUFA/Drivers/USB/Core/AVR8/EndpointStream_AVR8.c
+avr-gcc -c -mmcu=atmega32u4 -I. -gdwarf-2 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_USER -DARCH=ARCH_AVR8 -DBOOT_START_ADDR=0x7000UL -DDEVICE_VID=0x1FFBUL -DDEVICE_PID=0x0101UL -D USB_DEVICE_ONLY -D DEVICE_STATE_AS_GPIOR=0 -D ORDERED_EP_CONFIG -D FIXED_CONTROL_ENDPOINT_SIZE=8 -D FIXED_NUM_CONFIGURATIONS=1 -D USE_RAM_DESCRIPTORS -D USE_STATIC_OPTIONS="(USB_DEVICE_OPT_FULLSPEED | USB_OPT_REG_ENABLED | USB_OPT_AUTO_PLL)" -D NO_INTERNAL_SERIAL -D NO_DEVICE_SELF_POWER -D NO_DEVICE_REMOTE_WAKEUP -D NO_SOF_EVENTS -D NO_LOCK_BYTE_WRITE_SUPPORT -Os -funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-small-functions -fpack-struct -fshort-enums -fno-strict-aliasing -Wall -Wstrict-prototypes -Wa,-adhlns=./LUFA-111009/LUFA/Drivers/USB/Core/AVR8/EndpointStream_AVR8.lst -ILUFA-111009/ -std=c99 -MMD -MP -MF .dep/EndpointStream_AVR8.o.d LUFA-111009/LUFA/Drivers/USB/Core/AVR8/EndpointStream_AVR8.c -o LUFA-111009/LUFA/Drivers/USB/Core/AVR8/EndpointStream_AVR8.o
+
+Compiling C: LUFA-111009/LUFA/Drivers/USB/Core/AVR8/PipeStream_AVR8.c
+avr-gcc -c -mmcu=atmega32u4 -I. -gdwarf-2 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_USER -DARCH=ARCH_AVR8 -DBOOT_START_ADDR=0x7000UL -DDEVICE_VID=0x1FFBUL -DDEVICE_PID=0x0101UL -D USB_DEVICE_ONLY -D DEVICE_STATE_AS_GPIOR=0 -D ORDERED_EP_CONFIG -D FIXED_CONTROL_ENDPOINT_SIZE=8 -D FIXED_NUM_CONFIGURATIONS=1 -D USE_RAM_DESCRIPTORS -D USE_STATIC_OPTIONS="(USB_DEVICE_OPT_FULLSPEED | USB_OPT_REG_ENABLED | USB_OPT_AUTO_PLL)" -D NO_INTERNAL_SERIAL -D NO_DEVICE_SELF_POWER -D NO_DEVICE_REMOTE_WAKEUP -D NO_SOF_EVENTS -D NO_LOCK_BYTE_WRITE_SUPPORT -Os -funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-small-functions -fpack-struct -fshort-enums -fno-strict-aliasing -Wall -Wstrict-prototypes -Wa,-adhlns=./LUFA-111009/LUFA/Drivers/USB/Core/AVR8/PipeStream_AVR8.lst -ILUFA-111009/ -std=c99 -MMD -MP -MF .dep/PipeStream_AVR8.o.d LUFA-111009/LUFA/Drivers/USB/Core/AVR8/PipeStream_AVR8.c -o LUFA-111009/LUFA/Drivers/USB/Core/AVR8/PipeStream_AVR8.o
+
+Compiling C: LUFA-111009/LUFA/Drivers/USB/Core/ConfigDescriptor.c
+avr-gcc -c -mmcu=atmega32u4 -I. -gdwarf-2 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_USER -DARCH=ARCH_AVR8 -DBOOT_START_ADDR=0x7000UL -DDEVICE_VID=0x1FFBUL -DDEVICE_PID=0x0101UL -D USB_DEVICE_ONLY -D DEVICE_STATE_AS_GPIOR=0 -D ORDERED_EP_CONFIG -D FIXED_CONTROL_ENDPOINT_SIZE=8 -D FIXED_NUM_CONFIGURATIONS=1 -D USE_RAM_DESCRIPTORS -D USE_STATIC_OPTIONS="(USB_DEVICE_OPT_FULLSPEED | USB_OPT_REG_ENABLED | USB_OPT_AUTO_PLL)" -D NO_INTERNAL_SERIAL -D NO_DEVICE_SELF_POWER -D NO_DEVICE_REMOTE_WAKEUP -D NO_SOF_EVENTS -D NO_LOCK_BYTE_WRITE_SUPPORT -Os -funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-small-functions -fpack-struct -fshort-enums -fno-strict-aliasing -Wall -Wstrict-prototypes -Wa,-adhlns=./LUFA-111009/LUFA/Drivers/USB/Core/ConfigDescriptor.lst -ILUFA-111009/ -std=c99 -MMD -MP -MF .dep/ConfigDescriptor.o.d LUFA-111009/LUFA/Drivers/USB/Core/ConfigDescriptor.c -o LUFA-111009/LUFA/Drivers/USB/Core/ConfigDescriptor.o
+
+Compiling C: LUFA-111009/LUFA/Drivers/USB/Core/DeviceStandardReq.c
+avr-gcc -c -mmcu=atmega32u4 -I. -gdwarf-2 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_USER -DARCH=ARCH_AVR8 -DBOOT_START_ADDR=0x7000UL -DDEVICE_VID=0x1FFBUL -DDEVICE_PID=0x0101UL -D USB_DEVICE_ONLY -D DEVICE_STATE_AS_GPIOR=0 -D ORDERED_EP_CONFIG -D FIXED_CONTROL_ENDPOINT_SIZE=8 -D FIXED_NUM_CONFIGURATIONS=1 -D USE_RAM_DESCRIPTORS -D USE_STATIC_OPTIONS="(USB_DEVICE_OPT_FULLSPEED | USB_OPT_REG_ENABLED | USB_OPT_AUTO_PLL)" -D NO_INTERNAL_SERIAL -D NO_DEVICE_SELF_POWER -D NO_DEVICE_REMOTE_WAKEUP -D NO_SOF_EVENTS -D NO_LOCK_BYTE_WRITE_SUPPORT -Os -funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-small-functions -fpack-struct -fshort-enums -fno-strict-aliasing -Wall -Wstrict-prototypes -Wa,-adhlns=./LUFA-111009/LUFA/Drivers/USB/Core/DeviceStandardReq.lst -ILUFA-111009/ -std=c99 -MMD -MP -MF .dep/DeviceStandardReq.o.d LUFA-111009/LUFA/Drivers/USB/Core/DeviceStandardReq.c -o LUFA-111009/LUFA/Drivers/USB/Core/DeviceStandardReq.o
+
+Compiling C: LUFA-111009/LUFA/Drivers/USB/Core/Events.c
+avr-gcc -c -mmcu=atmega32u4 -I. -gdwarf-2 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_USER -DARCH=ARCH_AVR8 -DBOOT_START_ADDR=0x7000UL -DDEVICE_VID=0x1FFBUL -DDEVICE_PID=0x0101UL -D USB_DEVICE_ONLY -D DEVICE_STATE_AS_GPIOR=0 -D ORDERED_EP_CONFIG -D FIXED_CONTROL_ENDPOINT_SIZE=8 -D FIXED_NUM_CONFIGURATIONS=1 -D USE_RAM_DESCRIPTORS -D USE_STATIC_OPTIONS="(USB_DEVICE_OPT_FULLSPEED | USB_OPT_REG_ENABLED | USB_OPT_AUTO_PLL)" -D NO_INTERNAL_SERIAL -D NO_DEVICE_SELF_POWER -D NO_DEVICE_REMOTE_WAKEUP -D NO_SOF_EVENTS -D NO_LOCK_BYTE_WRITE_SUPPORT -Os -funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-small-functions -fpack-struct -fshort-enums -fno-strict-aliasing -Wall -Wstrict-prototypes -Wa,-adhlns=./LUFA-111009/LUFA/Drivers/USB/Core/Events.lst -ILUFA-111009/ -std=c99 -MMD -MP -MF .dep/Events.o.d LUFA-111009/LUFA/Drivers/USB/Core/Events.c -o LUFA-111009/LUFA/Drivers/USB/Core/Events.o
+
+Compiling C: LUFA-111009/LUFA/Drivers/USB/Core/HostStandardReq.c
+avr-gcc -c -mmcu=atmega32u4 -I. -gdwarf-2 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_USER -DARCH=ARCH_AVR8 -DBOOT_START_ADDR=0x7000UL -DDEVICE_VID=0x1FFBUL -DDEVICE_PID=0x0101UL -D USB_DEVICE_ONLY -D DEVICE_STATE_AS_GPIOR=0 -D ORDERED_EP_CONFIG -D FIXED_CONTROL_ENDPOINT_SIZE=8 -D FIXED_NUM_CONFIGURATIONS=1 -D USE_RAM_DESCRIPTORS -D USE_STATIC_OPTIONS="(USB_DEVICE_OPT_FULLSPEED | USB_OPT_REG_ENABLED | USB_OPT_AUTO_PLL)" -D NO_INTERNAL_SERIAL -D NO_DEVICE_SELF_POWER -D NO_DEVICE_REMOTE_WAKEUP -D NO_SOF_EVENTS -D NO_LOCK_BYTE_WRITE_SUPPORT -Os -funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-small-functions -fpack-struct -fshort-enums -fno-strict-aliasing -Wall -Wstrict-prototypes -Wa,-adhlns=./LUFA-111009/LUFA/Drivers/USB/Core/HostStandardReq.lst -ILUFA-111009/ -std=c99 -MMD -MP -MF .dep/HostStandardReq.o.d LUFA-111009/LUFA/Drivers/USB/Core/HostStandardReq.c -o LUFA-111009/LUFA/Drivers/USB/Core/HostStandardReq.o
+
+Compiling C: LUFA-111009/LUFA/Drivers/USB/Core/USBTask.c
+avr-gcc -c -mmcu=atmega32u4 -I. -gdwarf-2 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_USER -DARCH=ARCH_AVR8 -DBOOT_START_ADDR=0x7000UL -DDEVICE_VID=0x1FFBUL -DDEVICE_PID=0x0101UL -D USB_DEVICE_ONLY -D DEVICE_STATE_AS_GPIOR=0 -D ORDERED_EP_CONFIG -D FIXED_CONTROL_ENDPOINT_SIZE=8 -D FIXED_NUM_CONFIGURATIONS=1 -D USE_RAM_DESCRIPTORS -D USE_STATIC_OPTIONS="(USB_DEVICE_OPT_FULLSPEED | USB_OPT_REG_ENABLED | USB_OPT_AUTO_PLL)" -D NO_INTERNAL_SERIAL -D NO_DEVICE_SELF_POWER -D NO_DEVICE_REMOTE_WAKEUP -D NO_SOF_EVENTS -D NO_LOCK_BYTE_WRITE_SUPPORT -Os -funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-small-functions -fpack-struct -fshort-enums -fno-strict-aliasing -Wall -Wstrict-prototypes -Wa,-adhlns=./LUFA-111009/LUFA/Drivers/USB/Core/USBTask.lst -ILUFA-111009/ -std=c99 -MMD -MP -MF .dep/USBTask.o.d LUFA-111009/LUFA/Drivers/USB/Core/USBTask.c -o LUFA-111009/LUFA/Drivers/USB/Core/USBTask.o
+
+Compiling C: LUFA-111009/LUFA/Drivers/USB/Class/Common/HIDParser.c
+avr-gcc -c -mmcu=atmega32u4 -I. -gdwarf-2 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_USER -DARCH=ARCH_AVR8 -DBOOT_START_ADDR=0x7000UL -DDEVICE_VID=0x1FFBUL -DDEVICE_PID=0x0101UL -D USB_DEVICE_ONLY -D DEVICE_STATE_AS_GPIOR=0 -D ORDERED_EP_CONFIG -D FIXED_CONTROL_ENDPOINT_SIZE=8 -D FIXED_NUM_CONFIGURATIONS=1 -D USE_RAM_DESCRIPTORS -D USE_STATIC_OPTIONS="(USB_DEVICE_OPT_FULLSPEED | USB_OPT_REG_ENABLED | USB_OPT_AUTO_PLL)" -D NO_INTERNAL_SERIAL -D NO_DEVICE_SELF_POWER -D NO_DEVICE_REMOTE_WAKEUP -D NO_SOF_EVENTS -D NO_LOCK_BYTE_WRITE_SUPPORT -Os -funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-small-functions -fpack-struct -fshort-enums -fno-strict-aliasing -Wall -Wstrict-prototypes -Wa,-adhlns=./LUFA-111009/LUFA/Drivers/USB/Class/Common/HIDParser.lst -ILUFA-111009/ -std=c99 -MMD -MP -MF .dep/HIDParser.o.d LUFA-111009/LUFA/Drivers/USB/Class/Common/HIDParser.c -o LUFA-111009/LUFA/Drivers/USB/Class/Common/HIDParser.o
+
+Linking: Caterina.elf
+avr-gcc -mmcu=atmega32u4 -I. -gdwarf-2 -DF_CPU=16000000UL -DF_USB=16000000UL -DBOARD=BOARD_USER -DARCH=ARCH_AVR8 -DBOOT_START_ADDR=0x7000UL -DDEVICE_VID=0x1FFBUL -DDEVICE_PID=0x0101UL -D USB_DEVICE_ONLY -D DEVICE_STATE_AS_GPIOR=0 -D ORDERED_EP_CONFIG -D FIXED_CONTROL_ENDPOINT_SIZE=8 -D FIXED_NUM_CONFIGURATIONS=1 -D USE_RAM_DESCRIPTORS -D USE_STATIC_OPTIONS="(USB_DEVICE_OPT_FULLSPEED | USB_OPT_REG_ENABLED | USB_OPT_AUTO_PLL)" -D NO_INTERNAL_SERIAL -D NO_DEVICE_SELF_POWER -D NO_DEVICE_REMOTE_WAKEUP -D NO_SOF_EVENTS -D NO_LOCK_BYTE_WRITE_SUPPORT -Os -funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-small-functions -fpack-struct -fshort-enums -fno-strict-aliasing -Wall -Wstrict-prototypes -Wa,-adhlns=Caterina.o -ILUFA-111009/ -std=c99 -MMD -MP -MF .dep/Caterina.elf.d Caterina.o Descriptors.o LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Device_AVR8.o LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Endpoint_AVR8.o LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Host_AVR8.o LUFA-111009/LUFA/Drivers/USB/Core/AVR8/Pipe_AVR8.o LUFA-111009/LUFA/Drivers/USB/Core/AVR8/USBController_AVR8.o LUFA-111009/LUFA/Drivers/USB/Core/AVR8/USBInterrupt_AVR8.o LUFA-111009/LUFA/Drivers/USB/Core/AVR8/EndpointStream_AVR8.o LUFA-111009/LUFA/Drivers/USB/Core/AVR8/PipeStream_AVR8.o LUFA-111009/LUFA/Drivers/USB/Core/ConfigDescriptor.o LUFA-111009/LUFA/Drivers/USB/Core/DeviceStandardReq.o LUFA-111009/LUFA/Drivers/USB/Core/Events.o LUFA-111009/LUFA/Drivers/USB/Core/HostStandardReq.o LUFA-111009/LUFA/Drivers/USB/Core/USBTask.o LUFA-111009/LUFA/Drivers/USB/Class/Common/HIDParser.o --output Caterina.elf -Wl,-Map=Caterina.map,--cref -Wl,--section-start=.text=0x7000 -Wl,--relax -Wl,--gc-sections     -lm
+
+Creating load file for Flash: Caterina.hex
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock Caterina.elf Caterina.hex
+
+Creating load file for EEPROM: Caterina.eep
+avr-objcopy -j .eeprom --set-section-flags=.eeprom="alloc,load" \
+--change-section-lma .eeprom=0 --no-change-warnings -O ihex Caterina.elf Caterina.eep || exit 0
+
+Creating Extended Listing: Caterina.lss
+avr-objdump -h -S -z Caterina.elf > Caterina.lss
+
+Creating Symbol Table: Caterina.sym
+avr-nm -n Caterina.elf > Caterina.sym
+
+Size after:
+AVR Memory Usage
+----------------
+Device: atmega32u4
+
+Program:    4088 bytes (12.5% Full)
+(.text + .data + .bootloader)
+
+Data:        228 bytes (8.9% Full)
+(.data + .bss + .noinit)
+
+
+
+-------- end --------
+
