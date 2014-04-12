@@ -28,6 +28,39 @@
   this software.
 */
 
+/*
+Copyright (c) 2014 Pololu Corporation.  For more information, see
+
+http://www.pololu.com/
+http://forum.pololu.com/
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+/*
+This file was modified by Pololu from the original Arduino Caterina
+bootloader to support the A-Star 32U4.
+*/
+
 /** \file
  *
  *  USB Device Descriptors, for library use when in USB device mode. Descriptors are special
@@ -191,27 +224,23 @@ const USB_Descriptor_String_t LanguageString =
  */
 const USB_Descriptor_String_t ProductString =
 {
-	.Header                 = {.Size = USB_STRING_LEN(16), .Type = DTYPE_String},
-
-	#if DEVICE_PID == 0x0036
-	.UnicodeString          = L"Arduino Leonardo" 
-	#elif DEVICE_PID == 0x0037
-	.UnicodeString			= L"Arduino Micro   "
-	#elif DEVICE_PID == 0x003C
-	.UnicodeString			= L"Arduino Esplora "
+	#if DEVICE_VID == 0x1FFB && DEVICE_PID == 0x0101
+	.Header        = {.Size = USB_STRING_LEN(29), .Type = DTYPE_String},
+	.UnicodeString = L"Pololu A-Star 32U4 Bootloader"
 	#else
-	.UnicodeString			= L"USB IO board    "
+	.Header        = {.Size = USB_STRING_LEN(13), .Type = DTYPE_String},
+	.UnicodeString = L"USB I/O board"
 	#endif
 };
 
 const USB_Descriptor_String_t ManufNameString = 
 {
-	.Header					= {.Size = USB_STRING_LEN(11), .Type = DTYPE_String},
-	
-	#if DEVICE_VID == 0x2341
-	.UnicodeString			= L"Arduino LLC"
+	#if DEVICE_VID == 0x1FFB
+	.Header        = {.Size = USB_STRING_LEN(18), .Type = DTYPE_String},
+	.UnicodeString = L"Pololu Corporation"
 	#else
-	.UnicodeString			= L"Unknown    "
+	.Header        = {.Size = USB_STRING_LEN(7), .Type = DTYPE_String},
+	.UnicodeString = L"Unknown"
 	#endif
 };
 

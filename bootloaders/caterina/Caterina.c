@@ -28,6 +28,43 @@
   this software.
 */
 
+/*
+Copyright (c) 2014 Pololu Corporation.  For more information, see
+
+http://www.pololu.com/
+http://forum.pololu.com/
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+/*
+This file was modified by Pololu from the original Arduino Caterina
+bootloader to support the A-Star 32U4. We made the reset line work the
+same way as on SparkFun's Pro Micro: a single external reset restarts
+the sketch after 750 milliseconds, while two external resets within
+750 ms start the bootloader. We also needed to optimize a few things
+to allow the bootloader to still fit within 4 KB.
+*/
+
 /** \file
  *
  *  Main source file for the CDC class bootloader. This file contains the complete bootloader logic.
@@ -35,6 +72,7 @@
 
 #define  INCLUDE_FROM_CATERINA_C
 #include "Caterina.h"
+#include <util/delay.h> // for _delay_ms()
 
 /** Contains the current baud rate and other settings of the first virtual serial port. This must be retained as some
  *  operating systems will not open the port unless the settings can be set successfully.
@@ -65,7 +103,7 @@ uint16_t RxLEDPulse = 0; // time remaining for Rx LED pulse
 #define TIMEOUT_PERIOD	8000
 uint16_t Timeout = 0;
 
-uint16_t bootKey = 0x7777;
+static const uint16_t bootKey = 0x7777;
 volatile uint16_t *const bootKeyPtr = (volatile uint16_t *)0x0800;
 
 void StartSketch(void)
@@ -115,22 +153,54 @@ int main(void)
 	*bootKeyPtr = 0;
 
 	/* Check the reason for the reset so we can act accordingly */
-	uint8_t  mcusr_state = MCUSR;		// store the initial state of the Status register
-	MCUSR = 0;							// clear all reset flags	
+	uint8_t  mcusr_state = MCUSR;							// store the initial state of the Status register
+	MCUSR &= ~((1 << PORF) | (1 << EXTRF) | (1 << WDRF));	// clear reset flags that are used by the bootloader
 
 	/* Watchdog may be configured with a 15 ms period so must disable it before going any further */
 	wdt_disable();
 	
-	if (mcusr_state & (1<<EXTRF)) {
-		// External reset -  we should continue to self-programming mode.
-	} else if ((mcusr_state & (1<<PORF)) && (pgm_read_word(0) != 0xFFFF)) {		
-		// After a power-on reset skip the bootloader and jump straight to sketch 
-		// if one exists.	
-		StartSketch();
-	} else if ((mcusr_state & (1<<WDRF)) && (bootKeyPtrVal != bootKey) && (pgm_read_word(0) != 0xFFFF)) {	
-		// If it looks like an "accidental" watchdog reset then start the sketch.
-		StartSketch();
+
+	if (pgm_read_word(0) != 0xFFFF)
+	{
+		// There is a sketch (otherwise, skip these checks and just run the bootloader).
+		
+		if (mcusr_state & (1 << PORF))
+		{
+			// After power-on reset, clear BORF so sketch can tell it wasn't a brown-out reset,
+			// then start the sketch.
+			MCUSR &= ~(1 << BORF);
+			StartSketch();
+		}
+		else if (mcusr_state & (1 << EXTRF))
+		{
+			// External reset.
+			if (bootKeyPtrVal != bootKey)
+			{
+				// First reset button press. Set boot key for 750 ms so second reset button press
+				// can be detected, then start the sketch if there isn't another reset.
+				*bootKeyPtr = bootKey;
+				_delay_ms(750);
+				*bootKeyPtr = 0;
+				StartSketch();
+			}
+			else
+			{
+				 // Second reset button press; boot key was already set. Fall through to bootloader.
+			}
+		}
+		else if ((mcusr_state & (1 << WDRF)) && (bootKeyPtrVal == bootKey))
+		{
+			// Watchdog reset triggered by sketch to start bootloader. Fall through.
+		}
+		else
+		{
+			// Reset happened for some other reason; start the sketch.
+			StartSketch();
+		}
 	}
+
+	// Clear remaining reset flags so the sketch doesn't see info about an old reset when it runs later.
+	MCUSR = 0;
 	
 	/* Setup hardware required for the bootloader */
 	SetupHardware();
@@ -161,19 +231,21 @@ int main(void)
 /** Configures all hardware required for the bootloader. */
 void SetupHardware(void)
 {
+	// This was in the original Caterina, but it shouldn't be necessary because we've already
+	// cleared WDRF and disabled the watchdog timer in main().
 	/* Disable watchdog if enabled by bootloader/fuses */
-	MCUSR &= ~(1 << WDRF);
-	wdt_disable();
+	//MCUSR &= ~(1 << WDRF);
+	//wdt_disable();
 
 	/* Disable clock division */
-	clock_prescale_set(clock_div_1);
-
+	//clock_prescale_set(clock_div_1); // redundant
+	CPU_PRESCALE(0);
+	
 	/* Relocate the interrupt vector table to the bootloader section */
 	MCUCR = (1 << IVCE);
 	MCUCR = (1 << IVSEL);
 	
 	LED_SETUP();
-	CPU_PRESCALE(0); 
 	L_LED_OFF();
 	TX_LED_OFF();
 	RX_LED_OFF();
