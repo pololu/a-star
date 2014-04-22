@@ -1,1 +1,2 @@
 *.inf -text
+*.txt text eol=crlf
