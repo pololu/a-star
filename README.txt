@@ -1,7 +1,8 @@
 Pololu A-Star Software and Drivers
 
-These files are the software and drivers for the Pololu A-Star 32U4 Micro,
-a tiny programmable module featuring Atmel's ATmega32U4 microcontroller.
+These files are the software and drivers for the Pololu A-Star 32U4 boards,
+which are a family of tiny programmable modules featuring Atmel's ATmega32U4
+microcontroller.
 
 For more information about the A-Star, see the user's guide:
 http://www.pololu.com/docs/0J61
