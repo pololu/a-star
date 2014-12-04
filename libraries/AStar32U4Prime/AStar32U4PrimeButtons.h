@@ -21,7 +21,7 @@
  *  Prime. */
 #define A_STAR_32U4_PRIME_BUTTON_C 17
 
-/*! Interfaces with button A on the A-Star 32U4 Prime. */
+/*! \brief Interfaces with button A on the A-Star 32U4 Prime. */
 class AStar32U4PrimeButtonA : public Pushbutton
 {
 public:
@@ -30,7 +30,7 @@ public:
     }
 };
 
-/*! Interfaces with button B on the A-Star 32U4 Prime.
+/*! \brief Interfaces with button B on the A-Star 32U4 Prime.
  *
  * The pin used for button B is also used for the TX LED.
  *
@@ -53,7 +53,7 @@ public:
     }
 };
 
-/*! Interfaces with button C on the A-Star 32U4 Prime.
+/*! \brief Interfaces with button C on the A-Star 32U4 Prime.
  *
  * The pin used for button C is also used for the RX LED.
  *
