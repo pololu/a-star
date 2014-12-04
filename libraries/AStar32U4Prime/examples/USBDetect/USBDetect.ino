@@ -33,7 +33,7 @@ void loop()
   bool usbConfigured = USBDevice.configured();
 
   // The Arduino Serial object can be implicitly converted to a
-  // boolean which is true if the Arduino core code considers the
+  // bool which is true if the Arduino core code considers the
   // port to be open.  This is usually used in code like "if
   // (Serial)" and is documented here:
   //
