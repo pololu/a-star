@@ -47,7 +47,7 @@ public:
         FastGPIO::PinLoan<A_STAR_32U4_PRIME_BUTTON_B> loan;
 
         FastGPIO::Pin<A_STAR_32U4_PRIME_BUTTON_B>::setInputPulledUp();
-        _delay_us(10);  // TODO: optimize this delay
+        _delay_us(3);
         return !FastGPIO::Pin<A_STAR_32U4_PRIME_BUTTON_B>::isInputHigh();
     }
 };
@@ -70,7 +70,7 @@ public:
         FastGPIO::PinLoan<A_STAR_32U4_PRIME_BUTTON_C> loan;
 
         FastGPIO::Pin<A_STAR_32U4_PRIME_BUTTON_C>::setInputPulledUp();
-        _delay_us(10);  // TODO: optimize this delay
+        _delay_us(3);
         return !FastGPIO::Pin<A_STAR_32U4_PRIME_BUTTON_C>::isInputHigh();
     }
 };
