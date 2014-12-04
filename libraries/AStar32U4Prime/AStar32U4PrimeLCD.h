@@ -1,5 +1,7 @@
 /*! \file AStar32U4PrimeLCD.h */
 
+#pragma once
+
 #include <PololuHD44780.h>
 #include <FastGPIO.h>
 #include <USBPause.h>
