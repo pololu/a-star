@@ -1,0 +1,11 @@
+
+# Doxygen configuration file for generating documentation.
+PROJECT_NAME = "AStar32U4Prime library"
+OUTPUT_DIRECTORY = docs
+INLINE_INHERITED_MEMB = YES
+INPUT = .
+USE_MDFILE_AS_MAINPAGE = README.md
+RECURSIVE = YES
+SOURCE_BROWSER = YES
+USE_MATHJAX = YES
+GENERATE_LATEX = NO
