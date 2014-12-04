@@ -1,6 +1,6 @@
 /* This example demonstrates three different methods for
-detecting a button press and release.  It blinks the yellow user
-LED on pin 13 each time button A is pressed and released. */
+detecting a button press and release.  It blinks the green user
+LED each time button A is pressed and released. */
 
 #include <AStar32U4Prime.h>
 
@@ -10,11 +10,9 @@ AStar32U4PrimeButtonA buttonA;
 AStar32U4PrimeButtonB buttonB;
 AStar32U4PrimeButtonC buttonC;
 
-#define LED_PIN 13
-
 void setup()
 {
-  pinMode(LED_PIN, OUTPUT);
+
 }
 
 void loop()
@@ -37,9 +35,9 @@ void loop()
   while (buttonA.isPressed());     // if button isn't still released, loop
 
   // blink LED
-  digitalWrite(LED_PIN, HIGH);
+  ledGreen(1);
   delay(200);
-  digitalWrite(LED_PIN, LOW);
+  ledGreen(0);
 
   /* Method 2: Use the waitForButton() function, which blocks and
    * doesn't return until a button press and release are
@@ -47,9 +45,9 @@ void loop()
   buttonA.waitForButton();
 
   // blink LED
-  digitalWrite(LED_PIN, HIGH);
+  ledGreen(1);
   delay(200);
-  digitalWrite(LED_PIN, LOW);
+  ledGreen(0);
 
   /* Method 3: Call the getSingleDebouncedRelease() function
    * repeatedly in a loop, which returns true to report a single
@@ -63,9 +61,9 @@ void loop()
     if (buttonA.getSingleDebouncedRelease())
     {
       // blink LED
-      digitalWrite(LED_PIN, HIGH);
+      ledGreen(1);
       delay(200);
-      digitalWrite(LED_PIN, LOW);
+      ledGreen(0);
       break;
     }
   }
