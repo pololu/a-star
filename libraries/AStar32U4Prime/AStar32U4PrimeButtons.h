@@ -1,4 +1,4 @@
-/* \file AStar32U4PrimeButtons.h */
+/** \file AStar32U4PrimeButtons.h */
 
 #pragma once
 
