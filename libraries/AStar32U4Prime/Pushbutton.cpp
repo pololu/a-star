@@ -1,5 +1,9 @@
 #include "Pushbutton.h"
 
+// This command and the corresponding endcond command.
+// hide PushbuttonStateMachine from Doxygen.
+// \cond
+
 PushbuttonStateMachine::PushbuttonStateMachine()
 {
   state = 0;
@@ -74,6 +78,8 @@ bool PushbuttonStateMachine::getSingleDebouncedRisingEdge(bool value)
 
   return false;
 }
+
+// \endcond
 
 void PushbuttonBase::waitForPress()
 {

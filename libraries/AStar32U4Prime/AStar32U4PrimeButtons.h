@@ -5,6 +5,7 @@
 #include <Pushbutton.h>
 #include <FastGPIO.h>
 #include <USBPause.h>
+#include <util/delay.h>
 
 /*! The pin number for the pin connected to button A on the A-Star 32U4
  *  Prime. */

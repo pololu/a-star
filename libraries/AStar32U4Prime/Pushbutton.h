@@ -34,11 +34,12 @@
  * probably be removed in the future. */
 #define ZUMO_BUTTON 12
 
+// \cond
 /** \brief A state machine that detects when a boolean value changes from false
  * to true, with debouncing.
  *
- * Most users of this library do not need to directly use PushbuttonStateMachine
- * or even know that it exists.  They can use Pushbutton instead. */
+ * This should be considered a private implementation detail of the library.
+ */
 class PushbuttonStateMachine
 {
 public:
@@ -103,7 +104,13 @@ public:
    *
    * This is just like getSingleDebouncedPress() except it has a separate state
    * machine and it watches for when the button goes from the pressed state to
-   * the released state. */
+   * the released state.
+   *
+   * There is no strict guarantee that every debounced button press event
+   * returned by getSingleDebouncedButtonPress() will have a corresponding
+   * button release event returned by getSingleDebouncedButtonRelease(); the two
+   * functions use independent state machines and sample the button at different
+   * times. */
   bool getSingleDebouncedRelease();
 
   /*! \brief indicates whether button is currently pressed without any debouncing.
