@@ -1,0 +1,72 @@
+/* This example demonstrates three different methods for
+detecting a button press and release.  It blinks the yellow user
+LED on pin 13 each time button A is pressed and released. */
+
+#include <AStar32U4Prime.h>
+
+// These objects provide access to the A-Star 32U4 Prime's
+// on-board buttons.  We will only use buttonA.
+AStar32U4PrimeButtonA buttonA;
+AStar32U4PrimeButtonB buttonB;
+AStar32U4PrimeButtonC buttonC;
+
+#define LED_PIN 13
+
+void setup()
+{
+  pinMode(LED_PIN, OUTPUT);
+}
+
+void loop()
+{
+  /* Method 1: Directly read the state of the button with the
+   * isPressed() function. You must debounce the button yourself
+   * with this method. */
+  do
+  {
+    while (!buttonA.isPressed());  // wait for button to be pressed
+    delay(10);                     // debounce the button press
+  }
+  while (!buttonA.isPressed());    // if button isn't still pressed, loop
+
+  do
+  {
+    while (buttonA.isPressed());   // wait for button to be released
+    delay(10);                     // debounce the button release
+  }
+  while (buttonA.isPressed());     // if button isn't still released, loop
+
+  // blink LED
+  digitalWrite(LED_PIN, HIGH);
+  delay(200);
+  digitalWrite(LED_PIN, LOW);
+
+  /* Method 2: Use the waitForButton() function, which blocks and
+   * doesn't return until a button press and release are
+   * detected. This function takes care of button debouncing. */
+  buttonA.waitForButton();
+
+  // blink LED
+  digitalWrite(LED_PIN, HIGH);
+  delay(200);
+  digitalWrite(LED_PIN, LOW);
+
+  /* Method 3: Call the getSingleDebouncedRelease() function
+   * repeatedly in a loop, which returns true to report a single
+   * button release or false otherwise. This function takes care
+   * of button debouncing. If you have multiple buttons, you can
+   * call getSingleDebouncedRelease() or
+   * getSingleDebouncedPress() in a loop for all of them until
+   * one of them returns true. */
+  while (1)
+  {
+    if (buttonA.getSingleDebouncedRelease())
+    {
+      // blink LED
+      digitalWrite(LED_PIN, HIGH);
+      delay(200);
+      digitalWrite(LED_PIN, LOW);
+      break;
+    }
+  }
+}
