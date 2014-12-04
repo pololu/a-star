@@ -1,3 +1,5 @@
+/*! \file AStar32U4PrimeLCD.h */
+
 #include <PololuHD44780.h>
 #include <FastGPIO.h>
 #include <USBPause.h>
@@ -31,8 +33,8 @@
  *
  * If you want to control your LCD with different pins, you can edit the line
  * labeled "Pin assignments" in AStar32U4PrimeLCD.h or you can make your own new
- * LCD class in your sketch by copy and pasting the code for that class, which
- * is not very long.
+ * LCD class in your sketch by copying the code for the AStar32U4PrimeLCD class,
+ * which is not very long.
  *
  * This class inherits from the Arduino Print class, so you can call the
  * `print()` function on it with a variety of arguments.  See the
