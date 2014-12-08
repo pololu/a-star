@@ -1,1 +1,13 @@
+AStar32U4PrimeLCD	KEYWORD1
+AStar32U4PrimeBuzzer	KEYWORD1
+AStar32U4PrimeButtonA	KEYWORD1
+AStar32U4PrimeButtonB	KEYWORD1
+AStar32U4PrimeButtonC	KEYWORD1
 AStar32U4Prime	KEYWORD1
+SPIPause	KEYWORD1
+
+usbPowerPresent	KEYWORD2
+readBatteryMillivolts	KEYWORD2
+ledRed	KEYWORD2
+ledGreen	KEYWORD2
+ledYellow	KEYWORD2

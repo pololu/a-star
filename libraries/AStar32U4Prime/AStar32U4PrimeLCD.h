@@ -5,6 +5,7 @@
 #include <PololuHD44780.h>
 #include <FastGPIO.h>
 #include <USBPause.h>
+#include <SPIPause.h>
 
 /*! \brief Main class for interfacing with the A-Star 32U4 Prime LCD.
  *
@@ -61,18 +62,27 @@ public:
 
     virtual void send(uint8_t data, bool rsValue, bool only4bits)
     {
-        // Temporarily disable USB interrupts and also save the states of most
-        // of the LCD pins.  The interrupts will be restored and the pin states
-        // will be restored automatically before this function returns.
-        USBPause pause;
+        // Temporarily disable the AVR's hardware SPI module; if it is enabled
+        // then MISO is forced to be an input, and the Arduino SD library
+        // generally leaves it enabled.
+        SPIPause spiPause;
+
+        // Temporarily disable USB interrupts because they write some pins
+        // we are using as LCD pins.
+        USBPause usbPause;
+
+        // Save the state of the RS and data pins.  The state automatically
+        // gets restored before this function returns.
         FastGPIO::PinLoan<rs> loanRS;
         FastGPIO::PinLoan<db4> loanDB4;
         FastGPIO::PinLoan<db5> loanDB5;
         FastGPIO::PinLoan<db6> loanDB6;
         FastGPIO::PinLoan<db7> loanDB7;
 
+        // Drive the RS pin high or low.
         FastGPIO::Pin<rs>::setOutput(rsValue);
 
+        // Send the data.
         if (!only4bits) { sendNibble(data >> 4); }
         sendNibble(data & 0x0F);
     }
