@@ -342,11 +342,81 @@ void sdDemo()
   while(buttonMonitor() != 'B');
 }
 
+// Receives characters from the serial monitor and prints them on
+// the LCD.  Also sends button press notifications to the serial
+// monitor.
+void serialMonitorDemo()
+{
+  lcd.clear();
+  lcd.print(F("Type"));
+  lcd.gotoXY(0, 1);
+  lcd.print(F("into"));
+  delay(1000);
+
+  lcd.clear();
+  lcd.print(F("serial"));
+  lcd.gotoXY(0, 1);
+  lcd.print(F("monitor."));
+  delay(1000);
+
+  lcd.cursorBlinking();
+  displayBackArrow();
+
+  Serial.flush();
+
+  uint8_t column = 0;
+  bool quit = 0;
+
+  while(!quit)
+  {
+    if (Serial.available())
+    {
+      // We received a character from the serial port.
+      char c = Serial.read();
+
+      // Show the character on the LCD.
+      if (column >= 8)
+      {
+        // The first line has filled up, so reset the display.
+        displayBackArrow();
+        column = 0;
+      }
+      column++;
+      lcd.write(c);
+
+      // Write a message back to the serial monitor saying the
+      // hex value of the character received.
+      Serial.print("Received character 0x");
+      Serial.println((uint8_t)c, HEX);
+    }
+
+    // Send a message if button A or button C is pressed.
+    // Quit if button B is pressed.
+    switch(buttonMonitor())
+    {
+    case 'A':
+      Serial.println(F("Button A was pressed."));
+      break;
+
+    case 'C':
+      Serial.println(F("Button C was pressed."));
+      break;
+
+    case 'B':
+      quit = true;
+      break;
+    }
+  }
+
+  lcd.hideCursor();
+}
+
 Menu::Item mainMenuItems[] = {
   { "LEDs", ledDemo },
   { "Music", musicDemo },
   { "Power", powerDemo },
   { "SD card", sdDemo },
+  { "Ser. mon", serialMonitorDemo },
 };
 Menu mainMenu(mainMenuItems, 5);
 
