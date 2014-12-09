@@ -11,8 +11,8 @@ This is a C++ library for the Aruino IDE that helps access the on-board hardware
 * display information on the LCD
 * play sounds and music on the buzzer
 * read the battery voltage level
-* control all three user LEDs
-* use the three pushbuttons
+* control the three user LEDs
+* use the three user pushbuttons
 
 ## Installing the library
 
