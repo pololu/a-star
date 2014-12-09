@@ -458,7 +458,7 @@ Menu::Item mainMenuItems[] = {
   { "Music", musicDemo },
   { "Power", powerDemo },
   { "SD card", sdDemo },
-  { "Ser. mon", serialMonitorDemo },
+  { "Serial", serialMonitorDemo },
 };
 Menu mainMenu(mainMenuItems, 5);
 
