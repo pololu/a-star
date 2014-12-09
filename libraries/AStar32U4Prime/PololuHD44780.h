@@ -172,14 +172,6 @@ public:
         gotoXY(col, row);
     }
 
-    /*! Change the cursor to the beginning of the specified line.
-     *
-     * Calling gotoLine(y) is equivalent to calling gotoXY(0, y). */
-    void gotoLine(uint8_t y)
-    {
-        gotoXY(0, y);
-    }
-
     /*! Turns off the display while preserving its state.
      *
      * You can turn the display on again by calling display(). */
