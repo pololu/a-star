@@ -144,7 +144,7 @@ void PololuHD44780Base::cursorBlinking()
 
 void PololuHD44780Base::hideCursor()
 {
-    setDisplayControl(displayControl | ~0b011);
+    setDisplayControl(displayControl & ~0b011);
 }
 
 void PololuHD44780Base::noDisplay()
