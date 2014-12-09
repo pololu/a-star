@@ -393,7 +393,13 @@ void setup()
 
   // The brownout threshold on the A-Star 32U4 is 4.3 V.  If VCC
   // drops below this, a brownout reset will occur, preventing
-  // the AVR from operating out of spec.  The bootloader is
+  // the AVR from operating out of spec.
+  //
+  // Note: Brownout resets usually do not happen on the A-Star
+  // 32U4 Prime LV because the voltage regulator goes straight
+  // from 5 V to 0 V when VIN drops too low.
+  //
+  // The bootloader is
   // designed so that you can detect brownout resets from your
   // sketch using the following code:
   bool brownout = MCUSR >> BORF & 1;
