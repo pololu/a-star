@@ -169,6 +169,47 @@ void displayBackArrow()
   lcd.gotoXY(0,0);
 }
 
+// Acts as a two-key keyboard.  You can press button A or button
+// C to send the corresponding keys to the computer.  For more
+// information, see the Keyboard example.
+void keyboardDemo()
+{
+  displayBackArrow();
+  lcd.print(F("Type A/C"));
+
+  while(1)
+  {
+    if (buttonA.getSingleDebouncedPress())
+    {
+      // Button A was pressed.
+      Keyboard.press('a');
+      buzzer.playFromProgramSpace(beepButtonA);
+    }
+    if (!buttonA.isPressed())
+    {
+      Keyboard.release('a');
+    }
+
+    if (buttonC.getSingleDebouncedPress())
+    {
+      // Button C was pressed.
+      Keyboard.press('c');
+      buzzer.playFromProgramSpace(beepButtonC);
+    }
+    if (!buttonC.isPressed())
+    {
+      Keyboard.release('c');
+    }
+
+    if (buttonB.getSingleDebouncedPress())
+    {
+      // Button B was pressed, so quit.
+      buzzer.playFromProgramSpace(beepButtonB);
+      break;
+    }
+  }
+}
+
 // Blinks all three LEDs in sequence.
 void ledDemo()
 {
@@ -412,6 +453,7 @@ void serialMonitorDemo()
 }
 
 Menu::Item mainMenuItems[] = {
+  { "Keyboard", keyboardDemo },
   { "LEDs", ledDemo },
   { "Music", musicDemo },
   { "Power", powerDemo },
