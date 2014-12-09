@@ -3,12 +3,38 @@ A-Star 32U4 Prime.
 
 It uses the buttons, LCD, and buzzer to provide a user interface.
 It presents a menu to the user that lets the user select from
-several different demos. */
+several different demos.
 
-// The line below chooses what pin we will use to control the SD
-// card's chip select (CS) signal in the SD card demo.  This pin
-// needs to be connected to the CS input of the SD card or the SD
-// card demo will not work.  It is not connected by default.
+To use this demo program, you will need to have an LCD connected
+to the A-Star 32U4 Prime.  If you cannot see any text on the LCD, try
+adjusting the contrast potentiometer.
+
+== microSD card considerations ==
+
+To use the microSD card portion of this program, you will need to
+install a jumper between GND and CS.
+
+(You will also need to have a version of the A-Star 32U4 with a
+microSD card socket and you will need to insert a formatted
+microSD card into the socket.)
+
+Note: While the GND/CS jumper is installed, you will not be able to
+read button A.
+
+Note: If the GND/CS jumper is installed the microSD card is not
+present, the state of the DO pin from the microSD card will be
+undefined.  This could waste power and might also cause this
+program to detect spurious presses on button A.
+
+To avoid these issues, you might consider connecting a
+male-female jumper wire between CS and pin 4 instead of
+connecting CS to GND.  This demo drives pin 4 low whenever the
+microSD card is accessed and drives it high the rest of the time,
+allowing button A to work properly. */
+
+
+/* The line below chooses what pin we will use to control the SD
+card's chip select (CS) signal in the SD card demo. */
 const uint8_t chipSelect = 4;
 
 #include <AStar32U4Prime.h>
@@ -41,7 +67,7 @@ public:
   {
     lcd.clear();
     lcd.print(items[index].name);
-    lcd.gotoLine(1);
+    lcd.gotoXY(0, 1);
     lcd.print(F("\x7f" "A \xa5" "B C\x7e"));
   }
 
@@ -280,6 +306,10 @@ SdVolume volume;
 void sdDemo()
 {
   lcd.clear();
+  "Connect "
+  "GND=CS. "
+
+  lcd.clear();
   lcd.print(F("SD..."));
 
   if (!(card.init(SPI_HALF_SPEED, chipSelect)))
@@ -434,25 +464,25 @@ void setup()
 
   lcd.clear();
   lcd.print(F(" A-Star"));
-  lcd.gotoLine(1);
+  lcd.gotoXY(0, 1);
   lcd.print(F(" Prime"));
   delay(1000);
 
   lcd.clear();
   lcd.print(F("Demo"));
-  lcd.gotoLine(1);
+  lcd.gotoXY(0, 1);
   lcd.print(F("Program"));
   delay(1000);
 
   lcd.clear();
   lcd.print(F("Use B to"));
-  lcd.gotoLine(1);
+  lcd.gotoXY(0, 1);
   lcd.print(F("select."));
   delay(1000);
 
   lcd.clear();
   lcd.print(F("Press B"));
-  lcd.gotoLine(1);
+  lcd.gotoXY(0, 1);
   lcd.print(F("-try it!"));
 
   while(buttonMonitor() != 'B'){}
@@ -460,7 +490,7 @@ void setup()
   buzzer.playFromProgramSpace(beepThankYou);
   lcd.clear();
   lcd.print(F(" Thank"));
-  lcd.gotoLine(1);
+  lcd.gotoXY(0, 1);
   lcd.print(F("  you!"));
   delay(1000);
 }
@@ -471,7 +501,7 @@ void mainMenuSelect()
 {
   lcd.clear();
   lcd.print(F("  Main"));
-  lcd.gotoLine(1);
+  lcd.gotoXY(0, 1);
   lcd.print(F("  Menu"));
   delay(1000);
   mainMenu.select();
