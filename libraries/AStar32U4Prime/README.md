@@ -1,7 +1,7 @@
 # AStar32U4Prime library
 
 Version: 1.0.0<br/>
-Release date: 2014 Dec 05<br/>
+Release date: 2014 Dec 09<br/>
 [www.pololu.com](http://www.pololu.com/)
 
 ## Summary
@@ -62,3 +62,7 @@ You should avoid adding extra `#include` lines such as `#include <Pushbutton.h>`
 ## Documentation
 
 For complete documentation, see https://pololu.github.io/a-star-32u4-prime.  If you are already on that page, then click on the links in the "Classes and functions" section above.
+
+## Version history
+
+* 1.0.0 (2014 Dec 09): Original release.
