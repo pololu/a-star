@@ -125,6 +125,7 @@ private:
 
 
 // A couple of simple tunes, stored in program space.
+const char beepBrownout[] PROGMEM = "<c32<e32#<g32";
 const char beepWelcome[] PROGMEM = ">g32>>c32";
 const char beepThankYou[] PROGMEM = ">>c32>g32";
 const char beepButtonA[] PROGMEM = "!c32";
@@ -302,8 +303,6 @@ SdVolume volume;
 void sdDemo()
 {
   lcd.clear();
-  "Connect "
-  "GND=CS. "
 
   lcd.clear();
   lcd.print(F("SD..."));
@@ -324,9 +323,10 @@ void sdDemo()
     }
     else
     {
-      // We multiply the number of clusters times the number of blocks
-      // in a cluster to get the number of blocks.  Each block is 512
-      // bytes and there are 1024*1024 bytes in a megabyte.
+      // We multiply the number of clusters times the number of
+      // blocks in a cluster to get the number of blocks.  Each
+      // block is 512 bytes and there are 1024*1024 bytes in a
+      // megabyte.
       uint32_t size = (uint32_t)volume.clusterCount() *
         volume.blocksPerCluster() * 512 / 1024 / 1024;
       lcd.clear();
@@ -342,76 +342,11 @@ void sdDemo()
   while(buttonMonitor() != 'B');
 }
 
-// The timer demo turns the board into a stopwatch.
-// Press the C button to start and stop the stopwatch.
-// Press the A button to reset it.
-void timerDemo()
-{
-  displayBackArrow();
-
-  while(1)
-  {
-    static int32_t elapsedTime = 0;
-    static int32_t lastRead = 0;
-    static bool isTicking = 0;
-    static char lastSeconds = 0;
-
-    int32_t currentTime = millis();
-    if(isTicking)
-    {
-      elapsedTime += currentTime - lastRead;
-    }
-    lastRead = currentTime;
-
-    if (buttonA.getSingleDebouncedPress())
-    {
-      // Button A was pressed, so reset timer.
-      isTicking = 0;
-      elapsedTime = 0;
-      buzzer.playFromProgramSpace(beepButtonA);
-    }
-
-    if (buttonC.getSingleDebouncedPress())
-    {
-      // Button C was pressed, so start/stop timer.
-      isTicking = !isTicking;
-      buzzer.playFromProgramSpace(beepButtonC);
-    }
-
-    // Update the LCD constantly.
-    lcd.gotoXY(0, 0);
-    lcd.print((elapsedTime/1000/60/10)%10);  // tens of minutes
-    lcd.print((elapsedTime/1000/60)%10);  // minutes
-    lcd.print(':');
-    lcd.print((elapsedTime/1000)%60/10);  // tens of seconds
-    uint8_t seconds = ((elapsedTime/1000)%60)%10;
-    lcd.print(seconds);  // seconds
-    lcd.print('.');
-    lcd.print((elapsedTime/100)%10);  // tenths of seconds
-    lcd.print((elapsedTime/10)%10);  // hundredths of seconds
-
-    // Beep every second.
-    if(seconds != lastSeconds && elapsedTime != 0 && !buzzer.isPlaying())
-    {
-      buzzer.playFromProgramSpace(beepTimerTick);
-    }
-    lastSeconds = seconds;
-
-    if (buttonB.getSingleDebouncedPress())
-    {
-      // Button B was pressed, so play its sound and return.
-      buzzer.playFromProgramSpace(beepButtonB);
-      break;
-    }
-  }
-}
-
 Menu::Item mainMenuItems[] = {
   { "LEDs", ledDemo },
   { "Music", musicDemo },
   { "Power", powerDemo },
   { "SD card", sdDemo },
-  { "Timer", timerDemo },
 };
 Menu mainMenu(mainMenuItems, 5);
 
@@ -456,7 +391,31 @@ void setup()
 {
   loadCustomCharacters();
 
-  buzzer.playFromProgramSpace(beepWelcome);
+  // The brownout threshold on the A-Star 32U4 is 4.3 V.  If VCC
+  // drops below this, a brownout reset will occur, preventing
+  // the AVR from operating out of spec.  The bootloader is
+  // designed so that you can detect brownout resets from your
+  // sketch using the following code:
+  bool brownout = MCUSR >> BORF & 1;
+  MCUSR = 0;
+
+  if (brownout)
+  {
+    // The board was reset by a brownout reset
+    // (VCC dropped below 4.3 V).
+    // Play a special sound and display a note to the user.
+
+    buzzer.playFromProgramSpace(beepBrownout);
+    lcd.clear();
+    lcd.print(F("Brownout"));
+    lcd.gotoXY(0, 1);
+    lcd.print(F(" reset! "));
+    delay(1000);
+  }
+  else
+  {
+    buzzer.playFromProgramSpace(beepWelcome);
+  }
 
   lcd.clear();
   lcd.print(F(" A-Star"));
