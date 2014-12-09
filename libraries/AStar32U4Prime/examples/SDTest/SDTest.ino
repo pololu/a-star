@@ -42,10 +42,6 @@ AStar32U4PrimeButtonA buttonA;
 AStar32U4PrimeButtonB buttonB;
 AStar32U4PrimeButtonC buttonC;
 
-// The line below chooses what pin we will use to control the SD
-// card's chip select (CS) signal.  This pin needs to be
-// connected to the CS input of the SD card.  It is not connected
-// by default.
 const uint8_t chipSelect = 4;
 
 void setup()

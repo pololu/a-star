@@ -6,8 +6,8 @@ It presents a menu to the user that lets the user select from
 several different demos.
 
 To use this demo program, you will need to have an LCD connected
-to the A-Star 32U4 Prime.  If you cannot see any text on the LCD, try
-adjusting the contrast potentiometer.
+to the A-Star 32U4 Prime.  If you cannot see any text on the LCD,
+try rotating the contrast potentiometer.
 
 == microSD card considerations ==
 
@@ -32,9 +32,6 @@ demo drives pin 4 low whenever the microSD card is accessed and
 drives it high the rest of the time, allowing button A to work
 properly. */
 
-
-/* The line below chooses what pin we will use to control the SD
-card's chip select (CS) signal in the SD card demo. */
 const uint8_t chipSelect = 4;
 
 #include <AStar32U4Prime.h>
@@ -301,8 +298,7 @@ Sd2Card card;
 SdVolume volume;
 
 // Displays the size of the main partition on the inserted SD
-// card.  If this doesn't work, see the note about the chipSelect
-// variable above.
+// card.  If this doesn't work, see the notes at the top.
 void sdDemo()
 {
   lcd.clear();
