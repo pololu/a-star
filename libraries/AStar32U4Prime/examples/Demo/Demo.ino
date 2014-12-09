@@ -18,19 +18,19 @@ install a jumper between GND and CS.
 microSD card socket and you will need to insert a formatted
 microSD card into the socket.)
 
-Note: While the GND/CS jumper is installed, you will not be able to
-read button A.
+Note: While the GND/CS jumper is installed, button A will not
+work.
 
-Note: If the GND/CS jumper is installed the microSD card is not
-present, the state of the DO pin from the microSD card will be
-undefined.  This could waste power and might also cause this
-program to detect spurious presses on button A.
+Note: If the GND/CS jumper is installed and the microSD card is
+not inserted, the state of the DO signal from the microSD card
+will be undefined.  This could waste power and might also cause
+this program to detect spurious presses on button A.
 
-To avoid these issues, you might consider connecting a
-male-female jumper wire between CS and pin 4 instead of
-connecting CS to GND.  This demo drives pin 4 low whenever the
-microSD card is accessed and drives it high the rest of the time,
-allowing button A to work properly. */
+To avoid these issues, you can connect CS to pin 4 using a
+male-female jumper wire instead of connecting CS to GND.  This
+demo drives pin 4 low whenever the microSD card is accessed and
+drives it high the rest of the time, allowing button A to work
+properly. */
 
 
 /* The line below chooses what pin we will use to control the SD
