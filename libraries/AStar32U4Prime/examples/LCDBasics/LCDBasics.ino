@@ -28,7 +28,7 @@ void loop()
   lcd.clear();
 
   // Print a string
-  lcd.print("hi ");
+  lcd.print("hi");
 
   // Go to the next line
   lcd.gotoXY(0, 1);

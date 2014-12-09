@@ -53,7 +53,7 @@ void loop()
   // Turn on the red LED if USB is configured.
   ledRed(usbConfigured);
 
-  // Turn on the green LED if the serial port is open.
+  // Turn on the green TX LED if the serial port is open.
   ledGreen(portOpen);
 
   // Display the results on the LCD every 100 ms.
