@@ -460,7 +460,7 @@ Menu::Item mainMenuItems[] = {
   { "SD card", sdDemo },
   { "Serial", serialMonitorDemo },
 };
-Menu mainMenu(mainMenuItems, 5);
+Menu mainMenu(mainMenuItems, 6);
 
 void loadCustomCharacters()
 {
