@@ -181,52 +181,53 @@ public:
      *  previously called. */
     void display();
 
-    /*! Hides the cursor.  The cursor is hidden by default, so this is only
-     *  needed if it has been turned on.
+    /*! Hides the solid cursor.
      *
-     * This function clears the LCD's "C" configuration bit without changing the
-     * other bits.
-     */
+     * This function clears the LCD's "C" configuration bit without changing
+     * the other bits.
+     *
+     * If the "B" bit is set to 1, a blinking cursor will still be displayed
+     * even after calling this function.  For that reason, it is usually better
+     * to call hideCursor() instead.  This function is only provided for
+     * compatibility with the LiquidCrystal library. */
     void noCursor();
 
-    /*! Shows the cursor.
+    /*! Shows the solid cursor.
      *
      * This function sets the LCD's "C" configuration bit without changing the
      * other bits.
      *
-     * The cursor will normally be solid, but it could be blinking if previous
-     * commands have enabled a blinking cursor.  For this reason, it is usually
-     * better to call cursorSolid() or cursorBlinking() instead.  This function
-     * is only provided for compatibility with the LiquidCrystal library,
-     *
-     * Note that the cursor will not be shown if the display is currently off
-     * (due to a call to noDisplay()), or if the cursor position is not within
-     * the bounds of the screen. */
+     * The cursor will normally be a solid line in the bottom row, but there
+     * could be a blinking rectangle superimposed on it if previous commands
+     * have enabled the blinking cursor.  For this reason, it is usually better
+     * to call cursorSolid() or cursorBlinking() instead.  This function is only
+     * provided for compatibility with the LiquidCrystal library. */
     void cursor();
 
-    /*! Makes the cursor stop blinking.
+    /*! Hides the blinking cursor.
      *
      * This functions clears the LCD's "B" configuration bit without changing
      * the other bits.
      *
-     * Calling this function does not actually enable the cursor so it is
-     * usually better to call cursorSolid() or cursorBlinking() instead.  This
-     * function is only provided for compatibilty with the LiquidCrystal
-     * library. */
+     * Calling this function does not enable or disable the solid cursor (a
+     * solid line in the bottom row) so it is usually better to call
+     * hideCursor() or cursorSolid() instead.  This function is only provided
+     * for compatibilty with the LiquidCrystal library. */
     void noBlink();
 
-    /*! Makes the cursor start blinking.
+    /*! Shows the blinking cursor.
      *
-     * This function sets the LCD's "B" configuration bit without changing the other
-     * bits.
+     * This function sets the LCD's "B" configuration bit without changing the
+     * other bits.
      *
-     * Calling this function does not actually enable the cursor, so it is
-     * usually better to call cursorSolid() or cursorBlinking() instead.  This
-     * function is only provided for compatibilty with the LiquidCrystal
-     * library. */
+     * The cursor will normally be a blinking rectangle, but there could also be
+     * a row of solid black pixels at the bottom if previous commands have
+     * enabled the solid cursor.  For this reason, it is usually better to call
+     * cursorSolid() or cursorBlinking() instead.  This function is only
+     * provided for compatibilty with the LiquidCrystal library. */
     void blink();
 
-    /*! Turns on the cursor and disables its blinking.
+    /*! Enables a cursor that appears as a solid line in the bottom row.
      *
      * This sets the LCD's "C" configuration bit and clears its "B" bit.
      *
@@ -235,7 +236,7 @@ public:
      * the bounds of the screen. */
     void cursorSolid();
 
-    /*! Turns on the cursor and makes it blink.
+    /*! Enables a cursor that appears as a blinking black rectangle.
      *
      * This sets the LCD's "C" and "B" configuration bits.
      *
@@ -243,6 +244,11 @@ public:
      * (due to a call to noDisplay()), or if the cursor position is not within
      * the bounds of the screen. */
     void cursorBlinking();
+
+    /*! Hides the solid and blinking cursors.
+     *
+     * This clears the LCD's "C" and "B" configuration bits. */
+    void hideCursor();
 
     /*! Scrolls everything on the screen one position to the left.
      *
