@@ -1,7 +1,7 @@
 Pololu A-Star Software and Drivers
 
 These files are the software and drivers for the Pololu A-Star 32U4 boards,
-which are a family of tiny programmable modules featuring Atmel's ATmega32U4
+which are a family of programmable modules featuring Atmel's ATmega32U4
 microcontroller.
 
 For more information about the A-Star, see the user's guide:
@@ -41,3 +41,10 @@ The "udev-rules" directory contains a file named "a-star.rules" for Linux users.
 If you copy this file to /etc/udev/rules.d/, it will tell ModemManager to not
 try to access the virtual serial ports of the A-Star.  This is necessary on some
 systems in order to program the A-Star.
+
+
+== AStar32U4Prime library ==
+
+The "libraries" directory contains the AStar32U4Prime library, which can help
+you write code that interfaces with on-board hardware on the A-Star 32U4 Prime.
+For more information, see the library's README.md file.
