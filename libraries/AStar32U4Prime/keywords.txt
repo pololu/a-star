@@ -10,7 +10,9 @@ usbPowerPresent	KEYWORD2
 readBatteryMillivolts	KEYWORD2
 ledRed	KEYWORD2
 ledGreen	KEYWORD2
-ledYellow	KEYWORD2FastGPIO	KEYWORD1
+ledYellow	KEYWORD2
+
+FastGPIO	KEYWORD1
 Pin	KEYWORD1
 
 setOutputLow	KEYWORD2

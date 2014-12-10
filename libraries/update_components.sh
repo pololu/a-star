@@ -6,7 +6,7 @@ KEYWORDS=$LIBDIR/keywords.txt
 COMPONENT_VERSIONS=components.txt
 
 echo > $COMPONENT_VERSIONS
-cat $LIBDIR/local_keywords.txt > $KEYWORDS
+(cat $LIBDIR/local_keywords.txt; echo) > $KEYWORDS
 
 copylib()
 {
