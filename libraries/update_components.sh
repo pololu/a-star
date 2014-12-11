@@ -3,7 +3,7 @@
 
 LIBDIR=AStar32U4Prime
 KEYWORDS=$LIBDIR/keywords.txt
-COMPONENT_VERSIONS=components.txt
+COMPONENT_VERSIONS=$LIBDIR/components.txt
 
 echo > $COMPONENT_VERSIONS
 (cat $LIBDIR/local_keywords.txt; echo) > $KEYWORDS
