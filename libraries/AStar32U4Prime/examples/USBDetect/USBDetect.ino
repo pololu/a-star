@@ -5,7 +5,11 @@
 - Detect whether a program is connected to the USB virtual COM port.
 
 The results are displayed using the three on-board user LEDs and the LCD.
-*/
+
+Note: This demo uses the standard A-Star 32U4 Prime LCD and LED pins. To 
+avoid damage or improper operation, if you have shields or other 
+electronics connected, make sure they do not use those pins in a 
+conflicting way. */
 
 #include <AStar32U4Prime.h>
 

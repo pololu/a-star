@@ -1,10 +1,6 @@
 /* This example uses the AStar32U4PrimeBuzzer class to play a
 series of notes on the buzzer.
 
-The buzzer library uses pin 6 to send music to the buzzer, so you
-should make sure that you have not connected anything to that pin
-that might be damaged when it is driven high or low.
-
 This example demonstrates the use of the playFrequency(),
 playNote(), and playFromProgramSpace() functions, which play
 entirely in the background, requiring no further action from the
@@ -18,7 +14,12 @@ to tell whether the buzzer is still playing or not.
 For this example to work, you will need to have a buzzer soldered
 into the A-Star, and you will need to install a shorting block
 on the two pins near the buzzer, which will connect pin 6 to the
-buzzer. */
+buzzer. 
+
+Note: This demo uses the A-Star 32U4 Prime buzzer pin. To avoid 
+damage or improper operation, if you have shields or other 
+electronics connected, make sure they do not use that pin in a 
+conflicting way. */
 
 #include <AStar32U4Prime.h>
 

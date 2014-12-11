@@ -1,5 +1,10 @@
 /* This example shows how to blink the three user LEDs
-on the A-Star 32U4 Prime. */
+on the A-Star 32U4 Prime.
+
+Note: This demo uses the standard A-Star 32U4 Prime LED pins.
+To avoid damage or improper operation, if you have shields or
+other electronics connected, make sure they do not use those
+pins in a conflicting way. */
 
 #include <AStar32U4Prime.h>
 
