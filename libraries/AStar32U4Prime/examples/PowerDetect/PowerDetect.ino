@@ -6,7 +6,7 @@
 The results are printed to the LCD and also to the serial
 monitor.
 
-This example only works if A1 has been connected the BATLEV.
+This example only works if A1 has been connected to BATLEV.
 Also, the power switch needs to be in the "On" position.
 */
 
