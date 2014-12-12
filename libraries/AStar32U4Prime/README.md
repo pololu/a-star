@@ -18,7 +18,7 @@ This is a C++ library for the Arduino IDE that helps access the on-board hardwar
 
 You can download this library from the [Pololu A-Star 32U4 User's Guide](http://www.pololu.com/docs/0J61) or from the [a-star repository on GitHub](https://github.com/pololu/a-star).  Extract the files from the downloaded ZIP file and find the "AStar32U4Prime" directory, which is inside the "libraries" folder.  Copy the "AStar32U4Prime" folder into the "libraries" subdirectory inside your Arduino sketchbook directory.  You can see the sketchbook location in the Arduino IDE Preferences dialog, which is available from the File menu.  For a typical user, the sketchbook location will be a folder named Arduino inside the Documents folder.  For a typical user running a recent version of Windows, the "AStar32U4Prime" folder should be installed in this location:
 
-`C:\Users\<username>\Documents\Arduino\AStar32U4Prime`
+`C:\Users\<username>\Documents\Arduino\libraries\AStar32U4Prime`
 
 After installing the library, restart the Arduino IDE.
 
