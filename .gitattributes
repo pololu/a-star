@@ -1,2 +1,3 @@
 *.inf -text
 *.txt text eol=crlf
+*.md test eol=crlf
