@@ -16,10 +16,10 @@ every debounced button press event would have a corresponding
 button release event; the two functions use independent state
 machines and sample the button at different times.
 
-Note: This demo uses the A-Star 32U4 Prime button pins. To avoid
-damage or improper operation, if you have shields or other
-electronics connected, make sure they do not use those pins in a
-conflicting way. */
+Note: This demo uses the standard A-Star 32U4 Prime button pins
+and pin 12. To avoid damage or improper operation, if you have
+shields or other electronics connected, make sure they do not use
+those pins in a conflicting way. */
 
 #include <AStar32U4Prime.h>
 

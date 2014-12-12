@@ -9,6 +9,12 @@ sure that any cached data in the SD libraries have been used up,
 and then it reads 8 more bytes from the file.  Those 8 characters
 are displayed on the LCD and printed to the serial monitor.
 
+Note: This demo uses the standard A-Star 32U4 Prime LCD pins,
+buzzer pin, button pins, microSD pins, and pin 4.  To avoid
+damage or improper operation, if you have shields or other
+electronics connected, make sure they do not use those pins in a
+conflicting way.
+
 == microSD card considerations ==
 
 You will need to install a jumper between GND and CS to enable
@@ -30,14 +36,7 @@ To avoid these issues, you can connect CS to pin 4 using a
 male-female jumper wire instead of connecting CS to GND.  This
 program drives pin 4 low whenever the microSD card is accessed
 and drives it high the rest of the time, allowing button A to
-work properly.
-
-== Conflicting pin warning ==
-
-Note: This demo uses the standard A-Star 32U4 Prime LCD, buzzer,
-button, and microSD card pins. To avoid damage or improper
-operation, if you have shields or other electronics connected,
-make sure they do not use those pins in a conflicting way. */
+work properly. */
 
 #include <AStar32U4Prime.h>
 #include <SPI.h>

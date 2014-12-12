@@ -2,13 +2,15 @@
 
 - Detect whether USB power is present.
 - Detect whether our USB connection is in the "Configured" state.
-- Detect whether a program is connected to the USB virtual COM port.
+- Detect whether a program is connected to the USB virtual
+  serial port.
 
-The results are displayed using the three on-board user LEDs and the LCD.
+The results are displayed using the three on-board user LEDs and
+the LCD.
 
-Note: This demo uses the standard A-Star 32U4 Prime LCD and LED pins. To 
-avoid damage or improper operation, if you have shields or other 
-electronics connected, make sure they do not use those pins in a 
+Note: This demo uses the standard A-Star 32U4 Prime LCD pins.  To
+avoid damage or improper operation, if you have shields or other
+electronics connected, make sure they do not use those pins in a
 conflicting way. */
 
 #include <AStar32U4Prime.h>
@@ -24,7 +26,7 @@ void loop()
 {
   // usbPowerPresent() is defined in the AStar32U4Prime library
   // and returns true if power from the USB port is detected.
-  // It is equivalent to: USBSTA >> VBUS & 1
+  // It is equivalent to: (USBSTA >> VBUS) & 1
   bool usbPower = usbPowerPresent();
 
   // USBDevice.configured() is provided by the Arduino core code.

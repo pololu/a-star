@@ -14,11 +14,11 @@ to tell whether the buzzer is still playing or not.
 For this example to work, you will need to have a buzzer soldered
 into the A-Star, and you will need to install a shorting block
 on the two pins near the buzzer, which will connect pin 6 to the
-buzzer. 
+buzzer.
 
-Note: This demo uses the A-Star 32U4 Prime buzzer pin. To avoid 
-damage or improper operation, if you have shields or other 
-electronics connected, make sure they do not use that pin in a 
+Note: This demo uses pin 6 to control the buzzer. To avoid
+damage or improper operation, if you have shields or other
+electronics connected, make sure they do not use that pin in a
 conflicting way. */
 
 #include <AStar32U4Prime.h>

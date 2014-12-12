@@ -9,7 +9,7 @@ monitor.
 This example only works if A1 has been connected to BATLEV.
 Also, the power switch needs to be in the "On" position.
 
-Note: This demo uses the A-Star 32U4 Prime analog input pins.
+Note: This demo uses the standard A-Star 32U4 Prime LCD pins.
 To avoid damage or improper operation, if you have shields or
 other electronics connected, make sure they do not use those
 pins in a conflicting way. */

@@ -9,6 +9,12 @@ To use this demo program, you will need to have an LCD connected
 to the A-Star 32U4 Prime.  If you cannot see any text on the LCD,
 try rotating the contrast potentiometer.
 
+Note: This demo uses the standard A-Star 32U4 Prime LCD pins,
+buzzer pin, button pins, microSD pins, and pin 4. To avoid damage
+or improper operation, if you have shields or other electronics
+connected, make sure they do not use those pins in a conflicting
+way.
+
 == microSD card considerations ==
 
 To use the microSD card portion of this program, you will need to
@@ -30,14 +36,7 @@ To avoid these issues, you can connect CS to pin 4 using a
 male-female jumper wire instead of connecting CS to GND.  This
 demo drives pin 4 low whenever the microSD card is accessed and
 drives it high the rest of the time, allowing button A to work
-properly.
-
-== Conflicting pin warning ==
-
-Note: This demo uses the standard A-Star 32U4 Prime LCD, buzzer,
-button, and microSD card pins. To avoid damage or improper
-operation, if you have shields or other electronics connected,
-make sure they do not use those pins in a conflicting way. */
+properly. */
 
 const uint8_t chipSelect = 4;
 
