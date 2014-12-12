@@ -230,7 +230,7 @@ void ledDemo()
       case 0:
         buzzer.play("c32");
         lcd.gotoXY(0, 0);
-	lcd.print("Red   ");
+        lcd.print("Red   ");
         ledRed(1);
         ledGreen(0);
         ledYellow(0);
@@ -239,7 +239,7 @@ void ledDemo()
       case 1:
         buzzer.play("e32");
         lcd.gotoXY(0, 0);
-	lcd.print("Green");
+        lcd.print("Green");
         ledRed(0);
         ledGreen(1);
         ledYellow(0);
@@ -248,7 +248,7 @@ void ledDemo()
       case 2:
         buzzer.play("g32");
         lcd.gotoXY(0, 0);
-	lcd.print("Yellow");
+        lcd.print("Yellow");
         ledRed(0);
         ledGreen(0);
         ledYellow(1);
