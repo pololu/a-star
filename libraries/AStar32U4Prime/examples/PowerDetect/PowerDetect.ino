@@ -24,9 +24,6 @@ void loop()
   bool usbPower = usbPowerPresent();
   uint16_t batteryLevel = readBatteryMillivolts();
 
-  // The F() macro used below stores the strings in flash, which
-  // frees up some space in RAM.
-
   // Print the results to the LCD.
   lcd.clear();
   lcd.print(F("B="));
