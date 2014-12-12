@@ -1,6 +1,11 @@
 /* This example demonstrates three different methods for
 detecting a button press and release.  It blinks the green user
-LED each time button A is pressed and released. */
+LED each time button A is pressed and released.
+
+Note: This demo uses the A-Star 32U4 Prime button and LED pins.
+To avoid damage or improper operation, if you have shields or
+other electronics connected, make sure they do not use those
+pins in a conflicting way. */
 
 #include <AStar32U4Prime.h>
 
