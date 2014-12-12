@@ -1,4 +1,4 @@
-// Copyright (C) Pololu Corporation - see LICENSE.txt for details.
+// Copyright Pololu Corporation.  For more information, see http://www.pololu.com/
 
 /*! \file USBPause.h
  *
@@ -55,7 +55,7 @@ public:
 
     ~USBPause()
     {
-        // Restore endoint 0 interrupts.
+        // Restore endpoint 0 interrupts.
         UENUM = 0;
         UEIENX = savedUEIENX0;
 

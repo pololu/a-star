@@ -1,4 +1,4 @@
-// Copyright (C) Pololu Corporation.  See LICENSE.txt for more details.
+// Copyright Pololu Corporation.  For more information, see http://www.pololu.com/
 
 /*! \file PololuBuzzer.h
  *

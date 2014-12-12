@@ -1,4 +1,4 @@
-// Copyright (C) Pololu Corporation.  See LICENSE.txt for details.
+// Copyright Pololu Corporation.  For more information, see http://www.pololu.com/
 
 /*! \file Pushbutton.h
  *
@@ -129,8 +129,8 @@ private:
 
 /** \brief Main class for interfacing with pushbuttons.
  *
- * This class can inteface with any pushbutton whose state can be read with
- * the `digitalRead` funtion, which is part of the Arduino core.
+ * This class can interface with any pushbutton whose state can be read with
+ * the `digitalRead` function, which is part of the Arduino core.
  *
  * See https://github.com/pololu/pushbutton-arduino for an overview
  * of the different ways to use this class. */
@@ -145,11 +145,11 @@ public:
    *
    * @param pullUp Specifies whether the pin's internal pull-up resistor should
    * be enabled.  This should be either #PULL_UP_ENABLED (which is the default if
-   * the argment is omitted) or #PULL_UP_DISABLED.
+   * the argument is omitted) or #PULL_UP_DISABLED.
    *
    * @param defaultState Specifies the voltage level that corresponds to the
    * button's default (released) state.  This should be either
-   * #DEFAULT_STATE_HIGH (which is the default if this arugment is omitted) or
+   * #DEFAULT_STATE_HIGH (which is the default if this argument is omitted) or
    * #DEFAULT_STATE_LOW. */
   Pushbutton(uint8_t pin, uint8_t pullUp = PULL_UP_ENABLED,
       uint8_t defaultState = DEFAULT_STATE_HIGH);

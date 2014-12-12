@@ -1,4 +1,4 @@
-// Copyright (C) Pololu Corporation.  See LICENSE.txt for more details.
+// Copyright Pololu Corporation.  For more information, see http://www.pololu.com/
 
 /*! \file PololuHD44780.h
  *
@@ -135,7 +135,7 @@ public:
     void loadCustomCharacter(const uint8_t * picture, uint8_t number);
 
     /*! Defines a custom character from RAM.
-     * @param picture A pointer toe the character dot pattern, in RAM.
+     * @param picture A pointer to the character dot pattern, in RAM.
      * @param number A number between 0 and 7. */
     void loadCustomCharacterFromRam(const uint8_t * picture, uint8_t number);
 

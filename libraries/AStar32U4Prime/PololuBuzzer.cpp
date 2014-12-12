@@ -1,3 +1,5 @@
+// Copyright Pololu Corporation.  For more information, see http://www.pololu.com/
+
 #include <avr/interrupt.h>
 #include "PololuBuzzer.h"
 
@@ -187,7 +189,7 @@ void PololuBuzzer::init2()
 }
 
 
-// Set up timer 1 to play the desired frequency (in Hz or .1 Hz) for the
+// Set up the timer to play the desired frequency (in Hz or .1 Hz) for the
 //   the desired duration (in ms). Allowed frequencies are 40 Hz to 10 kHz.
 //   volume controls buzzer volume, with 15 being loudest and 0 being quietest.
 // Note: frequency*duration/1000 must be less than 0xFFFF (65535).  This
@@ -259,7 +261,7 @@ void PololuBuzzer::playFrequency(unsigned int freq, unsigned int dur,
 
 #ifdef __AVR_ATmega32U4__
   TCCR4B = (TCCR4B & 0xF0) | (dividerExponent + 1); // select timer 4 clock prescaler: divider = 2^n if CS4 = n+1
-  TC4H = top >> 8;                                  // set timer 1 pwm frequency: top 2 bits...
+  TC4H = top >> 8;                                  // set timer 4 pwm frequency: top 2 bits...
   OCR4C = top;                                      // and bottom 8 bits
   unsigned int width = top >> (16 - volume);        // set duty cycle (volume):
   TC4H = width >> 8;                                // top 2 bits...
@@ -465,7 +467,7 @@ void PololuBuzzer::play(const char *notes)
   buzzerSequence = notes;
   use_program_space = 0;
   staccato_rest_duration = 0;
-  nextNote();          // this re-enables the timer1 interrupt
+  nextNote();          // this re-enables the timer interrupt
 }
 
 void PololuBuzzer::playFromProgramSpace(const char *notes_p)
@@ -474,7 +476,7 @@ void PololuBuzzer::playFromProgramSpace(const char *notes_p)
   buzzerSequence = notes_p;
   use_program_space = 1;
   staccato_rest_duration = 0;
-  nextNote();          // this re-enables the timer1 interrupt
+  nextNote();          // this re-enables the timer interrupt
 }
 
 
@@ -686,7 +688,7 @@ static void nextNote()
     tmp_duration -= staccato_rest_duration;
   }
 
-  // this will re-enable the timer1 overflow interrupt
+  // this will re-enable the timer overflow interrupt
   PololuBuzzer::playNote(rest ? SILENT_NOTE : note, tmp_duration, volume);
 }
 

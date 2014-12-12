@@ -1,7 +1,7 @@
+// Copyright Pololu Corporation.  For more information, see http://www.pololu.com/
+
 #include "Pushbutton.h"
 
-// This command and the corresponding endcond command.
-// hide PushbuttonStateMachine from Doxygen.
 // \cond
 
 PushbuttonStateMachine::PushbuttonStateMachine()
