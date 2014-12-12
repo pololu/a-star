@@ -24,12 +24,13 @@
 
 /*! \brief Interfaces with button A on the A-Star 32U4 Prime.
  *
- * The pin used for button A is also used for reading the MISO pin on the SD
- * card.  If the chip select (CS) pin for the SD card is low (active), you
- * cannot read button A because the signal from the SD card will override the
- * signal from the button.  Therefore, the CS pin needs to be high whenever
- * functions in this class are called.  The Arduino's SD library leaves CS high
- * by default so most users will not need to worry about that. */
+ * The pin used for button A is also used for reading the DO pin on the microSD
+ * card.  If the chip select (CS) pin for the microSD card is low (active), you
+ * cannot read button A because the signal from the microSD card will override
+ * the signal from the button.  Therefore, the CS pin needs to be high whenever
+ * functions in this class are called.  The CS pin is high by default and the
+ * Arduino's SD library leaves CS high when the microSD card is not being used,
+ * so most users will not need to worry about that. */
 class AStar32U4PrimeButtonA : public Pushbutton
 {
 public:
