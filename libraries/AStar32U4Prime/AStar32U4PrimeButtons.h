@@ -1,3 +1,5 @@
+// Copyright Pololu Corporation.  For more information, see http://www.pololu.com/
+
 /** \file AStar32U4PrimeButtons.h */
 
 #pragma once
