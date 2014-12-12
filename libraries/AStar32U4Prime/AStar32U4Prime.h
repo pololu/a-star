@@ -63,16 +63,23 @@ inline bool usbPowerPresent()
 
 This function performs an analog reading and uses it to compute the voltage on
 the A-Star 32U4's VIN pin in millivolts.  This only works if the specified pin
-(A1 by default) has been connected the BATLEV.
+(A1 by default) has been connected to BATLEV.
 
 @param pin The pin number to read.  This argument is passed on to analogRead.
   The default value is `A1`.
 */
 inline uint16_t readBatteryMillivolts(uint8_t pin = A1)
 {
+    const uint8_t sampleCount = 8;
+    uint16_t sum = 0;
+    for (uint8_t i = 0; i < sampleCount; i++)
+    {
+        sum += analogRead(pin);
+    }
+
     // VBAT = 3 * millivolt reading = 3 * raw * 5000/1024
     //      = raw * 1875 / 128
     // The 63 below makes it so that we round to the nearest
     // whole number instead of always rounding down.
-    return ((uint32_t)analogRead(pin) * 1875 + 63) / 128;
+    return ((uint32_t)(sum / sampleCount) * 1875 + 63) / 128;
 }
