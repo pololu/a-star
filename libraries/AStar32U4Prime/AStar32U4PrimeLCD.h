@@ -21,6 +21,8 @@
  * * This class disables USB interrupts temporarily while writing to the LCD so
  *   that the USB interrupts will not change the RXLED and TXLED pins, which
  *   double as LCD data lines.
+ * * This class disables the AVR's hardware SPI module temporarily so that
+ *   it can use the PB3/MISO/DB4 pin as an output to control the LCD.
  * * This class restores the RS, DB4, DB5, DB6, and DB7 pins to their previous
  *   states when it is done using them so that those pins can also be used for
  *   other purposes such as controlling LEDs.
