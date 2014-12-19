@@ -81,7 +81,8 @@ inline uint16_t readBatteryMillivolts(uint8_t pin = A1)
 
     // VBAT = 3 * millivolt reading = 3 * raw * 5000/1024
     //      = raw * 1875 / 128
-    // The 63 below makes it so that we round to the nearest
+    // The correction number below makes it so that we round to the nearest
     // whole number instead of always rounding down.
-    return ((uint32_t)(sum / sampleCount) * 1875 + 63) / 128;
+    const uint16_t correction = 64 * sampleCount - 1;
+    return ((uint32_t)sum * 1875 + correction) / (128 * sampleCount);
 }
