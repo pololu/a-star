@@ -11,7 +11,8 @@ A_STAR_32U4_PRIME_BUTTON_B	LITERAL1
 A_STAR_32U4_PRIME_BUTTON_C	LITERAL1
 
 usbPowerPresent	KEYWORD2
-readBatteryMillivolts	KEYWORD2
+readBatteryMillivoltsLV	KEYWORD2
+readBatteryMillivoltsSV	KEYWORD2
 ledRed	KEYWORD2
 ledGreen	KEYWORD2
 ledYellow	KEYWORD2

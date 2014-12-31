@@ -38,6 +38,18 @@ demo drives pin 4 low whenever the microSD card is accessed and
 drives it high the rest of the time, allowing button A to work
 properly. */
 
+
+/* This demo assumes you are using the A-Star 32U4 Prime LV (the
+blue board).  If not, then comment out the line below. */
+#define A_STAR_LV
+
+// Assume this will run on the A-Star 32U4 Prime SV (the green
+// board) if it is not running on the LV.
+#ifndef A_STAR_LV
+#define A_STAR_SV
+#endif
+
+// This demo drives pin 4 low whenver the SD card is being used.
 const uint8_t chipSelect = 4;
 
 #include <AStar32U4Prime.h>
@@ -154,7 +166,7 @@ const char note[] PROGMEM = {
 };
 
 // This character is a back arrow.
-const char back_arrow[] PROGMEM = {
+const char backArrow[] PROGMEM = {
   0b00000,
   0b00010,
   0b00001,
@@ -164,6 +176,15 @@ const char back_arrow[] PROGMEM = {
   0b01000,
   0b00100,
 };
+
+void loadCustomCharacters()
+{
+  // The LCD supports up to 8 custom characters.  Each character
+  // has a number between 0 and 7.  We assign #6 to be the back
+  // arrow, and #7 to be the musical note.
+  lcd.loadCustomCharacter(backArrow, 6);
+  lcd.loadCustomCharacter(note, 7);
+}
 
 // Clears the LCD and puts [back_arrow]B on the second line
 // to indicate to the user that the B button goes back.
@@ -328,13 +349,19 @@ void powerDemo()
     if ((uint16_t)(millis() - lastDisplayTime) > 250)
     {
       bool usbPower = usbPowerPresent();
-      uint16_t batteryLevel = readBatteryMillivolts();
+
+#if defined(A_STAR_LV)
+      uint16_t batteryLevel = readBatteryMillivoltsLV();
+#elif defined(A_STAR_SV)
+      uint16_t batteryLevel = readBatteryMillivoltsSV();
+#else
+#error "Unknown board"
+#endif
 
       lastDisplayTime = millis();
       lcd.clear();
-      lcd.print(F("B="));
       lcd.print(batteryLevel);
-      lcd.print(F("mV"));
+      lcd.print(F(" mV"));
       lcd.gotoXY(0, 1);
       lcd.print(F("\6B USB="));
       lcd.print(usbPower ? 'Y' : 'N');
@@ -468,15 +495,6 @@ Menu::Item mainMenuItems[] = {
 };
 Menu mainMenu(mainMenuItems, 6);
 
-void loadCustomCharacters()
-{
-  // The LCD supports up to 8 custom characters.  Each character
-  // has a number between 0 and 7.  We assign #6 to be the back
-  // arrow, and #7 to be the musical note.
-  lcd.loadCustomCharacter(back_arrow, 6);
-  lcd.loadCustomCharacter(note, 7);
-}
-
 // This function watches for button presses.  If a button is
 // pressed, it beeps a corresponding beep and it returns 'A',
 // 'B', or 'C' depending on what button was pressed.  If no
@@ -544,7 +562,14 @@ void setup()
   lcd.clear();
   lcd.print(F(" A-Star"));
   lcd.gotoXY(0, 1);
-  lcd.print(F(" Prime"));
+#if defined(A_STAR_LV)
+  lcd.print(F("Prime LV"));
+#elif defined(A_STAR_SV)
+  lcd.print(F("Prime SV"));
+#else
+#error "Unknown board"
+#endif
+
   delay(1000);
 
   lcd.clear();
