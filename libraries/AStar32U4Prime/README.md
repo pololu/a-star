@@ -1,12 +1,12 @@
 # AStar32U4Prime library
 
-Version: 1.0.0<br/>
-Release date: 2014 Dec 11<br/>
+Version: 1.1.0<br/>
+Release date: 2014 Dec 31<br/>
 [www.pololu.com](http://www.pololu.com/)
 
 ## Summary
 
-This is a C++ library for the Arduino IDE that helps access the on-board hardware of the A-Star 32U4 Prime, which is a programmable controller from Pololu based on the ATmega32U4.  You can program the A-Star 32U4 Prime directly from the Arduino IDE without using this library, but this library makes it easy to:
+This is a C++ library for the Arduino IDE that helps access the on-board hardware of the [A-Star 32U4 Prime](http://www.pololu.com/category/165/a-star-32u4-prime), which is a family of programmable controllers from Pololu based on the ATmega32U4.  You can program the A-Star 32U4 Prime directly from the Arduino IDE without using this library, but this library makes it easy to:
 
 * display information on the LCD
 * play sounds and music on the buzzer
@@ -66,4 +66,5 @@ For complete documentation, see https://pololu.github.io/a-star-32u4-prime.  If 
 
 ## Version history
 
+* 1.1.0 (2014 Dec 31): Added support for the A-Star 32U4 Prime SV.
 * 1.0.0 (2014 Dec 11): Original release.
