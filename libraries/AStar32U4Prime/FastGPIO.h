@@ -71,17 +71,17 @@ namespace FastGPIO
 
         volatile uint8_t * pin() const
         {
-            return (volatile uint8_t *)pinAddr;
+            return (volatile uint8_t *)(int)pinAddr;
         }
 
         volatile uint8_t * port() const
         {
-            return (volatile uint8_t *)portAddr;
+            return (volatile uint8_t *)(int)portAddr;
         }
 
         volatile uint8_t * ddr() const
         {
-            return (volatile uint8_t *)ddrAddr;
+            return (volatile uint8_t *)(int)ddrAddr;
         }
     } IOStruct;
     /** @endcond */
