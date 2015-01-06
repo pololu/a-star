@@ -1,7 +1,7 @@
 # AStar32U4Prime library
 
-Version: 1.1.0<br/>
-Release date: 2014 Dec 31<br/>
+Version: 1.1.1<br/>
+Release date: 2015 Jan 06<br/>
 [www.pololu.com](http://www.pololu.com/)
 
 ## Summary
@@ -66,5 +66,6 @@ For complete documentation, see https://pololu.github.io/a-star-32u4-prime.  If 
 
 ## Version history
 
+* 1.1.1 (2015 Jan 06): Update to version 1.0.1 of the FastGPIO library, which has a minor change to fix some compiler warnings.
 * 1.1.0 (2014 Dec 31): Added support for the A-Star 32U4 Prime SV.
 * 1.0.0 (2014 Dec 11): Original release.
