@@ -118,7 +118,6 @@ loadCustomCharacterFromRam	KEYWORD2
 createChar	KEYWORD2
 gotoXY	KEYWORD2
 setCursor	KEYWORD2
-gotoLine	KEYWORD2
 noDisplay	KEYWORD2
 display	KEYWORD2
 noCursor	KEYWORD2
