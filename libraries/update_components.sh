@@ -1,12 +1,15 @@
 # This is a script helps us copy all of the library files we need from
 # other repositories and to keep track of what versions were copied.
 
-LIBDIR=AStar32U4Prime
-KEYWORDS=$LIBDIR/keywords.txt
-COMPONENT_VERSIONS=$LIBDIR/components.txt
+library()
+{
+  LIBDIR=$1
+  KEYWORDS=$LIBDIR/keywords.txt
+  COMPONENT_VERSIONS=$LIBDIR/components.txt
 
-echo > $COMPONENT_VERSIONS
-(cat $LIBDIR/local_keywords.txt; echo) > $KEYWORDS
+  echo > $COMPONENT_VERSIONS
+  (cat $LIBDIR/local_keywords.txt; echo) > $KEYWORDS
+}
 
 copylib()
 {
@@ -38,8 +41,19 @@ copylib()
   echo $origin $ver >> $COMPONENT_VERSIONS
 }
 
+library AStar32U4Prime
 copylib https://github.com/pololu/fastgpio-arduino ../../fastgpio-arduino/FastGPIO FastGPIO.h
 copylib https://github.com/pololu/pololu-buzzer-arduino ../../pololu-buzzer-arduino/PololuBuzzer PololuBuzzer{.cpp,.h}
 copylib https://github.com/pololu/usb-pause-arduino ../../usb-pause-arduino/USBPause USBPause.h
 copylib https://github.com/pololu/pololu-hd44780-arduino ../../pololu-hd44780-arduino/PololuHD44780 PololuHD44780{.cpp,.h}
 copylib https://github.com/pololu/pushbutton-arduino ../../pushbutton-arduino/Pushbutton Pushbutton{.cpp,.h}
+
+library Zumo32U4
+copylib https://github.com/pololu/fastgpio-arduino ../../fastgpio-arduino/FastGPIO FastGPIO.h
+copylib https://github.com/pololu/usb-pause-arduino ../../usb-pause-arduino/USBPause USBPause.h
+copylib https://github.com/pololu/pushbutton-arduino ../../pushbutton-arduino/Pushbutton Pushbutton{.cpp,.h}
+copylib https://github.com/pololu/pololu-buzzer-arduino ../../pololu-buzzer-arduino/PololuBuzzer PololuBuzzer{.cpp,.h}
+copylib https://github.com/pololu/pololu-hd44780-arduino ../../pololu-hd44780-arduino/PololuHD44780 PololuHD44780{.cpp,.h}
+copylib https://github.com/pololu/lsm303-arduino ../../lsm303-arduino/LSM303 LSM303{.cpp,.h}
+copylib https://github.com/pololu/l3g-arduino ../../l3g-arduino/L3G L3G{.cpp,.h}
+copylib https://github.com/pololu/qtr-sensors-arduino ../../qtr-sensors-arduino/QTRSensors QTRSensors{.cpp,.h}
