@@ -95,9 +95,7 @@ void Zumo32U4ProximitySensors::prepareToRead()
 
     if (levelsArray == NULL)
     {
-        // Note: We don't use the static const version of this array from the
-        // header file because that would permanently take up 16 bytes of RAM.
-        uint16_t defaultBrightnessLevels[] = { 4, 15, 32, 55, 85, 120, 162, 210 };
+        uint16_t defaultBrightnessLevels[] = { 4, 15, 32, 55, 85, 120 };
         setBrightnessLevels(defaultBrightnessLevels, 8);
     }
 }

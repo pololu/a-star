@@ -15,7 +15,7 @@ Zumo32U4ButtonA buttonA;
 #define LEFT 0
 #define RIGHT 1
 
-const uint8_t sensorThreshold = 3;
+const uint8_t sensorThreshold = 1;
 const uint16_t turnSpeedMax = 400; // was 300
 const uint16_t turnSpeedMin = 100;
 const uint16_t deceleration = 10;

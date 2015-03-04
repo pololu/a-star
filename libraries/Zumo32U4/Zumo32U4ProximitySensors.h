@@ -93,19 +93,17 @@ static const uint8_t SENSOR_NO_PIN = 255;
  * big effect on the readings returned by this class.  The levels can be
  * changed by calling setBrightnessLevels().
  *
- * The default IR pulse brightness levels used are 4, 15, 32, 55, 85, 120, 162,
- * and 210.
+ * The default IR pulse brightness levels used are 4, 15, 32, 55, 85, and 120.
  *
  * These numbers each represent the pulse width to be used in a burst of IR pulses.
  * Specifically, the pulse width is (1 + brightness) / (16 MHz).
  *
- * The useful range of levels is from 4 to 210, so we chose those as the minimum
- * and maximum.  The number 4 was determined by experiment.  The number 210 was
- * chosen because it results in a duty cycle of approximately 50%.  We used the
- * formula ((2.236 + 1.756*i)^2 - 1) with i from 0 to 7 to generate the
- * intermediate points.  Since the pulse width as a function of array index is
- * quadratic, and light obeys an inverse-square law, the sensing distance as a
- * function of array index should be linear. */
+ * We determined by experimenting that the useful range of levels is from about
+ * 4 to 210, so we chose those as the minimum and maximum.  We used the formula
+ * ((2.236 + 1.756*i)^2 - 1) with i from 0 to 5 to generate the intermediate
+ * points.  Since the pulse width as a function of array index is quadratic, and
+ * light obeys an inverse-square law, the sensing distance as a function of
+ * array index should be linear. */
 class Zumo32U4ProximitySensors
 {
 public:

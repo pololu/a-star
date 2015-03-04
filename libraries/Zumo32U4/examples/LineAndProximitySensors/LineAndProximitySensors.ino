@@ -97,7 +97,7 @@ void setup()
   //proxSensors.setPeriod(420);
   //proxSensors.setPulseOnTimeUs(421);
   //proxSensors.setPulseOffTimeUs(578);
-  //uint16_t levels[] = { 4, 14, 31, 54, 83, 119, 161, 210 };
+  //uint16_t levels[] = { 4, 15, 32, 55, 85, 120 };
   //proxSensors.setBrightnessLevels(levels, sizeof(levels)/2);
 
   loadCustomCharacters();
