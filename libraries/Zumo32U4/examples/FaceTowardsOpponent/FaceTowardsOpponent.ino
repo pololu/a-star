@@ -1,8 +1,8 @@
-/** This example uses the front proximity sensor on the Zumo 32U4
+/* This example uses the front proximity sensor on the Zumo 32U4
 Front Sensor Array to locate an opponent robot or any other
-reflective object.  Using the motors to turn, it scans its
-surroundings.  If it senses an object, it turns on its yellow
-LED and attempts to face towards that object. */
+reflective object. Using the motors to turn, it scans its
+surroundings. If it senses an object, it turns on its yellow LED
+and attempts to face towards that object. */
 
 #include <Wire.h>
 #include <Zumo32U4.h>
