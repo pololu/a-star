@@ -52,5 +52,5 @@ For more information, see the library's README.md file.
 == Zumo32U4 library ==
 
 The "libraries" directory contains the Zumo32U4 library, which can help you
-write code that interfaces with on-board hardware on the Zumo32U4 robot.  For
+write code that interfaces with on-board hardware on the Zumo 32U4 robot.  For
 more information, see the library's README.md file.
