@@ -29,18 +29,10 @@ void loop()
   /* Method 2: Directly read the state of the button with the
    * isPressed() function.  This method is non-blocking and
    * provides no debouncing. */
-  bool buttonPressed = buttonB.isPressed();
   if (buttonB.isPressed())
   {
     // Whenever the button is pressed, turn on the yellow LED.
     ledYellow(1);
-
-    Serial.println(F("Button B was pressed."));
-
-    lcd.clear();
-    lcd.print(F("Button B"));
-    lcd.gotoXY(0,1);
-    lcd.print(F("pressed "));
   }
   else
   {
@@ -53,14 +45,16 @@ void loop()
    * loop, which returns true to report a single button press or
    * false otherwise. This function is non-blocking and takes
    * care of button debouncing. */
+  static int cPressedCount = 0;
   if (buttonC.getSingleDebouncedPress())
   {
-    Serial.println(F("Button C was pressed."));
+    cPressedCount += 1;
+    Serial.print(F("Button C was pressed "));
+    Serial.print(cPressedCount);
+    Serial.println(F(" times."));
 
     lcd.clear();
-    lcd.print(F("Button C"));
-    lcd.gotoXY(0,1);
-    lcd.print(F("pressed"));
+    lcd.print(cPressedCount);
   }
 
   /* If you use non-blocking functions like isPressed() and
