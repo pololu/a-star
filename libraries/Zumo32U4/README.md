@@ -1,7 +1,7 @@
 # Zumo32U4 library
 
-Version: 1.0.0<br/>
-Release date: 2015 Mar 05<br/>
+Version: 1.0.1<br/>
+Release date: 2015 Mar 11<br/>
 [www.pololu.com](http://www.pololu.com/)
 
 ## Summary
@@ -70,4 +70,5 @@ For complete documentation, see https://pololu.github.io/zumo-32u4.  If you are 
 
 ## Version history
 
+* 1.0.1 (2015 Mar 11): Improve the Buttons example.
 * 1.0.0 (2015 Mar 05): Original release.
