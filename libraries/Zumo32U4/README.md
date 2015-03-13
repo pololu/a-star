@@ -8,6 +8,12 @@ Release date: 2015 Mar 11<br/>
 
 This is a C++ library for the Arduino IDE that helps access the on-board hardware of the Zumo 32U4 robot.
 
+The Zumo 32U4 robot consists of the Zumo chassis, the Zumo 32U4 Main Board, and the Zumo 32U4 Front Sensor Array.  It has an integrated AVR ATmega32U4 microcontroller, motor drivers, encoders, proximity sensors, line sensors, buzzer, four buttons, LCD connector, LSM303D accelerometer, and L3GD20H gyro.  The user's guide for the Zumo 32U4 robot is here:
+
+https://www.pololu.com/docs/0J63
+
+Please note that this library does NOT work with the Zumo Shield for Arduino, which is a very different product.  The Zumo Shield does not have an integrated microcontroller, so it must be connected to an Arduino-sized board to run.  If you have the Zumo Shield, then you should not use this library and instead refer to the Zumo Shield documentation [here](https://www.pololu.com/docs/0J57).
+
 ## Installing the library
 
 You can download this library from the [Zumo 32U4 Robot User's Guide](https://www.pololu.com/docs/0J63), or from the [a-star repository on GitHub](https://github.com/pololu/a-star).  Extract the files from the downloaded ZIP file and find the "Zumo32U4" directory, which is inside the "libraries" folder.  Copy the "Zumo32U4" folder into the "libraries" subdirectory inside your Arduino sketchbook directory.  The Arduino sketchbook location is typically in your Documents folder in a subfolder named "Arduino".  You can see the sketchbook location in the Arduino IDE Preferences dialog, which is available from the File menu.
