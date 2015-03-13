@@ -21,7 +21,7 @@ const uint8_t sensorThreshold = 1;
 // full speed.
 const uint16_t turnSpeedMax = 400;
 
-// The minimum speed to drive the motors while turning.  100 if
+// The minimum speed to drive the motors while turning.  400 is
 // full speed.
 const uint16_t turnSpeedMin = 100;
 
