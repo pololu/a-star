@@ -64,7 +64,7 @@ read	KEYWORD2
 countsWithLeftLeds	KEYWORD2
 countsWithRightLeds	KEYWORD2
 countsLeftWithLeftLeds	KEYWORD2
-coutnsLeftWithRightLeds	KEYWORD2
+countsLeftWithRightLeds	KEYWORD2
 countsFrontWithLeftLeds	KEYWORD2
 countsFrontWithRightLeds	KEYWORD2
 countsRightWithLeftLeds	KEYWORD2
