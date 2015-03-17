@@ -13,7 +13,7 @@ installed in order to connect pin 4 to DN4 and pin 20 to DN2. */
 #include <Zumo32U4.h>
 
 // This is the maximum speed the motors will be allowed to turn.
-// A MAX_SPEED of 400 lets the motors go at top speed.  Decrease
+// A maxSpeed of 400 lets the motors go at top speed.  Decrease
 // this value to impose a speed limit.
 const uint16_t maxSpeed = 400;
 
@@ -152,9 +152,9 @@ void loop()
   int16_t leftSpeed = (int16_t)maxSpeed + speedDifference;
   int16_t rightSpeed = (int16_t)maxSpeed - speedDifference;
 
-  // Constrain our motor speeds to be between 0 and MAX_SPEED.
-  // One motor will always be turning at MAX_SPEED, and the other
-  // will be at MAX_SPEED-|speedDifference| if that is positive,
+  // Constrain our motor speeds to be between 0 and maxSpeed.
+  // One motor will always be turning at maxSpeed, and the other
+  // will be at maxSpeed-|speedDifference| if that is positive,
   // else it will be stationary.  For some applications, you
   // might want to allow the motor speed to go negative so that
   // it can spin in reverse.
