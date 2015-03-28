@@ -14,7 +14,8 @@ https://github.com/pololu/a-star
 == Arduino add-on ==
 
 The "add-on" directory contains a folder named "pololu" which can be used to add
-a "Pololu A-Star 32U4" entry to the "Board" menu in the Arduino IDE.
+a "Pololu A-Star 32U4" entry to the "Board" menu in the Arduino IDE.  The add-on
+supports the 1.0.x, 1.5.x, and 1.6.x, versions of the Arduino IDE.
 
 To install the add-on, copy the "pololu" folder into the "hardware" subfolder of
 the Arduino sketchbook location.  The Arduino sketchbook location is typically
