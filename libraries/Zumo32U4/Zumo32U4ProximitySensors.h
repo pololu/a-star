@@ -99,11 +99,9 @@ static const uint8_t SENSOR_NO_PIN = 255;
  * Specifically, the pulse width is (1 + brightness) / (16 MHz).
  *
  * We determined by experimenting that the useful range of levels is from about
- * 4 to 210, so we chose those as the minimum and maximum.  We used the formula
+ * 4 to 120, so we chose those as the minimum and maximum.  We used
  * ((2.236 + 1.756*i)^2 - 1) with i from 0 to 5 to generate the intermediate
- * points.  Since the pulse width as a function of array index is quadratic, and
- * light obeys an inverse-square law, the sensing distance as a function of
- * array index should be linear. */
+ * points. */
 class Zumo32U4ProximitySensors
 {
 public:
