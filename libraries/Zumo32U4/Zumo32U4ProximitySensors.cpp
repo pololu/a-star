@@ -96,7 +96,7 @@ void Zumo32U4ProximitySensors::prepareToRead()
     if (levelsArray == NULL)
     {
         uint16_t defaultBrightnessLevels[] = { 4, 15, 32, 55, 85, 120 };
-        setBrightnessLevels(defaultBrightnessLevels, 8);
+        setBrightnessLevels(defaultBrightnessLevels, 6);
     }
 }
 
