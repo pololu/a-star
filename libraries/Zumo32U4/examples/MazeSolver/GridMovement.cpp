@@ -1,19 +1,11 @@
-/** This file provides functions for moving on a line grid.  It
-uses the line sensors to follow lines and detect intersections,
-and it uses the L3GD20H gyro to help perform turns.
+/* GridMovement.cpp and GridMovement.h provide functions for
+moving on a line grid.  For more information, see
+GridMovement.h. */
 
-This code was designed with maze-solving in mind, but it can be
-used in other applications as long as there are black lines on a
-white surface, and the lines are not too close together, and the
-lines intersect at right angles. */
-
+#include "TurnSensor.h"
 #include "GridMovement.h"
 
 uint16_t lineSensorValues[numSensors];
-
-int16_t gyroOffset;
-uint16_t gyroLastUpdate = 0;
-uint32_t gyroAngle = 0;
 
 // Sets up special characters in the LCD so that we can display
 // bar graphs.
@@ -36,68 +28,6 @@ void printBar(uint8_t height)
   if (height > 8) { height = 8; }
   const char barChars[] = {' ', 0, 1, 2, 3, 4, 5, 6, 255};
   lcd.print(barChars[height]);
-}
-
-// Reset the gyro angle to zero and prepare to keep track of it.
-void gyroAngleReset()
-{
-  gyroLastUpdate = micros();
-  gyroAngle = 0;
-}
-
-// Read the gyro and update the angle.  This should be called as
-// frequently as possible while using the gyro to do turns.
-void gyroAngleUpdate()
-{
-  uint16_t m = micros();
-  uint16_t dt = m - gyroLastUpdate;
-  gyroLastUpdate = m;
-
-  // (70 mdps/digit) * (1/1000 dps/mdps) * (1/1000000 s/us) * (2^29/45 unit/degree)
-  // = 14680064/17578125 unit/us/digit
-
-  gyro.read();
-
-  gyroAngle += (int64_t)((int32_t)(gyro.g.z - gyroOffset) * dt) * 14680064 / 17578125;
-}
-
-// Calibrates the gyro.  The digital zero-rate level of the
-// L3GD20H gyro can be as high as 25 degrees per second, and this
-// calibration helps us correct for that.  It is important for
-// the robot to be stationary during this time.
-static void gyroSetup()
-{
-  Wire.begin();
-  gyro.init();
-  gyro.writeReg(L3G::CTRL_REG1, 0xFF); // 800 Hz ODR, LPF cutoff 100 Hz
-  gyro.writeReg(L3G::CTRL_REG4, 0x20); // 2000 dps FS
-  gyro.writeReg(L3G::CTRL_REG5, 0x00); // HPF off
-
-  lcd.clear();
-  lcd.print(F("Gyro cal"));
-
-  // Delay to give the user time to remove their finger.
-  delay(500);
-
-  int32_t total = 0;
-  for (uint16_t i = 0; i < 1024; i++)
-  {
-    while(!gyro.readReg(L3G::STATUS_REG & 0x08));
-    gyro.read();
-    total += gyro.g.z;
-  }
-  gyroOffset = total / 1024;
-
-  // Display the angle (in degrees) until the user presses A.
-  lcd.clear();
-  gyroAngleReset();
-  while (!buttonA.getSingleDebouncedRelease())
-  {
-    gyroAngleUpdate();
-    lcd.gotoXY(0, 0);
-    lcd.print(((gyroAngle >> 16) * 360) >> 16);
-    lcd.print(F("   "));
-  }
 }
 
 // Takes calibrated readings of the lines sensors and stores them
@@ -147,30 +77,30 @@ static void lineSensorSetup()
   // necessary, and so that if there are issues with the gyro
   // then you will know before actually starting the robot.
 
-  gyroAngleReset();
+  turnSensorReset();
 
   // Turn to the left 90 degrees.
   motors.setSpeeds(-calibrationSpeed, calibrationSpeed);
-  while((int32_t)gyroAngle < gyroAngle45 * 2)
+  while((int32_t)turnAngle < turnAngle45 * 2)
   {
     lineSensors.calibrate();
-    gyroAngleUpdate();
+    turnSensorUpdate();
   }
 
   // Turn to the right 90 degrees.
   motors.setSpeeds(calibrationSpeed, -calibrationSpeed);
-  while((int32_t)gyroAngle > -gyroAngle45 * 2)
+  while((int32_t)turnAngle > -turnAngle45 * 2)
   {
     lineSensors.calibrate();
-    gyroAngleUpdate();
+    turnSensorUpdate();
   }
 
   // Turn back to center using the gyro.
   motors.setSpeeds(-calibrationSpeed, calibrationSpeed);
-  while((int32_t)gyroAngle < 0)
+  while((int32_t)turnAngle < 0)
   {
     lineSensors.calibrate();
-    gyroAngleUpdate();
+    turnSensorUpdate();
   }
 
   // Stop the motors.
@@ -207,7 +137,7 @@ void turn(char dir)
     return;
   }
 
-  gyroAngleReset();
+  turnSensorReset();
 
   uint8_t sensorIndex;
 
@@ -216,9 +146,9 @@ void turn(char dir)
   case 'B':
     // Turn left 125 degrees using the gyro.
     motors.setSpeeds(-turnSpeed, turnSpeed);
-    while((int32_t)gyroAngle < gyroAngle45 * 3)
+    while((int32_t)turnAngle < turnAngle45 * 3)
     {
-      gyroAngleUpdate();
+      turnSensorUpdate();
     }
     sensorIndex = 1;
     break;
@@ -226,9 +156,9 @@ void turn(char dir)
   case 'L':
     // Turn left 45 degrees using the gyro.
     motors.setSpeeds(-turnSpeed, turnSpeed);
-    while((int32_t)gyroAngle < gyroAngle45)
+    while((int32_t)turnAngle < turnAngle45)
     {
-      gyroAngleUpdate();
+      turnSensorUpdate();
     }
     sensorIndex = 1;
     break;
@@ -236,9 +166,9 @@ void turn(char dir)
   case 'R':
     // Turn right 45 degrees using the gyro.
     motors.setSpeeds(turnSpeed, -turnSpeed);
-    while((int32_t)gyroAngle > -gyroAngle45)
+    while((int32_t)turnAngle > -turnAngle45)
     {
-      gyroAngleUpdate();
+      turnSensorUpdate();
     }
     sensorIndex = 3;
     break;
@@ -373,7 +303,7 @@ void gridMovementSetup()
 
   // Calibrate the gyro and show readings from it until the user
   // presses button A.
-  gyroSetup();
+  turnSensorSetup();
 
   // Calibrate the sensors by turning left and right, and show
   // readings from it until the user presses A again.

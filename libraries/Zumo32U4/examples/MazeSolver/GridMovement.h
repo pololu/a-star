@@ -1,12 +1,24 @@
+/* GridMovement.h and GridMovement.cpp provide functions to help
+the Zumo navigate a grid made of black lines on a white surface.
+The line must intersect at right angles.
+
+The code uses the line sensors to follow lines and detect
+intersections, and it uses the gyro to help perform turns.
+
+This code was designed with maze-solving in mind, but it can be
+used in other applications as long as there are black lines on a
+white surface, and the lines are not too close together, and the
+lines intersect at right angles.
+
+The speed and delay parameters in this file were designed for a
+Zumo 32U4 with 4 NiMH batteries and 75:1 HP gearmotors.  They
+might need to be adjusted depending on your motor and battery
+voltage. */
+
 #pragma once
 
 #include <Wire.h>
 #include <Zumo32U4.h>
-
-// The speed and delay parameters in this file were designed for
-// a Zumo 32U4 with 4 NiMH batteries and 75:1 HP gearmotors.
-// They might need to be adjusted depending on your motor and
-// battery voltage.
 
 // Motor speed when driving straight.  400 is the max speed.
 const uint16_t straightSpeed = 200;
@@ -41,9 +53,6 @@ const int32_t gyroAngle45 = 0x20000000;
 
 // Functions and variables defined in GridMovement.cpp:
 void printBar(uint8_t barHeight);
-void gyroAngleReset();
-void gyroAngleUpdate();
-extern uint32_t gyroAngle;
 uint16_t readSensors();
 bool aboveLine(uint8_t sensorIndex);
 bool aboveLineDark(uint8_t sensorIndex);

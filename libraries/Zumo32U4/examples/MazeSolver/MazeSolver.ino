@@ -5,6 +5,11 @@ phases: first, it learns the maze with a left-hand-on-the-wall
 strategy and computes the most efficient path to the finish.
 Second, it follows the previously-computed path.
 
+This code is meant to run on a Zumo with 4 NiMH batteries and two
+75:1 HP micro metal gearmotors.  If you have different batteries
+or motors, you will probably need to adjust the timing and speed
+parameters in GridMovement.h.
+
 == Hardware setup ==
 
 This demo requires a Zumo 32U4 Front Sensor Array to be
@@ -18,13 +23,16 @@ the line sensors are approximately centered above one of the
 black lines.
 
 Next, turn on the Zumo, and be careful to not move it for a few
-seconds afterwards while the gyro is being calibrated.  After the
-gyro calibration is done, press button A to start the line sensor
-calibration.  The robot will turn left 90 degrees, return to
-center, turn right 90 degrees, and then return approximately to
-center.  If the angles are incorrect or the robot turns in
-circles, then something is probably wrong with the gyro and you
-should power off and try again.
+seconds afterwards while the gyro is being calibrated.  During
+the gyro calibration, the yellow LED is on and the words "Gyro
+cal" are displayed on the LCD.
+
+After the gyro calibration is done, press button A to start the
+line sensor calibration.  The robot will turn left 90 degrees,
+return to center, turn right 90 degrees, and then return
+approximately to center.  If the angles are incorrect or the
+robot turns in circles, then something is probably wrong with the
+gyro and you should power off and try again.
 
 The robot's position might shift during calibration.  If none of
 the inner three line sensors can see the line, as indicated on
@@ -37,12 +45,7 @@ path to reach it.  When it reaches the end, it will beep.
 
 Move the robot back to the starting position, and press button A
 again.  The robot will go directly to the end of the maze using
-the path it previously learned.
-
-== Adjustable parameters ==
-
-There are several parameters in GridMovement.h that might need to
-be adjusted based the motors and type of battery you are using. */
+the path it previously learned. */
 
 #include <Wire.h>
 #include <Zumo32U4.h>

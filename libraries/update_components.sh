@@ -57,3 +57,9 @@ copylib https://github.com/pololu/pololu-hd44780-arduino ../../pololu-hd44780-ar
 copylib https://github.com/pololu/lsm303-arduino ../../lsm303-arduino/LSM303 LSM303{.cpp,.h}
 copylib https://github.com/pololu/l3g-arduino ../../l3g-arduino/L3G L3G{.cpp,.h}
 copylib https://github.com/pololu/qtr-sensors-arduino ../../qtr-sensors-arduino/QTRSensors QTRSensors{.cpp,.h}
+
+# The Zumo32U4 library has some files that are reused between examples, and we
+# would like those to stay synchronized.
+pushd Zumo32U4/examples
+cp MazeSolver/TurnSensor.* RotationResist
+popd
