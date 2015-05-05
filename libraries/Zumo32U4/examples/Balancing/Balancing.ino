@@ -201,6 +201,9 @@ void setMotors()
   int32_t speed;
   if (abs(angle) > 45)
   {
+    // If the robot is tilted more than 45 degrees, it is
+    // probably going to fall over.  Stop the motors to prevent
+    // it from running away.
     speed = 0;
   }
   else
