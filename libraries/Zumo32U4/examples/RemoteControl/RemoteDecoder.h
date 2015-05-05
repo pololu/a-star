@@ -365,9 +365,9 @@ private:
 
     if (bitsReceived == messageSize * 8)
     {
-      // We have received all a complete message.  Go to the
-      // EndMark state so we can measure the time of the mark at
-      // the end of the message.
+      // We have received a complete message.  Go to the EndMark
+      // state so we can measure the time of the mark at the end
+      // of the message.
       repeatCommand = false;
       changeState(EndMark);
     }

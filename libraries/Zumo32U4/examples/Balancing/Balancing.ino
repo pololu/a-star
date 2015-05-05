@@ -154,9 +154,9 @@ void updateAngleGyro()
 
   gyro.read();
 
-  // Calculate how much the angle has changed, in degrees, and add it
-  // to our estimation of the current angle.  The gyro's sensitivity is
-  // 0.07 dps per digit.
+  // Calculate how much the angle has changed, in degrees, and
+  // add it to our estimation of the current angle.  The gyro's
+  // sensitivity is 0.07 dps per digit.
   angle += ((float)gyro.g.y - gyroOffsetY) * 70 * dt / 1000000000;
 }
 
@@ -191,9 +191,9 @@ void correctAngleAccel()
   angle = weight * aAngle + (1 - weight) * angle;
 }
 
-// This function uses our current angle estimation and a PID algorithm to
-// set the motor speeds.  This is the core of the robot's
-// balancing algorithm.
+// This function uses our current angle estimation and a PID
+// algorithm to set the motor speeds.  This is the core of the
+// robot's balancing algorithm.
 void setMotors()
 {
   const float targetAngle = 2.0;

@@ -1,6 +1,5 @@
 /* GridMovement.h and GridMovement.cpp provide functions to help
 the Zumo navigate a grid made of black lines on a white surface.
-The line must intersect at right angles.
 
 The code uses the line sensors to follow lines and detect
 intersections, and it uses the gyro to help perform turns.
