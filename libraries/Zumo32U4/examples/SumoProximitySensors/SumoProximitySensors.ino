@@ -132,17 +132,16 @@ void loop()
 
   if (state == StatePausing)
   {
-    // We are in the pausing state, so just wait for the user to
-    // press button A, while displaying the batter voltage every
-    // 100 ms.
+    // In this state, we just wait for the user to press button
+    // A, while displaying the battery voltage every 100 ms.
+
+    motors.setSpeeds(0, 0);
 
     if (justChangedState)
     {
       justChangedState = false;
       lcd.print(F("Press A"));
     }
-
-    motors.setSpeeds(0, 0);
 
     if (displayIsStale(100))
     {
@@ -153,6 +152,7 @@ void loop()
 
     if (buttonPress)
     {
+      // The user pressed button A, so go to the waiting state.
       changeState(StateWaiting);
     }
   }
@@ -163,23 +163,32 @@ void loop()
   }
   else if (state == StateWaiting)
   {
+    // In this state, we wait for a while and then move on to the
+    // scanning state.
+
+    motors.setSpeeds(0, 0);
+
     uint16_t time = timeInThisState();
-    uint16_t timeLeft = waitTime - time;
 
-    lcd.gotoXY(0, 0);
-    lcd.print(timeLeft / 1000 % 10);
-    lcd.print('.');
-    lcd.print(timeLeft / 100 % 10);
-
-    // TODO: beep every second
-
-    if (time >= waitTime)
+    if (time < waitTime)
     {
+      // Display the remaining time we have to wait.
+      uint16_t timeLeft = waitTime - time;
+      lcd.gotoXY(0, 0);
+      lcd.print(timeLeft / 1000 % 10);
+      lcd.print('.');
+      lcd.print(timeLeft / 100 % 10);
+    }
+    else
+    {
+      // We have waited long enough.  Start moving.
       changeState(StateScanning);
     }
   }
   else if (state == StateBacking)
   {
+    // In this state, the robot drives in reverse.
+
     if (justChangedState)
     {
       justChangedState = false;
@@ -188,6 +197,8 @@ void loop()
 
     motors.setSpeeds(-reverseSpeed, -reverseSpeed);
 
+    // After backing up for a specific amount of time, drive in
+    // reverse.
     if (timeInThisState() >= reverseTime)
     {
       changeState(StateScanning);
@@ -195,6 +206,9 @@ void loop()
   }
   else if (state == StateScanning)
   {
+    // In this state the robot rotates in place and tries to find
+    // its opponent.
+
     if (justChangedState)
     {
       justChangedState = false;
@@ -212,26 +226,29 @@ void loop()
 
     uint16_t time = timeInThisState();
 
-    if (time > scanTimeMin)
-    {
-      proxSensors.read();
-      if (proxSensors.countsFrontWithLeftLeds() > 1)
-      {
-        changeState(StateDriving);
-      }
-      if (proxSensors.countsFrontWithRightLeds() > 1)
-      {
-        changeState(StateDriving);
-      }
-    }
-
     if (time > scanTimeMax)
     {
+      // We have not seen anything for a while, so start driving.
       changeState(StateDriving);
+    }
+    else if (time > scanTimeMin)
+    {
+      // Read the proximity sensors.  If we detect anything with
+      // the front sensor, then start driving forwards.
+      proxSensors.read();
+      if (proxSensors.countsFrontWithLeftLeds() >= 2
+        || proxSensors.countsFrontWithRightLeds() >= 2)
+      {
+        changeState(StateDriving);
+      }
     }
   }
   else if (state == StateDriving)
   {
+    // In this state we drive forward while also looking for the
+    // opponent using the proximity sensors and checking for the
+    // white border.
+
     if (justChangedState)
     {
       justChangedState = false;
@@ -251,47 +268,67 @@ void loop()
       changeState(StateBacking);
     }
 
-    // Try to drive towards the opponent.
+    // Read the proximity sensors to see if know where the
+    // opponent is.
     proxSensors.read();
     uint8_t sum = proxSensors.countsFrontWithRightLeds() + proxSensors.countsFrontWithLeftLeds();
     int8_t diff = proxSensors.countsFrontWithRightLeds() - proxSensors.countsFrontWithLeftLeds();
 
-    // You might also consider using encoders to detect a
-    // stalemate, but that might be difficult if the robot's
-    // treads are slipping.
     if (sum >= 4 || timeInThisState() > stalemateTime)
     {
+      // The front sensor is getting a strong signal, or we have
+      // been driving forward for a while now without seeing the
+      // border.  Either way, there is probably a robot in front
+      // of us and we should switch to ramming speed to try to
+      // push the robot out of the ring.
       motors.setSpeeds(rammingSpeed, rammingSpeed);
+
+      // Turn on the red LED when ramming.
       ledRed(1);
     }
     else if (sum == 0)
     {
+      // We don't see anything with the front sensor, so just
+      // keep driving forward.  Also monitor the side sensors; if
+      // they see an object then we want to go to the scanning
+      // state and turn torwards that object.
+
       motors.setSpeeds(forwardSpeed, forwardSpeed);
+
       if (proxSensors.countsLeftWithLeftLeds() >= 2)
       {
+        // Detected something to the left.
         scanDir = DirectionLeft;
         changeState(StateScanning);
       }
+
       if (proxSensors.countsRightWithRightLeds() >= 2)
       {
+        // Detected something to the right.
         scanDir = DirectionRight;
         changeState(StateScanning);
       }
+
+      ledRed(0);
     }
     else
     {
+      // We see somehing with the front sensor but it is not a
+      // strong reading.
+
       if (diff >= 1)
       {
-        // Veer to the right.
+        // The right-side reading is stronger, so veer to the right.
         motors.setSpeeds(veerSpeedHigh, veerSpeedLow);
       }
       else if (diff <= -1)
       {
-        // Veer to the left.
+        // The left-side reading is stronger, so veer to the left.
         motors.setSpeeds(veerSpeedLow, veerSpeedHigh);
       }
       else
       {
+        // Both readings are equal, so just drive forward.
         motors.setSpeeds(forwardSpeed, forwardSpeed);
       }
       ledRed(0);
@@ -332,7 +369,7 @@ bool displayIsStale(uint16_t staleTime)
 }
 
 // Any part of the code that uses displayIsStale to decide when
-// to update the LCD should call this function after updating the
+// to update the LCD should call this function when it updates the
 // LCD.
 void displayUpdated()
 {
