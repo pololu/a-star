@@ -58,7 +58,8 @@ void loop()
   int32_t turnSpeed = -(int32_t)turnAngle / (turnAngle1 / 56)
     - turnRate / 20;
 
-  // Constrain our motor speeds to be between -maxSpeed and maxSpeed.
+  // Constrain our motor speeds to be between
+  // -maxSpeed and maxSpeed.
   turnSpeed = constrain(turnSpeed, -maxSpeed, maxSpeed);
 
   motors.setSpeeds(-turnSpeed, turnSpeed);
