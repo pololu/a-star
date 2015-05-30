@@ -1,6 +1,6 @@
 // This file contains constants for the address and commands in
-// the messages transmitted by Adafruit's remote:
-// http://www.adafruit.com/products/389
+// the messages transmitted by the Mini IR Remote Control:
+// https://www.pololu.com/product/2777
 
 #pragma once
 

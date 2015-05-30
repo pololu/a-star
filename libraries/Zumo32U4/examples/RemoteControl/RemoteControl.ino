@@ -1,9 +1,9 @@
 /* This example shows how to use the receivers for the infrared
 proximity sensors on the Zumo 32U4 to detect and decode commands
 from an infrared remote.  This code is designed to work with the
-Mini Remote Control from Adafruit, product ID 389:
+Mini IR Remote Control available from Pololu:
 
-  http://www.adafruit.com/products/389
+  https://www.pololu.com/product/2777
 
 For this code to work, jumpers on the front sensor array should
 be installed in order to connect pin 4 to RGT and connect pin 20
