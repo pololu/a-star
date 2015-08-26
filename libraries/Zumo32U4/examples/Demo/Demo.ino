@@ -1,3 +1,13 @@
+/* This demo program shows many features of the Zumo 32U4.
+
+It uses the buttons, LCD, and buzzer to provide a user interface.
+It presents a menu to the user that lets the user select from
+several different demos.
+
+To use this demo program, you will need to have the LCD connected
+to the Zumo 32U4.  If you cannot see any text on the LCD,
+try rotating the contrast potentiometer. */
+
 #include <Wire.h>
 #include <Zumo32U4.h>
 
@@ -100,7 +110,6 @@ const char beepThankYou[] PROGMEM = ">>c32>g32";
 const char beepButtonA[] PROGMEM = "!c32";
 const char beepButtonB[] PROGMEM = "!e32";
 const char beepButtonC[] PROGMEM = "!g32";
-const char beepTimerTick[] PROGMEM = "!v8>>c32";
 
 // Custom characters for the LCD:
 
@@ -128,18 +137,6 @@ const char forwardArrows[] PROGMEM = {
   0b00000,
 };
 
-// This character is two solid arrows pointing up.
-const char forwardArrowsSolid[] PROGMEM = {
-  0b00000,
-  0b00100,
-  0b01110,
-  0b11111,
-  0b00100,
-  0b01110,
-  0b11111,
-  0b00000,
-};
-
 // This character is two chevrons pointing down.
 const char reverseArrows[] PROGMEM = {
   0b00000,
@@ -152,6 +149,17 @@ const char reverseArrows[] PROGMEM = {
   0b00000,
 };
 
+// This character is two solid arrows pointing up.
+const char forwardArrowsSolid[] PROGMEM = {
+  0b00000,
+  0b00100,
+  0b01110,
+  0b11111,
+  0b00100,
+  0b01110,
+  0b11111,
+  0b00000,
+};
 
 // This character is two solid arrows pointing down.
 const char reverseArrowsSolid[] PROGMEM = {
@@ -175,10 +183,9 @@ void loadCustomCharacters()
   lcd.loadCustomCharacter(backArrow, 7);
 }
 
+// Assigns #0-6 to be bar graph characters.
 void loadCustomCharactersBarGraph()
 {
-  // Assign #0-6 to be bar graph characters.
-  
   static const char levels[] PROGMEM = {
     0, 0, 0, 0, 0, 0, 0, 63, 63, 63, 63, 63, 63, 63
   };
@@ -191,11 +198,12 @@ void loadCustomCharactersBarGraph()
   lcd.loadCustomCharacter(levels + 6, 6);  // 7 bars
 }
 
+// Assigns #0-4 to be arrow symbols.
 void loadCustomCharactersMotorDirs()
 {
   lcd.loadCustomCharacter(forwardArrows, 0);
-  lcd.loadCustomCharacter(forwardArrowsSolid, 1);
-  lcd.loadCustomCharacter(reverseArrows, 2);
+  lcd.loadCustomCharacter(reverseArrows, 1);
+  lcd.loadCustomCharacter(forwardArrowsSolid, 2);
   lcd.loadCustomCharacter(reverseArrowsSolid, 3);
 }
 
@@ -264,11 +272,11 @@ void ledDemo()
 void printBar(uint8_t height)
 {
   if (height > 8) { height = 8; }
-  const char barChars[] = {' ', 0, 1, 2, 3, 4, 5, 6, 255};
+  static const char barChars[] = {' ', 0, 1, 2, 3, 4, 5, 6, 255};
   lcd.print(barChars[height]);
 }
 
-// Display line sensor readings.
+// Display line sensor readings. Holding button C turns off the IR emitters.
 void lineSensorDemo()
 {
   loadCustomCharactersBarGraph();
@@ -302,7 +310,7 @@ void lineSensorDemo()
     lcd.gotoXY(7, 1);
     if(buttonC.isPressed())
     {
-      lcd.print('\xa5');
+      lcd.print('\xa5'); // centered dot
     }
     else
     {
@@ -332,9 +340,9 @@ void proxSensorDemo()
   }
 }
 
+// Starts I2C and initializes the inertial sensors.
 void initInertialSensors()
 {
-  // Start I2C and initialize the inertial sensors.
   Wire.begin();
   compass.init();
   compass.enableDefault();
@@ -342,34 +350,41 @@ void initInertialSensors()
   gyro.enableDefault();
 }
 
-char printBiggestAxis(int16_t x, int16_t y, int16_t z, uint16_t threshold)
+// Given 3 readings for axes x, y, and z, prints the sign and
+// axis of the largest reading unless it is below the given
+// threshold.
+char printLargestAxis(int16_t x, int16_t y, int16_t z, uint16_t threshold)
 {
-  int16_t biggest = x;
+  int16_t largest = x;
   char axis = 'X';
   
-  if (abs(y) > abs(biggest))
+  if (abs(y) > abs(largest))
   {
-    biggest = y;
+    largest = y;
     axis = 'Y';
   }
-  if (abs(z) > abs(biggest))
+  if (abs(z) > abs(largest))
   {
-    biggest = z;
+    largest = z;
     axis = 'Z';
   }
   
-  if (abs(biggest) < threshold)
+  if (abs(largest) < threshold)
   {
     lcd.print("  ");
   }
   else
   {
-    bool positive = (biggest > 0);
+    bool positive = (largest > 0);
     lcd.print(positive ? '+' : '-');
     lcd.print(axis);
   }
 }
 
+// Print the direction of the largest rotation rate measured by
+// the gyro and the up direction based on the accelerometer's
+// measurement of gravitational acceleration (assuming gravity is
+// the dominant force acting on the Zumo).
 void inertialDemo()
 {
   displayBackArrow();
@@ -385,12 +400,20 @@ void inertialDemo()
     gyro.read();
     
     lcd.gotoXY(6, 0);
-    printBiggestAxis(gyro.g.x, gyro.g.y, gyro.g.z, 2000);    
+    printLargestAxis(gyro.g.x, gyro.g.y, gyro.g.z, 2000);    
     lcd.gotoXY(6, 1);
-    printBiggestAxis(compass.a.x, compass.a.y, compass.a.z, 200);
+    printLargestAxis(compass.a.x, compass.a.y, compass.a.z, 200);
   }
 }
 
+// Provides an interface to test the motors. Holding button A or C
+// causes the left or right motor to accelerate; releasing the
+// button causes the motor to decelerate. Tapping the button while
+// the motor is not running reverses the direction it runs.
+//
+// If the showEncoders argument is true, encoder counts are
+// displayed on the first line of the LCD; otherwise, an
+// instructional message is shown.
 void motorDemoHelper(bool showEncoders)
 {  
   loadCustomCharactersMotorDirs();
@@ -399,15 +422,15 @@ void motorDemoHelper(bool showEncoders)
   lcd.print(F("A \7B C"));
   
   int16_t leftSpeed = 0, rightSpeed = 0;
-  bool leftReverse = false, rightReverse = false;
+  int8_t leftDir = 1, rightDir = 1;
   uint16_t lastUpdateTime = millis() - 100;
-  uint8_t countA = 0, countC = 0, infoCount = 0;
+  uint8_t btnCountA = 0, btnCountC = 0, instructCount = 0;
   
   int16_t encCountsLeft = 0, encCountsRight = 0;
   char buf[4];
 
   while (buttonMonitor() != 'B')
-  {
+  {    
     encCountsLeft += encoders.getCountsAndResetLeft();
     if (encCountsLeft < 0) { encCountsLeft += 1000; }
     if (encCountsLeft > 999) { encCountsLeft -= 1000; }
@@ -415,7 +438,8 @@ void motorDemoHelper(bool showEncoders)
     encCountsRight += encoders.getCountsAndResetRight();
     if (encCountsRight < 0) { encCountsRight += 1000; }
     if (encCountsRight > 999) { encCountsRight -= 1000; }
-    
+
+    // Update the LCD every 50 ms.
     if ((uint16_t)(millis() - lastUpdateTime) > 50)
     {
       lastUpdateTime = millis();
@@ -431,25 +455,24 @@ void motorDemoHelper(bool showEncoders)
       }
       else
       {
-        // Swap info message every 2 s
-
-        if (infoCount == 0)
+        // Cycle the instructions every 2 seconds.
+        if (instructCount == 0)
         {
           lcd.print("Hold=run");
         }
-        else if (infoCount == 40)
+        else if (instructCount == 40)
         {
           lcd.print("Tap=flip");
         }
-        if (++infoCount == 80) { infoCount = 0; }
+        if (++instructCount == 80) { instructCount = 0; }
       }
       
       
       if (buttonA.isPressed())
       {
-        if (countA < 4)
+        if (btnCountA < 4)
         {
-          countA++;
+          btnCountA++;
         }
         else
         {
@@ -459,20 +482,20 @@ void motorDemoHelper(bool showEncoders)
       }
       else
       {
-        if (leftSpeed == 0 && countA > 0 && countA <= 4)
+        if (leftSpeed == 0 && btnCountA > 0 && btnCountA <= 4)
         {
-          // Motor isn't running and button was pressed for at most 200 ms, so flip the motor direction.
-          leftReverse = !leftReverse;
+          // Motor isn't running and button was pressed for 200 ms or less, so flip the motor direction.
+          leftDir = -leftDir;
         }
-        countA = 0;
+        btnCountA = 0;
         leftSpeed -= 30;
       }
       
       if (buttonC.isPressed())
       {
-        if (countC < 4)
+        if (btnCountC < 4)
         {
-          countC++;
+          btnCountC++;
         }
         else
         {
@@ -482,49 +505,52 @@ void motorDemoHelper(bool showEncoders)
       }
       else
       {
-        if (rightSpeed == 0 && countC > 0 && countC <= 4)
+        if (rightSpeed == 0 && btnCountC > 0 && btnCountC <= 4)
         {
-          // Motor isn't running and button was pressed for at most 200 ms, so flip the motor direction.
-          rightReverse = !rightReverse;
+          // Motor isn't running and button was pressed for 200 ms or less, so flip the motor direction.
+          rightDir = -rightDir;
         }
-        countC = 0;
+        btnCountC = 0;
         rightSpeed -= 30;
       }
       
       leftSpeed = constrain(leftSpeed, 0, 400);
       rightSpeed = constrain(rightSpeed, 0, 400);
       
-      motors.setSpeeds(leftSpeed * (leftReverse ? -1 : 1), rightSpeed * (rightReverse ? -1 : 1));
+      motors.setSpeeds(leftSpeed * leftDir, rightSpeed * rightDir);
       
-      // Display arrows pointing the appropriate direction (solid if running, chevrons if not)
+      // Display arrows pointing the appropriate direction (solid if the motor is running, chevrons if not).
       lcd.gotoXY(0, 1);
-      if (leftSpeed > 0)
+      if (leftSpeed == 0)
       {
-        lcd.print(leftReverse ? '\3' : '\1');
+        lcd.print((leftDir > 0) ? '\0' : '\1');
       }
       else
       {
-        lcd.print(leftReverse ? '\2' : '\0');
+        lcd.print((leftDir > 0) ? '\2' : '\3');
       }
       lcd.gotoXY(7, 1);
-      if (rightSpeed > 0)
+      if (rightSpeed == 0)
       {
-        lcd.print(rightReverse ? '\3' : '\1');
+        lcd.print((rightDir > 0) ? '\0' : '\1');
       }
       else
       {
-        lcd.print(rightReverse ? '\2' : '\0');
+        lcd.print((rightDir > 0) ? '\2' : '\3');
       }
     }
   }
   motors.setSpeeds(0, 0);
 }
 
+
+// Motor demo with instructions.
 void motorDemo()
 {
   motorDemoHelper(false);
 }
 
+// Motor demo with encoder counts.
 void encoderDemo()
 {
   motorDemoHelper(true);
@@ -657,17 +683,16 @@ void setup()
   
   loadCustomCharacters();
 
-  // The brownout threshold on the A-Star 32U4 is 4.3 V.  If VCC
-  // drops below this, a brownout reset will occur, preventing
-  // the AVR from operating out of spec.
+  // The brownout threshold on the ATmega32U4 is set to 4.3 V.
+  // If VCC drops below this, a brownout reset will occur,
+  // preventing the AVR from operating out of spec.
   //
-  // Note: Brownout resets usually do not happen on the A-Star
-  // 32U4 Prime LV because the voltage regulator goes straight
-  // from 5 V to 0 V when VIN drops too low.
+  // Note: Brownout resets usually do not happen on the Zumo
+  // 32U4 because the voltage regulator goes straight from 5 V
+  // to 0 V when VIN drops too low.
   //
-  // The bootloader is
-  // designed so that you can detect brownout resets from your
-  // sketch using the following code:
+  // The bootloader is designed so that you can detect brownout
+  // resets from your sketch using the following code:
   bool brownout = MCUSR >> BORF & 1;
   MCUSR = 0;
 
