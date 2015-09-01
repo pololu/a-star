@@ -288,9 +288,11 @@ void lineSensorDemo()
   uint16_t lineSensorValues[3];
   char c;
 
-  while(buttonMonitor() != 'B')
-  {    
-    if(buttonC.isPressed())
+  while (buttonMonitor() != 'B')
+  {
+    bool emittersOff = buttonC.isPressed();
+
+    if (emittersOff)
     {
       lineSensors.read(lineSensorValues, QTR_EMITTERS_OFF);
     }
@@ -310,7 +312,7 @@ void lineSensorDemo()
     // Display an indicator of whether emitters are on or
     // off.
     lcd.gotoXY(7, 1);
-    if(buttonC.isPressed())
+    if (emittersOff)
     {
       lcd.print('\xa5');  // centered dot
     }
