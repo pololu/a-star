@@ -197,8 +197,8 @@ void loop()
 
     motors.setSpeeds(-reverseSpeed, -reverseSpeed);
 
-    // After backing up for a specific amount of time, drive in
-    // reverse.
+    // After backing up for a specific amount of time, start
+    // scanning.
     if (timeInThisState() >= reverseTime)
     {
       changeState(StateScanning);
@@ -313,7 +313,7 @@ void loop()
     }
     else
     {
-      // We see somehing with the front sensor but it is not a
+      // We see something with the front sensor but it is not a
       // strong reading.
 
       if (diff >= 1)
