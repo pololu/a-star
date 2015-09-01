@@ -1,14 +1,21 @@
-Pololu A-Star Software and Drivers
+Pololu A-Star/Zumo 32U4 Software and Drivers
 
 These files are the software and drivers for the Pololu A-Star 32U4 boards,
 which are a family of programmable modules featuring Atmel's ATmega32U4
-microcontroller.
+microcontroller. They are also used for the A-Star-compatible Zumo 32U4 robot.
 
-For more information about the A-Star, see the user's guide:
-http://www.pololu.com/docs/0J61
+For more information about A-Star boards, see their user's guides:
+A-Star 32U4 (Micro, Mini, Prime): http://www.pololu.com/docs/0J61
+A-Star 32U4 Robot Controller: https://www.pololu.com/docs/0J66
+Zumo 32U4 Robot: https://www.pololu.com/docs/0J63
 
 These files are available on GitHub:
 https://github.com/pololu/a-star
+
+For programming an A-Star 32U4 or Zumo 32U4 with the Arduino environment, you
+might also want to install the applicable Arduino library:
+https://github.com/pololu/a-star-32u4-arduino-library
+https://github.com/pololu/zumo-32u4-arduino-library
 
 
 == Arduino add-on ==
@@ -42,16 +49,3 @@ The "udev-rules" directory contains a file named "a-star.rules" for Linux users.
 If you copy this file to /etc/udev/rules.d/, it will tell ModemManager to not
 try to access the virtual serial ports of the A-Star.  This is necessary on some
 systems in order to program the A-Star.
-
-
-== AStar32U4Prime library ==
-
-The "libraries" directory contains the AStar32U4Prime library, which can help
-you write code that interfaces with on-board hardware on the A-Star 32U4 Prime.
-For more information, see the library's README.md file.
-
-== Zumo32U4 library ==
-
-The "libraries" directory contains the Zumo32U4 library, which can help you
-write code that interfaces with on-board hardware on the Zumo 32U4 robot.  For
-more information, see the library's README.md file.
