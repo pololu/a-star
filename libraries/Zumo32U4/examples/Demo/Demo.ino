@@ -331,6 +331,9 @@ void proxSensorDemo()
 
   while (buttonMonitor() != 'B')
   {
+    bool proxLeftActive = proxSensors.readBasicLeft();
+    bool proxFrontActive = proxSensors.readBasicFront();
+    bool proxRightActive = proxSensors.readBasicRight();
     proxSensors.read();
 
     lcd.gotoXY(0, 0);
@@ -342,6 +345,14 @@ void proxSensorDemo()
     lcd.print(' ');
     printBar(proxSensors.countsRightWithLeftLeds());
     printBar(proxSensors.countsRightWithRightLeds());
+
+    // On the last 3 characters of the second line, display
+    // basic readings of the sensors taken without sending
+    // IR pulses.
+    lcd.gotoXY(5, 1);
+    printBar(proxLeftActive);
+    printBar(proxFrontActive);
+    printBar(proxRightActive);
   }
 }
 
