@@ -58,9 +58,9 @@ public:
   {
     lcdUpdate(lcdItemIndex);
 
-    while(1)
+    while (1)
     {
-      switch(buttonMonitor())
+      switch (buttonMonitor())
       {
       case 'A':
         // The A button was pressed so decrement the index.
@@ -89,7 +89,7 @@ public:
         break;
 
       case 'B':
-        // The B button was pressed so, run the item and return.
+        // The B button was pressed so run the item and return.
         action(lcdItemIndex);
         return;
       }
@@ -224,7 +224,7 @@ void ledDemo()
 
   uint8_t state = 3;
   static uint16_t lastUpdateTime = millis() - 2000;
-  while(buttonMonitor() != 'B')
+  while (buttonMonitor() != 'B')
   {
     if ((uint16_t)(millis() - lastUpdateTime) >= 500)
     {
@@ -232,7 +232,7 @@ void ledDemo()
       state = state + 1;
       if (state >= 4) { state = 0; }
 
-      switch(state)
+      switch (state)
       {
       case 0:
         buzzer.play("c32");
@@ -276,15 +276,16 @@ void printBar(uint8_t height)
   lcd.print(barChars[height]);
 }
 
-// Display line sensor readings. Holding button C turns off the IR emitters.
+// Display line sensor readings. Holding button C turns off
+// the IR emitters.
 void lineSensorDemo()
 {
   loadCustomCharactersBarGraph();
   displayBackArrow();
   lcd.gotoXY(6, 1);
   lcd.print('C');
-  
-  uint16_t lineSensorValues[3]; // an array to hold sensor values
+
+  uint16_t lineSensorValues[3];
   char c;
 
   while(buttonMonitor() != 'B')
@@ -297,7 +298,7 @@ void lineSensorDemo()
     {
       lineSensors.read(lineSensorValues, QTR_EMITTERS_ON);
     }
-    
+
     lcd.gotoXY(1, 0);
     for (uint8_t i = 0; i < 3; i++)
     {
@@ -305,12 +306,13 @@ void lineSensorDemo()
       printBar(barHeight);
       lcd.print(' ');
     }
-  
-    // Display an indicator of whether emitters are on or off
+
+    // Display an indicator of whether emitters are on or
+    // off.
     lcd.gotoXY(7, 1);
     if(buttonC.isPressed())
     {
-      lcd.print('\xa5'); // centered dot
+      lcd.print('\xa5');  // centered dot
     }
     else
     {
@@ -324,10 +326,11 @@ void proxSensorDemo()
 {
   loadCustomCharactersBarGraph();
   displayBackArrow();
-  
-  while(buttonMonitor() != 'B')
+
+  while (buttonMonitor() != 'B')
   {
     proxSensors.read();
+
     lcd.gotoXY(0, 0);
     printBar(proxSensors.countsLeftWithLeftLeds());
     printBar(proxSensors.countsLeftWithRightLeds());
@@ -350,14 +353,14 @@ void initInertialSensors()
   gyro.enableDefault();
 }
 
-// Given 3 readings for axes x, y, and z, prints the sign and
-// axis of the largest reading unless it is below the given
-// threshold.
-char printLargestAxis(int16_t x, int16_t y, int16_t z, uint16_t threshold)
+// Given 3 readings for axes x, y, and z, prints the sign
+// and axis of the largest reading unless it is below the
+// given threshold.
+void printLargestAxis(int16_t x, int16_t y, int16_t z, uint16_t threshold)
 {
   int16_t largest = x;
   char axis = 'X';
-  
+
   if (abs(y) > abs(largest))
   {
     largest = y;
@@ -368,7 +371,7 @@ char printLargestAxis(int16_t x, int16_t y, int16_t z, uint16_t threshold)
     largest = z;
     axis = 'Z';
   }
-  
+
   if (abs(largest) < threshold)
   {
     lcd.print("  ");
@@ -381,26 +384,27 @@ char printLargestAxis(int16_t x, int16_t y, int16_t z, uint16_t threshold)
   }
 }
 
-// Print the direction of the largest rotation rate measured by
-// the gyro and the up direction based on the accelerometer's
-// measurement of gravitational acceleration (assuming gravity is
-// the dominant force acting on the Zumo).
+// Print the direction of the largest rotation rate measured
+// by the gyro and the up direction based on the
+// accelerometer's measurement of gravitational acceleration
+// (assuming gravity is the dominant force acting on the
+// Zumo).
 void inertialDemo()
 {
   displayBackArrow();
-  
+
   lcd.gotoXY(3, 0);
   lcd.print(F("Rot"));
   lcd.gotoXY(4, 1);
   lcd.print(F("Up"));
-  
-  while(buttonMonitor() != 'B')
+
+  while (buttonMonitor() != 'B')
   {
     compass.read();
     gyro.read();
-    
+
     lcd.gotoXY(6, 0);
-    printLargestAxis(gyro.g.x, gyro.g.y, gyro.g.z, 2000);    
+    printLargestAxis(gyro.g.x, gyro.g.y, gyro.g.z, 2000);
     lcd.gotoXY(6, 1);
     printLargestAxis(compass.a.x, compass.a.y, compass.a.z, 200);
   }
@@ -415,31 +419,31 @@ void inertialDemo()
 // displayed on the first line of the LCD; otherwise, an
 // instructional message is shown.
 void motorDemoHelper(bool showEncoders)
-{  
+{
   loadCustomCharactersMotorDirs();
   lcd.clear();
   lcd.gotoXY(1, 1);
   lcd.print(F("A \7B C"));
-  
+
   int16_t leftSpeed = 0, rightSpeed = 0;
   int8_t leftDir = 1, rightDir = 1;
   uint16_t lastUpdateTime = millis() - 100;
   uint8_t btnCountA = 0, btnCountC = 0, instructCount = 0;
-  
+
   int16_t encCountsLeft = 0, encCountsRight = 0;
   char buf[4];
 
   while (buttonMonitor() != 'B')
-  {    
+  {
     encCountsLeft += encoders.getCountsAndResetLeft();
     if (encCountsLeft < 0) { encCountsLeft += 1000; }
     if (encCountsLeft > 999) { encCountsLeft -= 1000; }
-    
+
     encCountsRight += encoders.getCountsAndResetRight();
     if (encCountsRight < 0) { encCountsRight += 1000; }
     if (encCountsRight > 999) { encCountsRight -= 1000; }
 
-    // Update the LCD every 50 ms.
+    // Update the LCD and motors every 50 ms.
     if ((uint16_t)(millis() - lastUpdateTime) > 50)
     {
       lastUpdateTime = millis();
@@ -447,10 +451,10 @@ void motorDemoHelper(bool showEncoders)
       lcd.gotoXY(0, 0);
       if (showEncoders)
       {
-        sprintf(buf, "%03d", encCountsLeft); 
+        sprintf(buf, "%03d", encCountsLeft);
         lcd.print(buf);
         lcd.gotoXY(5, 0);
-        sprintf(buf, "%03d", encCountsRight); 
+        sprintf(buf, "%03d", encCountsRight);
         lcd.print(buf);
       }
       else
@@ -466,8 +470,7 @@ void motorDemoHelper(bool showEncoders)
         }
         if (++instructCount == 80) { instructCount = 0; }
       }
-      
-      
+
       if (buttonA.isPressed())
       {
         if (btnCountA < 4)
@@ -476,7 +479,8 @@ void motorDemoHelper(bool showEncoders)
         }
         else
         {
-          // Button has been held for more than 200 ms, so start running the motor.
+          // Button has been held for more than 200 ms, so
+          // start running the motor.
           leftSpeed += 15;
         }
       }
@@ -484,13 +488,14 @@ void motorDemoHelper(bool showEncoders)
       {
         if (leftSpeed == 0 && btnCountA > 0 && btnCountA <= 4)
         {
-          // Motor isn't running and button was pressed for 200 ms or less, so flip the motor direction.
+          // Motor isn't running and button was pressed for
+          // 200 ms or less, so flip the motor direction.
           leftDir = -leftDir;
         }
         btnCountA = 0;
         leftSpeed -= 30;
       }
-      
+
       if (buttonC.isPressed())
       {
         if (btnCountC < 4)
@@ -499,7 +504,8 @@ void motorDemoHelper(bool showEncoders)
         }
         else
         {
-          // Button has been held for more than 200 ms, so start running the motor.
+          // Button has been held for more than 200 ms, so
+          // start running the motor.
           rightSpeed += 15;
         }
       }
@@ -507,19 +513,21 @@ void motorDemoHelper(bool showEncoders)
       {
         if (rightSpeed == 0 && btnCountC > 0 && btnCountC <= 4)
         {
-          // Motor isn't running and button was pressed for 200 ms or less, so flip the motor direction.
+          // Motor isn't running and button was pressed for
+          // 200 ms or less, so flip the motor direction.
           rightDir = -rightDir;
         }
         btnCountC = 0;
         rightSpeed -= 30;
       }
-      
+
       leftSpeed = constrain(leftSpeed, 0, 400);
       rightSpeed = constrain(rightSpeed, 0, 400);
-      
+
       motors.setSpeeds(leftSpeed * leftDir, rightSpeed * rightDir);
-      
-      // Display arrows pointing the appropriate direction (solid if the motor is running, chevrons if not).
+
+      // Display arrows pointing the appropriate direction
+      // (solid if the motor is running, chevrons if not).
       lcd.gotoXY(0, 1);
       if (leftSpeed == 0)
       {
@@ -578,28 +586,28 @@ void musicDemo()
   uint8_t fugueTitlePos = 0;
   uint16_t lastShiftTime = millis() - 2000;
 
-  while(buttonMonitor() != 'B')
+  while (buttonMonitor() != 'B')
   {
     // Shift the song title to the left every 250 ms.
-    if((uint16_t)(millis() - lastShiftTime) > 250)
+    if ((uint16_t)(millis() - lastShiftTime) > 250)
     {
       lastShiftTime = millis();
 
       lcd.gotoXY(0, 0);
-      for(uint8_t i = 0; i < 8; i++)
+      for (uint8_t i = 0; i < 8; i++)
       {
         char c = pgm_read_byte(fugueTitle + fugueTitlePos + i);
         lcd.print(c);
       }
       fugueTitlePos++;
 
-      if(fugueTitlePos + 8 >= strlen(fugueTitle))
+      if (fugueTitlePos + 8 >= strlen(fugueTitle))
       {
         fugueTitlePos = 0;
       }
     }
 
-    if(!buzzer.isPlaying())
+    if (!buzzer.isPlaying())
     {
       buzzer.playFromProgramSpace(fugue);
     }
@@ -611,11 +619,11 @@ void musicDemo()
 void powerDemo()
 {
   displayBackArrow();
-  
+
   uint16_t lastDisplayTime = millis() - 2000;
   char buf[6];
-  
-  while(buttonMonitor() != 'B')
+
+  while (buttonMonitor() != 'B')
   {
     if ((uint16_t)(millis() - lastDisplayTime) > 250)
     {
@@ -680,19 +688,20 @@ void setup()
   lineSensors.initThreeSensors();
   proxSensors.initThreeSensors();
   initInertialSensors();
-  
+
   loadCustomCharacters();
 
-  // The brownout threshold on the ATmega32U4 is set to 4.3 V.
-  // If VCC drops below this, a brownout reset will occur,
-  // preventing the AVR from operating out of spec.
+  // The brownout threshold on the ATmega32U4 is set to 4.3
+  // V.  If VCC drops below this, a brownout reset will
+  // occur, preventing the AVR from operating out of spec.
   //
   // Note: Brownout resets usually do not happen on the Zumo
-  // 32U4 because the voltage regulator goes straight from 5 V
-  // to 0 V when VIN drops too low.
+  // 32U4 because the voltage regulator goes straight from 5
+  // V to 0 V when VIN drops too low.
   //
-  // The bootloader is designed so that you can detect brownout
-  // resets from your sketch using the following code:
+  // The bootloader is designed so that you can detect
+  // brownout resets from your sketch using the following
+  // code:
   bool brownout = MCUSR >> BORF & 1;
   MCUSR = 0;
 
@@ -738,7 +747,7 @@ void setup()
   lcd.gotoXY(0, 1);
   lcd.print(F("-try it!"));
 
-  while(buttonMonitor() != 'B'){}
+  while (buttonMonitor() != 'B'){}
 
   buzzer.playFromProgramSpace(beepThankYou);
   lcd.clear();
