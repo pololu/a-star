@@ -499,7 +499,7 @@ void motorDemoHelper(bool showEncoders)
       }
       else
       {
-        if (leftSpeed == 0 && btnCountA > 0 && btnCountA <= 4)
+        if (leftSpeed == 0 && btnCountA > 0 && btnCountA < 4)
         {
           // Motor isn't running and button was pressed for
           // 200 ms or less, so flip the motor direction.
@@ -524,7 +524,7 @@ void motorDemoHelper(bool showEncoders)
       }
       else
       {
-        if (rightSpeed == 0 && btnCountC > 0 && btnCountC <= 4)
+        if (rightSpeed == 0 && btnCountC > 0 && btnCountC < 4)
         {
           // Motor isn't running and button was pressed for
           // 200 ms or less, so flip the motor direction.
