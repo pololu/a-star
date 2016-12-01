@@ -18,17 +18,23 @@ https://github.com/pololu/a-star-32u4-arduino-library
 https://github.com/pololu/zumo-32u4-arduino-library
 
 
-== Arduino add-on ==
+== Arduino IDE integration ==
 
-The "add-on" directory contains a folder named "pololu" which can be used to add
-a "Pololu A-Star 32U4" entry to the "Board" menu in the Arduino IDE.  The add-on
-supports the 1.0.x, 1.5.x, and 1.6.x, versions of the Arduino IDE.
+These files can be used to add A-Star and Zumo support to the Arduino IDE.  An
+entry for the "Pololu A-Star 32U4" will appear in the "Boards" menu when you do
+this.
 
-To install the add-on, copy the "pololu" folder into the "hardware" subfolder of
-the Arduino sketchbook location.  The Arduino sketchbook location is typically
-in your Documents folder in a subfolder named "Arduino".  You can see the
-sketchbook location in the Arduino IDE Preferences dialog, which is available
-from the File menu.
+To add A-Star and Zumo support to the Arduino IDE, download these files and
+rename the directory that contains this README to "avr".  Next, locate your
+Arduino sketchbook folder, which is typically in your Documents folder in a
+subfolder named "Arduino".  You can see the sketchbook location in the Arduino
+IDE preferences dialog, which is available from the File menu.  Inside the
+Arduino sketchbook folder, add a folder named "hardware" if it does not already
+exist.  Inside the "hardware" folder, add a folder named "pololu" if it does not
+already exist.  Then move the "avr" folder (which includes this README,
+platform.txt, boards.txt, and other files) into the "pololu" folder.  Restart
+the Arduino IDE.  In the "Boards" menu, you should now see an entry for "Pololu
+A-Star 32U4".
 
 
 == Bootloader ==
