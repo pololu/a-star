@@ -23,7 +23,7 @@ merge blink sketch: Arduino 1.5.6-r2
 - overwrite Caterina-A-Star.hex with result
 
 program command: avrdude -p m32u4 -P COM13 -c stk500 -U flash:w:Caterina-A-Star.hex \
-                  -U lock:w:0x2f:m -U efuse:w:0xc8:m -U hfuse:w:0xd0:m -U lfuse:w:0xff:m
+                  -U lock:w:0xef:m -U efuse:w:0xc8:m -U hfuse:w:0xd0:m -U lfuse:w:0xff:m
 output:
 
 -------- begin --------
