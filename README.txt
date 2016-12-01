@@ -36,6 +36,11 @@ platform.txt, boards.txt, and other files) into the "pololu" folder.  Restart
 the Arduino IDE.  In the "Boards" menu, you should now see an entry for "Pololu
 A-Star 32U4".
 
+If you do not see the entry in the "Boards" menu, make sure that the final path
+to this README looks like this:
+
+    Arduino/hardware/pololu/avr/README.txt
+
 
 == Bootloader ==
 
