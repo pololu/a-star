@@ -1,0 +1,17 @@
+The files in this directory (a-star.inf and pololu.cat) are the A-Star drivers
+for Windows. To install these drivers:
+
+1. If you downloaded the drivers in a ZIP file, extract it to a temporary folder
+   on your computer.
+
+2. Open the folder containing these files. Right click on "a-star.inf" and
+   select "Install".
+
+3. Windows will ask you whether you want to install the drivers. Click "Install"
+   (Windows 10, 8, 7, and Vista) or "Continue Anyway" (Windows XP).
+
+4. Windows will not tell you when the installation is complete, but it should be
+   done after a few seconds.
+
+For further information, see the user's guide for your particular A-Star device
+on the Pololu website.
