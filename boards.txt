@@ -10,7 +10,7 @@ a-star328pb.bootloader.low_fuses=0xFF
 a-star328pb.bootloader.high_fuses=0xDE
 a-star328pb.bootloader.extended_fuses=0xF4
 a-star328pb.bootloader.unlock_bits=0x3F
-a-star328pb.bootloader.lock_bits=0x0F
+a-star328pb.bootloader.lock_bits=0xCF
 a-star328pb.bootloader.file=optiboot/optiboot_atmega328pb.hex
 
 a-star328pb.build.mcu=atmega328p
