@@ -17,7 +17,7 @@ a-star328pb.bootloader.file=optiboot/optiboot_atmega328pb.hex
 a-star328pb.build.mcu=atmega328p
 a-star328pb.build.f_cpu=16000000L
 a-star328pb.build.board=AVR_A_STAR_328PB
-a-star328pb.build.extra_flags=-include {runtime.platform.path}/variants/a-star328pb/io_for_328pb.h
+a-star328pb.build.extra_flags=-include {runtime.platform.path}/variants/a-star328pb/io_328pb.h
 a-star328pb.build.core=arduino:arduino
 a-star328pb.build.variant=a-star328pb
 
