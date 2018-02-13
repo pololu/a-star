@@ -1,6 +1,11 @@
-/* This header file allows you to write code for the ATmega328PB even if your
- * avr-gcc toolchain does not support it, and is configured for the
- * ATmega328P.  */
+/*
+ * This header file allows you to write code for the ATmega328PB on the
+ * Pololu A-Star 328PB even if your avr-gcc toolchain does not support it.
+ *
+ * Your toolchain should be configured to compile for the ATmega328P.
+ *
+ * To use new interrupt vectors, you will need to use new_vectors_328pb.h too.
+ */
 
 #include <avr/io.h>
 

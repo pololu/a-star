@@ -1,7 +1,14 @@
-/* Define the interrupt vectors for the ATmega328PB that are not present on the
- * ATmega328P.  We are counting on the linker to place the __328pb_vectors
- * function immediately after the __vectors symbol defined in
- * crtatmega328p.o.  */
+/*
+ * Define the interrupt vectors for the ATmega328PB on the Pololu A-Star 328PB
+ * that are not present on the ATmega328P.  We are counting on the linker to
+ * place the __vectors_328pb function immediately after the __vectors symbol
+ * defined in crtatmega328p.o.
+ *
+ * Your toolchain should be configured to compile for the ATmega328P, and you
+ * should include this header file in just one source file of your project.
+ * Also, it needs to be a source file that does not define any ISRs for the new
+ * interrupt vectors, or else you will get build errors.
+ */
 
 #ifdef __cplusplus
 extern "C" {
