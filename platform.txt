@@ -1,2 +1,24 @@
 name=Pololu A-Star Boards
 version=3.0.1
+
+tools.avrdudeforce.path={runtime.tools.avrdude.path}
+tools.avrdudeforce.cmd.path={path}/bin/avrdude
+tools.avrdudeforce.config.path={path}/etc/avrdude.conf
+
+tools.avrdudeforce.upload.params.verbose=-v
+tools.avrdudeforce.upload.params.quiet=-q -q
+tools.avrdudeforce.upload.params.noverify=-V
+tools.avrdudeforce.upload.pattern="{cmd.path}" "-C{config.path}" {upload.verbose} {upload.verify} -p{build.mcu} -c{upload.protocol} "-P{serial.port}" -b{upload.speed} -D "-Uflash:w:{build.path}/{build.project_name}.hex:i"
+
+tools.avrdudeforce.erase.params.verbose=-v
+tools.avrdudeforce.erase.params.quiet=-q -q
+tools.avrdudeforce.erase.pattern="{cmd.path}" "-C{config.path}" {erase.verbose} -p{build.mcu} -c{protocol} -F {program.extra_params} -e -Ulock:w:{bootloader.unlock_bits}:m -Uefuse:w:{bootloader.extended_fuses}:m -Uhfuse:w:{bootloader.high_fuses}:m -Ulfuse:w:{bootloader.low_fuses}:m
+
+tools.avrdudeforce.program.params.verbose=-v
+tools.avrdudeforce.program.params.quiet=-q -q
+tools.avrdudeforce.program.params.noverify=-V
+tools.avrdudeforce.program.pattern="{cmd.path}" "-C{config.path}" {program.verbose} {program.verify} -p{build.mcu} -c{protocol} -F {program.extra_params} "-Uflash:w:{build.path}/{build.project_name}.hex:i"
+
+tools.avrdudeforce.bootloader.params.verbose=-v
+tools.avrdudeforce.bootloader.params.quiet=-q -q
+tools.avrdudeforce.bootloader.pattern="{cmd.path}" "-C{config.path}" {bootloader.verbose} -p{build.mcu} -c{protocol} -F {program.extra_params} "-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i" -Ulock:w:{bootloader.lock_bits}:m
