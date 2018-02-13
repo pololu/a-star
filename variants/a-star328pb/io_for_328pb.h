@@ -43,6 +43,17 @@
 
 #define PCIF3 3
 
+// The ATmega328P's SPDR0 bit conflicts with the ATmega328PB's SPDR0 register,
+// undefine all the bits like that.
+#undef SPDR0
+#undef SPDR1
+#undef SPDR2
+#undef SPDR3
+#undef SPDR4
+#undef SPDR5
+#undef SPDR6
+#undef SPDR7
+
 #define SPCR0 SPCR
 #define SPSR0 SPSR
 #define SPDR0 SPDR
@@ -200,6 +211,17 @@
 
 #define SPDR1   _SFR_MEM8(0xAE)
 
+// The ATmega328P's TWBR0 bit conflicts with the ATmega328PB's TWBR0 register,
+// undefine all the bits like that.
+#undef TWBR0
+#undef TWBR1
+#undef TWBR2
+#undef TWBR3
+#undef TWBR4
+#undef TWBR5
+#undef TWBR6
+#undef TWBR7
+
 #define TWBR0 TWBR
 #define TWSR0 TWSR
 #define TWAR0 TWAR
@@ -333,7 +355,7 @@
 #undef _VECTORS_SIZE
 #define _VECTORS_SIZE 180
 
-#undef SIGNATURE_16
+#undef SIGNATURE_2
 #define SIGNATURE_2 0x16
 
 #endif   /* #ifdef _AVR_ATMEGA328PB_H_INCLUDED */
