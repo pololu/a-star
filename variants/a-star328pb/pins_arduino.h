@@ -227,4 +227,23 @@ const uint8_t PROGMEM digital_pin_to_timer_PGM[] = {
 #define SERIAL_PORT_HARDWARE Serial
 #define SERIAL_PORT_HARDWARE_OPEN Serial1
 
+inline void analogWrite328PB(uint8_t pin, int val)
+{
+  if (pin == 2 && val)
+  {
+    // To make analogWrite work on pin 2, we must configure the output compare
+    // modulator (OCM) to combine the OC3A and OC3B signals with an OR gate
+    // instead of AND.
+    PORTD |= (1 << 2);
+  }
+  analogWrite(pin, val);
+}
+
+// This is fragile: when compiling C code, leave analogWrite alone so that
+// wiring_analog.c can define the analogWrite function as usual.  When compiling
+// C++ code, define analogWrite as analogWrite328PB so that it works properly.
+#ifdef __cplusplus
+#define analogWrite analogWrite328PB
+#endif
+
 #endif
