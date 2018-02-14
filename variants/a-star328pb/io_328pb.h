@@ -59,13 +59,13 @@
 #undef SPDR6
 #undef SPDR7
 
-#define SPCR0 SPCR
-#define SPSR0 SPSR
-#define SPDR0 SPDR
+#define SPCR0    SPCR
+#define SPSR0    SPSR
+#define SPDR0    SPDR
 
-#define XFDCSR _SFR_MEM8(0x62)
-#define XFDIF  1
-#define XFDIE  0
+#define XFDCSR   _SFR_MEM8(0x62)
+#define XFDIF    1
+#define XFDIE    0
 
 #define PRR0     PRR
 #define PRTWI0   PRTWI
@@ -105,19 +105,19 @@
 #define OSCCAL1 1
 #define OSCCAL0 0
 
-#define PCIE3 3
+#define PCIE3   3
 
-#define TIMSK3 _SFR_MEM8(0x71)
-#define ICIE3  5
-#define OCIE3B 2
-#define OCIE3A 1
-#define TOIE3  0
+#define TIMSK3  _SFR_MEM8(0x71)
+#define ICIE3   5
+#define OCIE3B  2
+#define OCIE3A  1
+#define TOIE3   0
 
-#define TIMSK4 _SFR_MEM8(0x72)
-#define ICIE4  5
-#define OCIE4B 2
-#define OCIE4A 1
-#define TOIE4  0
+#define TIMSK4  _SFR_MEM8(0x72)
+#define ICIE4   5
+#define OCIE4B  2
+#define OCIE4A  1
+#define TOIE4   0
 
 #define PCMSK3  _SFR_MEM8(0x73)
 #define PCINT27 3
@@ -163,12 +163,12 @@
 #define OCR3BH  _SFR_MEM8(0x9B)
 
 #define TCCR4A  _SFR_MEM8(0xA0)
-#define WGM40   0
-#define WGM41   1
-#define COM4B0  4
-#define COM4B1  5
-#define COM4A0  6
 #define COM4A1  7
+#define COM4A0  6
+#define COM4B1  5
+#define COM4B0  4
+#define WGM41   1
+#define WGM40   0
 
 #define TCCR4B  _SFR_MEM8(0xA1)
 #define ICNC4   7
@@ -227,12 +227,12 @@
 #undef TWBR6
 #undef TWBR7
 
-#define TWBR0 TWBR
-#define TWSR0 TWSR
-#define TWAR0 TWAR
-#define TWDR0 TWDR
-#define TWCR0 TWCR
-#define TWAMR0 TWAMR
+#define TWBR0   TWBR
+#define TWSR0   TWSR
+#define TWAR0   TWAR
+#define TWDR0   TWDR
+#define TWCR0   TWCR
+#define TWAMR0  TWAMR
 
 #define UCSR1A  _SFR_MEM8(0xC8)
 #define RXC1    7
@@ -268,7 +268,7 @@
 #define UBRR1L  _SFR_MEM8(0xCC)
 #define UBRR1H  _SFR_MEM8(0xCD)
 
-// TODO: is this really 0xCE or is it 0xC7 like the datasheet says?
+// The datasheet says UDR1 is at 0xC7 but that is wrong.
 #define UDR1    _SFR_MEM8(0xCE)
 
 #define TWBR1   _SFR_MEM8(0xD8)
