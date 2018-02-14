@@ -232,7 +232,7 @@ inline void analogWrite328PB(uint8_t pin, int val)
   if (pin == 2 && val)
   {
     // To make analogWrite work on pin 2, we must configure the output compare
-    // modulator (OCM) to combine the OC3A and OC3B signals with an OR gate
+    // modulator (OCM) to combine the OC3B and OC4B signals with an OR gate
     // instead of AND.
     PORTD |= (1 << 2);
   }
