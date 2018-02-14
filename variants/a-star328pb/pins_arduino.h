@@ -229,12 +229,20 @@ const uint8_t PROGMEM digital_pin_to_timer_PGM[] = {
 
 inline void analogWrite328PB(uint8_t pin, int val)
 {
-  if (pin == 2 && val)
+  if (pin == 2)
   {
-    // To make analogWrite work on pin 2, we must configure the output compare
-    // modulator (OCM) to combine the OC3B and OC4B signals with an OR gate
-    // instead of AND.
-    PORTD |= (1 << 2);
+    if (val)
+    {
+      // To make analogWrite work on pin 2, we must configure the output compare
+      // modulator (OCM) to combine the OC3B and OC4B signals with an OR gate
+      // instead of AND.
+      PORTD |= (1 << 2);
+    }
+    else
+    {
+      // Avoid a glitch when setting the value to 0.
+      PORTD &= ~(1 << 2);
+    }
   }
   analogWrite(pin, val);
 }
