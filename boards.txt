@@ -1,4 +1,4 @@
-a-star328PB.name=Pololu A-Star 328PB 5V 16MHz
+a-star328PB.name=Pololu A-Star 328PB - 5V, 16MHz
 a-star328PB.upload.tool=avrdudecustom
 a-star328PB.upload.protocol=arduino
 a-star328PB.upload.mcu=atmega328pb
