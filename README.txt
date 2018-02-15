@@ -63,11 +63,11 @@ A-Star 328PB in the Arduino IDE:
 - analogWrite should work on every pin with PWM.
 - The "Upload Using Programmer" feature does not work.
 
-The ATmega328P has two new two pins named SCL1 and SDA1 that were not present on
-the ATmega328P.  These pins do not yet have official pin numbers in the Arduino
-environment, so if you need to use their pin numbers in your code, we recommend
-using the constants "SCL1" and "SDA1" that are defined in our header files.  For
-example:
+The ATmega328PB has two new two pins named SCL1 and SDA1 that were not present
+on the ATmega328P.  These pins do not yet have official pin numbers in the
+Arduino environment, so if you need to use their pin numbers in your code, we
+recommend using the constants "SCL1" and "SDA1" that are defined in our header
+files.  For example:
 
     digitalWrite(SDA1, HIGH);
 
