@@ -1,3 +1,6 @@
+// This was modified by Pololu to use the correct signature bytes for the
+// ATmega328PB and to enable the pull-up resistor on RX (PD0).
+
 /**********************************************************/
 /* Optiboot bootloader for Arduino                        */
 /*                                                        */
