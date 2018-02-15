@@ -300,6 +300,8 @@ int main(void) {
   TCCR1B = _BV(CS12) | _BV(CS10); // div 1024
 #endif
 #ifndef SOFT_UART
+  // Turn on the pull-up resistor for RX.
+  PORTD |= (1 << 0);
 #ifdef __AVR_ATmega8__
   UCSRA = _BV(U2X); //Double speed mode USART
   UCSRB = _BV(RXEN) | _BV(TXEN);  // enable Rx & Tx
