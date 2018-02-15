@@ -1,25 +1,25 @@
-a-star328pb.name=Pololu A-Star 328PB 5V 16MHz
-a-star328pb.upload.tool=avrdudecustom
-a-star328pb.upload.protocol=arduino
-a-star328pb.upload.mcu=atmega328pb
-a-star328pb.upload.maximum_size=32256
-a-star328pb.upload.maximum_data_size=2048
-a-star328pb.upload.speed=115200
+a-star328PB.name=Pololu A-Star 328PB 5V 16MHz
+a-star328PB.upload.tool=avrdudecustom
+a-star328PB.upload.protocol=arduino
+a-star328PB.upload.mcu=atmega328pb
+a-star328PB.upload.maximum_size=32256
+a-star328PB.upload.maximum_data_size=2048
+a-star328PB.upload.speed=115200
 
-a-star328pb.bootloader.tool=avrdudecustom
-a-star328pb.bootloader.low_fuses=0xFF
-a-star328pb.bootloader.high_fuses=0xDE
-a-star328pb.bootloader.extended_fuses=0xF4
-a-star328pb.bootloader.unlock_bits=0x3F
-a-star328pb.bootloader.lock_bits=0xCF
-a-star328pb.bootloader.file=optiboot/optiboot_atmega328pb.hex
+a-star328PB.bootloader.tool=avrdudecustom
+a-star328PB.bootloader.low_fuses=0xFF
+a-star328PB.bootloader.high_fuses=0xDE
+a-star328PB.bootloader.extended_fuses=0xF4
+a-star328PB.bootloader.unlock_bits=0x3F
+a-star328PB.bootloader.lock_bits=0xCF
+a-star328PB.bootloader.file=optiboot/optiboot_atmega328pb.hex
 
-a-star328pb.build.mcu=atmega328p
-a-star328pb.build.f_cpu=16000000L
-a-star328pb.build.board=AVR_A_STAR_328PB
-a-star328pb.build.extra_flags=-include {runtime.platform.path}/variants/a-star328pb/io_328pb.h
-a-star328pb.build.core=arduino:arduino
-a-star328pb.build.variant=a-star328pb
+a-star328PB.build.mcu=atmega328p
+a-star328PB.build.f_cpu=16000000L
+a-star328PB.build.board=AVR_A_STAR_328PB
+a-star328PB.build.extra_flags=-include {runtime.platform.path}/variants/a-star328pb/io_328pb.h
+a-star328PB.build.core=arduino:arduino
+a-star328PB.build.variant=a-star328pb
 
 ##############################################################
 
