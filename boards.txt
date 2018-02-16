@@ -54,7 +54,7 @@ a-star328PB-8mhz.upload.protocol=arduino
 a-star328PB-8mhz.upload.mcu=atmega328pb
 a-star328PB-8mhz.upload.maximum_size=32256
 a-star328PB-8mhz.upload.maximum_data_size=2048
-a-star328PB-8mhz.upload.speed=115200
+a-star328PB-8mhz.upload.speed=57600
 
 a-star328PB-8mhz.bootloader.tool=avrdudecustom
 a-star328PB-8mhz.bootloader.low_fuses=0xFF

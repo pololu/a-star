@@ -226,7 +226,7 @@ atmega328: $(PROGRAM)_atmega328.lst
 
 atmega328pb_8mhz: TARGET = atmega328pb
 atmega328pb_8mhz: MCU_TARGET = atmega328p
-atmega328pb_8mhz: CFLAGS += '-DLED_START_FLASHES=3' '-DBAUD_RATE=115200' '-DREALLY_328PB'
+atmega328pb_8mhz: CFLAGS += '-DLED_START_FLASHES=3' '-DBAUD_RATE=57600' '-DREALLY_328PB'
 atmega328pb_8mhz: AVR_FREQ = 8000000L
 atmega328pb_8mhz: LDSECTIONS  = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
 atmega328pb_8mhz: $(PROGRAM)_atmega328pb_8mhz.hex
