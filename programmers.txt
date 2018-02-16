@@ -1,0 +1,6 @@
+stk500for328PB.name=STK500 for Pololu A-Star 328PB
+stk500for328PB.communication=serial
+stk500for328PB.protocol=stk500
+stk500for328PB.program.protocol=stk500
+stk500for328PB.program.tool=avrdudecustom
+stk500for328PB.program.extra_params=-P{serial.port}
