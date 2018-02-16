@@ -10,7 +10,7 @@ a-star328PB-16mhz.bootloader.tool=avrdudecustom
 a-star328PB-16mhz.bootloader.low_fuses=0xFF
 a-star328PB-16mhz.bootloader.high_fuses=0xDE
 a-star328PB-16mhz.bootloader.extended_fuses=0xF4
-a-star328PB-16mhz.bootloader.unlock_bits=0x3F
+a-star328PB-16mhz.bootloader.unlock_bits=0xFF
 a-star328PB-16mhz.bootloader.lock_bits=0xCF
 a-star328PB-16mhz.bootloader.file=optiboot/optiboot_atmega328pb_16mhz.hex
 
@@ -35,7 +35,7 @@ a-star328PB-20mhz.bootloader.tool=avrdudecustom
 a-star328PB-20mhz.bootloader.low_fuses=0xFF
 a-star328PB-20mhz.bootloader.high_fuses=0xDE
 a-star328PB-20mhz.bootloader.extended_fuses=0xF4
-a-star328PB-20mhz.bootloader.unlock_bits=0x3F
+a-star328PB-20mhz.bootloader.unlock_bits=0xFF
 a-star328PB-20mhz.bootloader.lock_bits=0xCF
 a-star328PB-20mhz.bootloader.file=optiboot/optiboot_atmega328pb_20mhz.hex
 
@@ -60,7 +60,7 @@ a-star328PB-8mhz.bootloader.tool=avrdudecustom
 a-star328PB-8mhz.bootloader.low_fuses=0xFF
 a-star328PB-8mhz.bootloader.high_fuses=0xDE
 a-star328PB-8mhz.bootloader.extended_fuses=0xF4
-a-star328PB-8mhz.bootloader.unlock_bits=0x3F
+a-star328PB-8mhz.bootloader.unlock_bits=0xFF
 a-star328PB-8mhz.bootloader.lock_bits=0xCF
 a-star328PB-8mhz.bootloader.file=optiboot/optiboot_atmega328pb_8mhz.hex
 
@@ -85,7 +85,7 @@ a-star328PB-12mhz.bootloader.tool=avrdudecustom
 a-star328PB-12mhz.bootloader.low_fuses=0xFF
 a-star328PB-12mhz.bootloader.high_fuses=0xDE
 a-star328PB-12mhz.bootloader.extended_fuses=0xF4
-a-star328PB-12mhz.bootloader.unlock_bits=0x3F
+a-star328PB-12mhz.bootloader.unlock_bits=0xFF
 a-star328PB-12mhz.bootloader.lock_bits=0xCF
 a-star328PB-12mhz.bootloader.file=optiboot/optiboot_atmega328pb_12mhz.hex
 
