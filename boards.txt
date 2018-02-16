@@ -1,25 +1,100 @@
-a-star328PB.name=Pololu A-Star 328PB - 5V, 16MHz
-a-star328PB.upload.tool=avrdudecustom
-a-star328PB.upload.protocol=arduino
-a-star328PB.upload.mcu=atmega328pb
-a-star328PB.upload.maximum_size=32256
-a-star328PB.upload.maximum_data_size=2048
-a-star328PB.upload.speed=115200
+a-star328PB-16mhz.name=Pololu A-Star 328PB - 5V, 16MHz
+a-star328PB-16mhz.upload.tool=avrdudecustom
+a-star328PB-16mhz.upload.protocol=arduino
+a-star328PB-16mhz.upload.mcu=atmega328pb
+a-star328PB-16mhz.upload.maximum_size=32256
+a-star328PB-16mhz.upload.maximum_data_size=2048
+a-star328PB-16mhz.upload.speed=115200
 
-a-star328PB.bootloader.tool=avrdudecustom
-a-star328PB.bootloader.low_fuses=0xFF
-a-star328PB.bootloader.high_fuses=0xDE
-a-star328PB.bootloader.extended_fuses=0xF4
-a-star328PB.bootloader.unlock_bits=0x3F
-a-star328PB.bootloader.lock_bits=0xCF
-a-star328PB.bootloader.file=optiboot/optiboot_atmega328pb.hex
+a-star328PB-16mhz.bootloader.tool=avrdudecustom
+a-star328PB-16mhz.bootloader.low_fuses=0xFF
+a-star328PB-16mhz.bootloader.high_fuses=0xDE
+a-star328PB-16mhz.bootloader.extended_fuses=0xF4
+a-star328PB-16mhz.bootloader.unlock_bits=0x3F
+a-star328PB-16mhz.bootloader.lock_bits=0xCF
+a-star328PB-16mhz.bootloader.file=optiboot/optiboot_atmega328pb_16mhz.hex
 
-a-star328PB.build.mcu=atmega328p
-a-star328PB.build.f_cpu=16000000L
-a-star328PB.build.board=AVR_A_STAR_328PB
-a-star328PB.build.extra_flags=-include {runtime.platform.path}/variants/a-star328pb/io_328pb.h
-a-star328PB.build.core=arduino:arduino
-a-star328PB.build.variant=a-star328pb
+a-star328PB-16mhz.build.mcu=atmega328p
+a-star328PB-16mhz.build.f_cpu=16000000L
+a-star328PB-16mhz.build.board=AVR_A_STAR_328PB
+a-star328PB-16mhz.build.extra_flags=-include {runtime.platform.path}/variants/a-star328pb/io_328pb.h
+a-star328PB-16mhz.build.core=arduino:arduino
+a-star328PB-16mhz.build.variant=a-star328pb
+
+##############################################################
+
+a-star328PB-20mhz.name=Pololu A-Star 328PB - 5V, 20MHz
+a-star328PB-20mhz.upload.tool=avrdudecustom
+a-star328PB-20mhz.upload.protocol=arduino
+a-star328PB-20mhz.upload.mcu=atmega328pb
+a-star328PB-20mhz.upload.maximum_size=32256
+a-star328PB-20mhz.upload.maximum_data_size=2048
+a-star328PB-20mhz.upload.speed=115200
+
+a-star328PB-20mhz.bootloader.tool=avrdudecustom
+a-star328PB-20mhz.bootloader.low_fuses=0xFF
+a-star328PB-20mhz.bootloader.high_fuses=0xDE
+a-star328PB-20mhz.bootloader.extended_fuses=0xF4
+a-star328PB-20mhz.bootloader.unlock_bits=0x3F
+a-star328PB-20mhz.bootloader.lock_bits=0xCF
+a-star328PB-20mhz.bootloader.file=optiboot/optiboot_atmega328pb_20mhz.hex
+
+a-star328PB-20mhz.build.mcu=atmega328p
+a-star328PB-20mhz.build.f_cpu=20000000L
+a-star328PB-20mhz.build.board=AVR_A_STAR_328PB
+a-star328PB-20mhz.build.extra_flags=-include {runtime.platform.path}/variants/a-star328pb/io_328pb.h
+a-star328PB-20mhz.build.core=arduino:arduino
+a-star328PB-20mhz.build.variant=a-star328pb
+
+##############################################################
+
+a-star328PB-8mhz.name=Pololu A-Star 328PB - 3.3V, 8MHz
+a-star328PB-8mhz.upload.tool=avrdudecustom
+a-star328PB-8mhz.upload.protocol=arduino
+a-star328PB-8mhz.upload.mcu=atmega328pb
+a-star328PB-8mhz.upload.maximum_size=32256
+a-star328PB-8mhz.upload.maximum_data_size=2048
+a-star328PB-8mhz.upload.speed=115200
+
+a-star328PB-8mhz.bootloader.tool=avrdudecustom
+a-star328PB-8mhz.bootloader.low_fuses=0xFF
+a-star328PB-8mhz.bootloader.high_fuses=0xDE
+a-star328PB-8mhz.bootloader.extended_fuses=0xF4
+a-star328PB-8mhz.bootloader.unlock_bits=0x3F
+a-star328PB-8mhz.bootloader.lock_bits=0xCF
+a-star328PB-8mhz.bootloader.file=optiboot/optiboot_atmega328pb_8mhz.hex
+
+a-star328PB-8mhz.build.mcu=atmega328p
+a-star328PB-8mhz.build.f_cpu=8000000L
+a-star328PB-8mhz.build.board=AVR_A_STAR_328PB
+a-star328PB-8mhz.build.extra_flags=-include {runtime.platform.path}/variants/a-star328pb/io_328pb.h
+a-star328PB-8mhz.build.core=arduino:arduino
+a-star328PB-8mhz.build.variant=a-star328pb
+
+##############################################################
+
+a-star328PB-12mhz.name=Pololu A-Star 328PB - 3.3V, 12MHz
+a-star328PB-12mhz.upload.tool=avrdudecustom
+a-star328PB-12mhz.upload.protocol=arduino
+a-star328PB-12mhz.upload.mcu=atmega328pb
+a-star328PB-12mhz.upload.maximum_size=32256
+a-star328PB-12mhz.upload.maximum_data_size=2048
+a-star328PB-12mhz.upload.speed=115200
+
+a-star328PB-12mhz.bootloader.tool=avrdudecustom
+a-star328PB-12mhz.bootloader.low_fuses=0xFF
+a-star328PB-12mhz.bootloader.high_fuses=0xDE
+a-star328PB-12mhz.bootloader.extended_fuses=0xF4
+a-star328PB-12mhz.bootloader.unlock_bits=0x3F
+a-star328PB-12mhz.bootloader.lock_bits=0xCF
+a-star328PB-12mhz.bootloader.file=optiboot/optiboot_atmega328pb_12mhz.hex
+
+a-star328PB-12mhz.build.mcu=atmega328p
+a-star328PB-12mhz.build.f_cpu=12000000L
+a-star328PB-12mhz.build.board=AVR_A_STAR_328PB
+a-star328PB-12mhz.build.extra_flags=-include {runtime.platform.path}/variants/a-star328pb/io_328pb.h
+a-star328PB-12mhz.build.core=arduino:arduino
+a-star328PB-12mhz.build.variant=a-star328pb
 
 ##############################################################
 

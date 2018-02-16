@@ -224,13 +224,37 @@ atmega328: LDSECTIONS  = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.v
 atmega328: $(PROGRAM)_atmega328.hex
 atmega328: $(PROGRAM)_atmega328.lst
 
-atmega328pb: TARGET = atmega328pb
-atmega328pb: MCU_TARGET = atmega328p
-atmega328pb: CFLAGS += '-DLED_START_FLASHES=3' '-DBAUD_RATE=115200' '-DREALLY_328PB'
-atmega328pb: AVR_FREQ = 16000000L
-atmega328pb: LDSECTIONS  = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
-atmega328pb: $(PROGRAM)_atmega328pb.hex
-atmega328pb: $(PROGRAM)_atmega328pb.lst
+atmega328pb_8mhz: TARGET = atmega328pb
+atmega328pb_8mhz: MCU_TARGET = atmega328p
+atmega328pb_8mhz: CFLAGS += '-DLED_START_FLASHES=3' '-DBAUD_RATE=115200' '-DREALLY_328PB'
+atmega328pb_8mhz: AVR_FREQ = 8000000L
+atmega328pb_8mhz: LDSECTIONS  = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
+atmega328pb_8mhz: $(PROGRAM)_atmega328pb_8mhz.hex
+atmega328pb_8mhz: $(PROGRAM)_atmega328pb_8mhz.lst
+
+atmega328pb_12mhz: TARGET = atmega328pb
+atmega328pb_12mhz: MCU_TARGET = atmega328p
+atmega328pb_12mhz: CFLAGS += '-DLED_START_FLASHES=3' '-DBAUD_RATE=115200' '-DREALLY_328PB'
+atmega328pb_12mhz: AVR_FREQ = 12000000L
+atmega328pb_12mhz: LDSECTIONS  = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
+atmega328pb_12mhz: $(PROGRAM)_atmega328pb_12mhz.hex
+atmega328pb_12mhz: $(PROGRAM)_atmega328pb_12mhz.lst
+
+atmega328pb_16mhz: TARGET = atmega328pb
+atmega328pb_16mhz: MCU_TARGET = atmega328p
+atmega328pb_16mhz: CFLAGS += '-DLED_START_FLASHES=3' '-DBAUD_RATE=115200' '-DREALLY_328PB'
+atmega328pb_16mhz: AVR_FREQ = 16000000L
+atmega328pb_16mhz: LDSECTIONS  = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
+atmega328pb_16mhz: $(PROGRAM)_atmega328pb_16mhz.hex
+atmega328pb_16mhz: $(PROGRAM)_atmega328pb_16mhz.lst
+
+atmega328pb_20mhz: TARGET = atmega328pb
+atmega328pb_20mhz: MCU_TARGET = atmega328p
+atmega328pb_20mhz: CFLAGS += '-DLED_START_FLASHES=3' '-DBAUD_RATE=115200' '-DREALLY_328PB'
+atmega328pb_20mhz: AVR_FREQ = 20000000L
+atmega328pb_20mhz: LDSECTIONS  = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
+atmega328pb_20mhz: $(PROGRAM)_atmega328pb_20mhz.hex
+atmega328pb_20mhz: $(PROGRAM)_atmega328pb_20mhz.lst
 
 atmega328_isp: atmega328
 atmega328_isp: TARGET = atmega328
