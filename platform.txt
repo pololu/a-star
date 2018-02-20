@@ -13,13 +13,13 @@ tools.avrdudecustom.upload.pattern="{cmd.path}" "-C{config.path}" "-C+{config.pa
 
 tools.avrdudecustom.erase.params.verbose=-v
 tools.avrdudecustom.erase.params.quiet=-q -q
-tools.avrdudecustom.erase.pattern="{cmd.path}" "-C{config.path}" "-C+{config.path2}" {erase.verbose} -p{upload.mcu} -c{protocol} {program.extra_params} -e -Ulock:w:{bootloader.unlock_bits}:m -Uefuse:w:{bootloader.extended_fuses}:m -Uhfuse:w:{bootloader.high_fuses}:m -Ulfuse:w:{bootloader.low_fuses}:m
+tools.avrdudecustom.erase.pattern="{cmd.path}" "-C{config.path}" "-C+{config.path2}" {erase.verbose} -p{upload.mcu} -c{protocol} {program.extra_params} -B 5 -e -Ulock:w:{bootloader.unlock_bits}:m -Uefuse:w:{bootloader.extended_fuses}:m -Uhfuse:w:{bootloader.high_fuses}:m -Ulfuse:w:{bootloader.low_fuses}:m
 
 tools.avrdudecustom.program.params.verbose=-v
 tools.avrdudecustom.program.params.quiet=-q -q
 tools.avrdudecustom.program.params.noverify=-V
-tools.avrdudecustom.program.pattern="{cmd.path}" "-C{config.path}" "-C+{config.path2}" {program.verbose} {program.verify} -p{upload.mcu} -c{protocol} {program.extra_params} "-Uflash:w:{build.path}/{build.project_name}.hex:i"
+tools.avrdudecustom.program.pattern="{cmd.path}" "-C{config.path}" "-C+{config.path2}" {program.verbose} {program.verify} -p{upload.mcu} -c{protocol} {program.extra_params} -B 0.5 "-Uflash:w:{build.path}/{build.project_name}.hex:i"
 
 tools.avrdudecustom.bootloader.params.verbose=-v
 tools.avrdudecustom.bootloader.params.quiet=-q -q
-tools.avrdudecustom.bootloader.pattern="{cmd.path}" "-C{config.path}" "-C+{config.path2}" {bootloader.verbose} -p{upload.mcu} -c{protocol} {program.extra_params} "-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i" -Ulock:w:{bootloader.lock_bits}:m
+tools.avrdudecustom.bootloader.pattern="{cmd.path}" "-C{config.path}" "-C+{config.path2}" {bootloader.verbose} -p{upload.mcu} -c{protocol} {program.extra_params} -B 0.5 "-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i" -Ulock:w:{bootloader.lock_bits}:m
