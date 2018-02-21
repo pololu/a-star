@@ -29,8 +29,8 @@ Arduino sketchbook folder, add a folder named "hardware" if it does not already
 exist.  Inside the "hardware" folder, add a folder named "pololu" if it does not
 already exist.  Then move the "avr" folder (which includes this README,
 platform.txt, boards.txt, and other files) into the "pololu" folder.  Restart
-the Arduino IDE.  In the "Boards" menu, you should now see an entries for "Pololu
-A-Star 32U4" and "Pololu A-Star 328PB 5V 16 MHz".
+the Arduino IDE.  In the "Boards" menu, you should now see an entries for the
+Pololu A-Star 32U4 and the variations of the Pololu A-Star 328PB.
 
 If you do not see the entry in the "Boards" menu, make sure that the final path
 to this README looks like this:
@@ -61,7 +61,6 @@ A-Star 328PB in the Arduino IDE:
 - pinMode, digitalRead, and digitalWrite should work on every I/O pin.
 - analogRead should work on every analog pin (A0 through A7)
 - analogWrite should work on every pin with PWM.
-- The "Upload Using Programmer" feature does not work.
 
 The ATmega328PB has two new two pins named SCL1 and SDA1 that were not present
 on the ATmega328P.  These pins do not yet have official pin numbers in the
