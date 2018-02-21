@@ -32,8 +32,8 @@ platform.txt, boards.txt, and other files) into the "pololu" folder.  Restart
 the Arduino IDE.  In the "Boards" menu, you should now see an entries for the
 Pololu A-Star 32U4 and the variations of the Pololu A-Star 328PB.
 
-If you do not see the entry in the "Boards" menu, make sure that the final path
-to this README looks like this:
+If you do not see these entries in the "Boards" menu, make sure that the final
+path to this README looks like this:
 
     Arduino/hardware/pololu/avr/README.txt
 
