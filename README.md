@@ -1,7 +1,7 @@
 # Pololu A-Star Software and Drivers
 
-Version: 4.0.0<br>
-Release date: 2018-03-21<br>
+Version: 4.0.1<br>
+Release date: 2018-04-11<br>
 [www.pololu.com](https://www.pololu.com/)
 
 These files are the software and drivers for the Pololu
@@ -156,6 +156,8 @@ which are available in separate repositories:
 
 ## Version history
 
+- 4.0.1 (2018-04-11): 328PB interrupt vectors should be linked into sketch more
+                      reliably.
 - 4.0.0 (2018-03-21): Moved selection of A-Star 328PB versions to custom menu.
 - 3.1.0 (2018-02-20): Added support for A-Star 328PB.
 - 3.0.1 (2016-12-01): Fixed A-Star 32U4 bootloader unlock/lock bits.
