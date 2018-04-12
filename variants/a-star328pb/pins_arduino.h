@@ -111,8 +111,6 @@ static const uint8_t A7 = PIN_A7;
 
 #ifdef ARDUINO_MAIN
 
-#include "new_vectors_328pb.h"
-
 const uint16_t PROGMEM port_to_mode_PGM[] = {
   NOT_A_PORT,
   NOT_A_PORT,
