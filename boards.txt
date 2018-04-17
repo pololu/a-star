@@ -15,7 +15,7 @@ a-star328PB.bootloader.lock_bits=0xCF
 
 a-star328PB.build.mcu=atmega328p
 a-star328PB.build.board=AVR_A_STAR_328PB
-a-star328PB.build.extra_flags=-include {runtime.platform.path}/variants/a-star328pb/io_328pb.h
+a-star328PB.build.extra_flags=-include "{runtime.platform.path}/variants/a-star328pb/io_328pb.h"
 a-star328PB.build.core=arduino:arduino
 a-star328PB.build.variant=a-star328pb
 
