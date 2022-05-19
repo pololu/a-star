@@ -1,12 +1,12 @@
 menu.version=Version
 
 a-star328PB.name=Pololu A-Star 328PB
-a-star328PB.upload.tool=avrdude
+a-star328PB.upload.tool=arduino:avrdude
 a-star328PB.upload.protocol=arduino
 a-star328PB.upload.maximum_size=32256
 a-star328PB.upload.maximum_data_size=2048
 
-a-star328PB.bootloader.tool=avrdude
+a-star328PB.bootloader.tool=arduino:avrdude
 a-star328PB.bootloader.low_fuses=0xFF
 a-star328PB.bootloader.high_fuses=0xDE
 a-star328PB.bootloader.unlock_bits=0xFF
