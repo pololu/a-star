@@ -1,7 +1,7 @@
 # Pololu A-Star Software and Drivers
 
-Version: 4.0.2<br>
-Release date: 2018-04-17<br>
+Version: 5.0.0<br>
+Release date: 2022-05-19<br>
 [www.pololu.com](https://www.pololu.com/)
 
 These files are the software and drivers for the Pololu
@@ -92,13 +92,6 @@ directory):
 
 ## ATmega328PB support in the Arduino IDE
 
-These files have been tested with the Arduino IDE version 1.8.5.  Since that
-version of the IDE does not have official ATmega328PB support, these files
-configure the compiler to target the older ATmega328P, which is very similar to
-the PB.  We added extra definitions so you can use all of the new features of
-the ATmega328PB, while still being able to compile almost any code that worked
-on the older ATmega328P.
-
 Here are some details about what Arduino features work when programming the
 A-Star 328PB in the Arduino IDE:
 
@@ -156,6 +149,9 @@ which are available in separate repositories:
 
 ## Version history
 
+- 5.0.0 (2022-05-19): Removed workarounds and hacks that were required in older
+  versions of the Arduino IDE that did not have official support for the
+  ATmega328PB.  This version was tested in Arduino 1.8.19.
 - 4.0.2 (2018-04-17): Fixed an unquoted path in build flags that could cause an
                       error when compiling for the 328PB.
 - 4.0.1 (2018-04-11): 328PB interrupt vectors should be linked into sketch more
