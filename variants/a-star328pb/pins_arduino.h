@@ -252,4 +252,13 @@ inline void analogWrite328PB(uint8_t pin, int val)
 #define analogWrite analogWrite328PB
 #endif
 
+// Make it easier to compile I2C code written for other AVRs
+#define TWBR TWBR0
+#define TWSR TWSR0
+#define TWAR TWAR0
+#define TWDR TWDR0
+#define TWCR TWCR0
+#define TWAMR TWAMR0
+#define TWI_vect TWI0_vect
+
 #endif
