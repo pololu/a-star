@@ -1,7 +1,7 @@
 # Pololu A-Star Software and Drivers
 
-Version: 5.0.0<br>
-Release date: 2022-05-19<br>
+Version: 5.1.0<br>
+Release date: 2022-08-31<br>
 [www.pololu.com](https://www.pololu.com/)
 
 These files are the software and drivers for the Pololu
@@ -97,9 +97,13 @@ A-Star 328PB in the Arduino IDE:
 
 - The `Serial` and `Serial1` objects both work, providing access to UART0 and
   UART1, respectively.
-- There is no library support for accessing the ATmega328PB's second I2C module
-  (TWI1), or its second SPI module (SPI1).  However, you can access the
-  registers for those new modules and define ISRs for them.
+- The "Default I2C bus" sub-menu in the "Tools" menu allows you to choose
+  whether the Wire library and other libraries like it will use TWI0 or TWI1.
+  There is no library support for accessing TWI0 and TWI1 in the same program.
+- The "Default SPI bus" sub-menu in the "Tools" menu allows you to choose
+  whether the SPI library and other libraries like it will use SPI0 or SPI1.
+  There is no library support for accessing both SPI0 and SPI1 in the same
+  program.
 - `pinMode()`, `digitalRead()`, and `digitalWrite()` should work on every I/O
   pin.
 - `analogRead()` should work on every analog pin (A0 through A7).
@@ -149,6 +153,8 @@ which are available in separate repositories:
 
 ## Version history
 
+- 5.1.0 (2022-08-31): Made the Wire and SPI libraries usable on the A-Star 328PB
+  again.  Added the menus that let you choose which bus each libary will use.
 - 5.0.0 (2022-05-19): Removed workarounds and hacks that were required in older
   versions of the Arduino IDE that did not have official support for the
   ATmega328PB.  This version was tested in Arduino 1.8.19.
