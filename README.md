@@ -154,7 +154,7 @@ which are available in separate repositories:
 ## Version history
 
 - 5.1.0 (2022-08-31): Made the Wire and SPI libraries usable on the A-Star 328PB
-  again.  Added the menus that let you choose which bus each libary will use.
+  again.  Added menus that let you choose which bus each library will use.
 - 5.0.0 (2022-05-19): Removed workarounds and hacks that were required in older
   versions of the Arduino IDE that did not have official support for the
   ATmega328PB.  This version was tested in Arduino 1.8.19.
