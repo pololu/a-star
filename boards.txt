@@ -51,6 +51,20 @@ a-star328PB.menu.version.12mhz.build.f_cpu=12000000L
 
 ##############################################################
 
+a-star328PB.build.extra_flags={build.i2c_flags} {build.spi_flags}
+
+menu.i2c=Default I2C bus
+a-star328PB.menu.i2c.twi0=TWI0
+a-star328PB.menu.i2c.twi0.build.i2c_flags=-DTWBR=TWBR0 -DTWSR=TWSR0 -DTWAR=TWAR0 -DTWDR=TWDR0 -DTWCR=TWCR0 -DTWAMR=TWAMR0 -DTWI_vect=TWI0_vect -DPIN_WIRE_SDA=PIN_WIRE_SDA0 -DPIN_WIRE_SCL=PIN_WIRE_SCL0
+a-star328PB.menu.i2c.twi1=TWI1
+a-star328PB.menu.i2c.twi1.build.i2c_flags=-DTWBR=TWBR1 -DTWSR=TWSR1 -DTWAR=TWAR1 -DTWDR=TWDR1 -DTWCR=TWCR1 -DTWAMR=TWAMR1 -DTWI_vect=TWI1_vect -DPIN_WIRE_SDA=PIN_WIRE_SDA1 -DPIN_WIRE_SCL=PIN_WIRE_SCL1
+
+menu.spi=Default SPI bus
+a-star328PB.menu.spi.spi0=SPI0
+a-star328PB.menu.spi.spi0.build.spi_flags=-DSPCR=SPCR0 -DSPSR=SPSR0 -DSPDR=SPDR0 -DPIN_SPI_SS=PIN_SPI_SS0 -DPIN_SPI_MOSI=PIN_SPI_MOSI0 -DPIN_SPI_MISO=PIN_SPI_MISO0 -DPIN_SPI_SCK=PIN_SPI_SCK0
+a-star328PB.menu.spi.spi1=SPI1
+a-star328PB.menu.spi.spi1.build.spi_flags=-DSPCR=SPCR1 -DSPSR=SPSR1 -DSPDR=SPDR1 -DPIN_SPI_SS=PIN_SPI_SS1 -DPIN_SPI_MOSI=PIN_SPI_MOSI1 -DPIN_SPI_MISO=PIN_SPI_MISO1 -DPIN_SPI_SCK=PIN_SPI_SCK1
+
 a-star32U4.name=Pololu A-Star 32U4
 a-star32U4.vid.0=0x1ffb
 a-star32U4.pid.0=0x0101
