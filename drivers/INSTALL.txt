@@ -5,10 +5,11 @@ for Windows. To install these drivers:
    on your computer.
 
 2. Open the folder containing these files. Right click on "a-star.inf" and
-   select "Install".
+   select "Install".  On Windows 11, you must click "Show More Options" to
+   see the "Install" option.
 
 3. Windows will ask you whether you want to install the drivers. Click "Install"
-   (Windows 10, 8, 7, and Vista) or "Continue Anyway" (Windows XP).
+   (Windows 11, 10, 8, 7, and Vista) or "Continue Anyway" (Windows XP).
 
 4. Windows will not tell you when the installation is complete, but it should be
    done after a few seconds.
