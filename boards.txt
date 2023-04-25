@@ -35,6 +35,14 @@ a-star328PB.menu.version.20mhz.build.f_cpu=20000000L
 
 ##############################################################
 
+a-star328PB.menu.version.1mhz=3.3V, 1MHz
+a-star328PB.menu.version.1mhz.upload.speed=57600
+a-star328PB.menu.version.1mhz.bootloader.extended_fuses=0xF5
+a-star328PB.menu.version.1mhz.bootloader.file=optiboot/optiboot_atmega328pb_1mhz.hex
+a-star328PB.menu.version.1mhz.build.f_cpu=1000000L
+
+##############################################################
+
 a-star328PB.menu.version.8mhz=3.3V, 8MHz
 a-star328PB.menu.version.8mhz.upload.speed=57600
 a-star328PB.menu.version.8mhz.bootloader.extended_fuses=0xF5
